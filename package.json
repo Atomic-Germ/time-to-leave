@@ -13,8 +13,8 @@
   "main": "main.mjs",
   "scripts": {
     "clean": "npx rimraf coverage release-builds __tests__/__main__/__database.ttldb__ ",
-    "debug:main": "electron --inspect=5858 .",
-    "debug:render": "electron --remote-debugging-port=9222 .",
+    "debug:main": "electronmon --inspect=5858 .",
+    "debug:render": "electronmon --remote-debugging-port=9222 .",
     "lint": "npm-run-all --parallel lint:*",
     "lint:css": "stylelint css/*.css",
     "lint:eslint": "eslint .",

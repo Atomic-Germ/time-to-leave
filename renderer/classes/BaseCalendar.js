@@ -129,8 +129,8 @@ class BaseCalendar
     _generateTableFooter()
     {
         return '<button class="punch-button" id="punch-button" disabled>' +
-                   '<img src="../assets/fingerprint.svg" height="36" width="36"></img>' +
-                   `<label for="punch-button" id="punch-button-label">${this._getTranslation('$Menu.punch-time')}</label>` +
+            `<label for="punch-button" id="punch-button-label"><img src="../assets/fingerprint.svg" alt="punch button"/>
+            ${this._getTranslation('$Menu.punch-time')}</label>` +
                '</button>\n';
     }
 

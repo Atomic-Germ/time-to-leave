@@ -428,13 +428,15 @@ body {
   color: var(--punch-disable-bground);
 }
 
-.punch-button img {
-  -webkit-user-drag: none;
-}
-
 #punch-button-label {
   cursor: pointer;
   margin: auto;
+}
+
+#punch-button-label img {
+  width: 2.3rem;
+  -webkit-user-drag: none;
+  padding-bottom: 0.2rem;
 }
 
 .punch-button:disabled #punch-button-label {

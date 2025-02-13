@@ -49,9 +49,10 @@ jobs:
 
             # For ChromeDriver to work
             export DISPLAY=':99'
+            xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test
           fi
 
-          xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test
+          npm run test
       - name: '        CodeCov'
         uses: codecov/codecov-action@v5
         with:

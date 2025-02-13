@@ -52,7 +52,7 @@ jobs:
             export DISPLAY=':99'
           fi
 
-          npm run test
+        npm run test:ubuntu-ci
       - name: '        CodeCov'
         uses: codecov/codecov-action@v5
         with:

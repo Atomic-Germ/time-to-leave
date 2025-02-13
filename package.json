@@ -33,6 +33,7 @@
     "pretest": "npm run clean",
     "start": "electronmon .",
     "test": "npm-run-all test:*",
+    "test:ubuntu-ci": "xvfb-run --auto-servernum --server-args=\"-screen 0 1280x960x24\" -- npm-run-all test:*",
     "test:mocha": "c8 --config configs/.c8rc.json -o ./coverage_mocha -- mocha --timeout 3000 --config configs/.mocharc.cjs",
     "test:electron-mocha": "c8 --config configs/.c8rc.json electron-mocha --config configs/.mocharc.cjs",
     "setup:win": "node scripts/create_windows_installer.cjs"

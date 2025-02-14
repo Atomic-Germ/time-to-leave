@@ -12,6 +12,7 @@
   "type": "module",
   "main": "main.mjs",
   "scripts": {
+    "nothing":"",
     "clean": "npx rimraf coverage release-builds __tests__/__main__/__database.ttldb__ ",
     "debug:main": "electronmon --inspect=5858 .",
     "debug:render": "electronmon --remote-debugging-port=9222 .",

@@ -146,6 +146,12 @@ describe('Test Preferences Window', () =>
             checkRenderedItem('count-today');
         });
 
+        it('Change time-24 to true', () =>
+        {
+            changeItemValue('time-24', true);
+            checkRenderedItem('time-24');
+        });
+
         it('Change close-to-tray to false', () =>
         {
             changeItemValue('close-to-tray', false);

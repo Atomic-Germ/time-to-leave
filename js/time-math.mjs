@@ -87,11 +87,22 @@ class TimeMath
     }
 
     /**
-     * Validates that a string is a valid 12 or 24 hour time, following the format of HH:MM
+     * Validates that a string is a valid 12 hour time, following the format of HH:MM
      * @returns true if it's valid
      */
     static validateTime(time)
     {
+        const re = new RegExp('^-?(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
+        return re.test(time);
+    }
+
+    /**
+     * Validates that a string is a valid 24 hour time, following the format of HH:MM
+     * @returns true if it's valid
+     */
+    static validate24Time(time)
+    {
+        if (time.length < 5) { time = '0' + time; }
         const re = new RegExp('^-?(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$');
         return re.test(time);
     }

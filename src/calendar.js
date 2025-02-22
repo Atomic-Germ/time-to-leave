@@ -87,18 +87,3 @@ $(() =>
     });
 });
 
-/*
- * Utility function to format time based on preference
- */
-function formatTime(date, preferences) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    if (preferences["time-24"]) {
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    } else {
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        return `${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-    }
-}

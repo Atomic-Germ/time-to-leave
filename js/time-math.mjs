@@ -87,7 +87,7 @@ class TimeMath
     }
 
     /**
-     * Validates that a string is a valid time, following the format of HH:MM
+     * Validates that a string is a valid 12 or 24 hour time, following the format of HH:MM
      * @returns true if it's valid
      */
     static validateTime(time)

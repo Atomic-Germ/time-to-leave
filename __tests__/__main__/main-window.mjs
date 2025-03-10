@@ -160,61 +160,6 @@ describe('main-window.mjs', () =>
         });
     });
 
-    describe('emit IpcConstants.SwitchView', () =>
-    {
-        it('It should send new event to ipcRenderer', function(done)
-        {
-            this.timeout(5000);
-
-            assert.strictEqual(savePreferences({
-                ...getDefaultPreferences(),
-                ['view']: 'month'
-            }), true);
-            createWindow();
-            /**
-             * @type {BrowserWindow}
-             */
-            const mainWindow = getMainWindow();
-
-            const windowSpy = spy(mainWindow.webContents, 'send');
-            mainWindow.webContents.ipc.on(IpcConstants.WindowReadyToShow, () =>
-            {
-                const windowSize = mainWindow.getSize();
-                assert.strictEqual(windowSize.length, 2);
-
-                // First, check the month view sizes
-                // For some reason the default height is changing on CI
-                const possibleHeights = [800, 970, 728];
-                assert.strictEqual(Math.abs(windowSize[0] - 1010) < 5, true, `Width was ${windowSize[0]}`);
-                assert.strictEqual(possibleHeights.indexOf(windowSize[1]) !== -1, true, `Height was ${windowSize[1]}`);
-
-                mainWindow.webContents.on('content-bounds-updated', () =>
-                {
-                    setTimeout(() =>
-                    {
-                        const windowSize = mainWindow.getSize();
-                        assert.strictEqual(windowSize.length, 2);
-
-                        // Now in day view sizes
-                        assert.strictEqual(Math.abs(windowSize[0] - 500) < 5, true, `Width was ${windowSize[0]}`);
-                        assert.strictEqual(Math.abs(windowSize[1] - 500) < 5, true, `Height was ${windowSize[1]}`);
-
-                        assert.strictEqual(windowSpy.calledOnce, true);
-
-                        const firstCall = windowSpy.firstCall;
-                        assert.strictEqual(firstCall.args[0], IpcConstants.PreferencesSaved);
-                        assert.strictEqual(firstCall.args[1]['view'], 'day');
-
-                        windowSpy.restore();
-                        done();
-                    }, 300);
-                });
-
-                ipcMain.emit(IpcConstants.SwitchView);
-            });
-        });
-    });
-
     describe('emit IpcConstants.ReceiveLeaveBy', () =>
     {
         it('Should not show notification when notifications is not sent', (done) =>

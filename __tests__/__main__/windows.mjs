@@ -59,7 +59,6 @@ describe('Windows tests', () =>
 
     it('Should create waiver window', (done) =>
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });
@@ -83,7 +82,6 @@ describe('Windows tests', () =>
 
     it('Should show waiver window when it has been created', (done) =>
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });
@@ -112,7 +110,6 @@ describe('Windows tests', () =>
 
     it('Should set global waiverDay when event is sent', (done) =>
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });
@@ -128,7 +125,6 @@ describe('Windows tests', () =>
 
     it('Should reset waiverWindow on close', (done) =>
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });
@@ -144,7 +140,6 @@ describe('Windows tests', () =>
 
     it('Should create preferences window', function(done)
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });
@@ -171,7 +166,6 @@ describe('Windows tests', () =>
 
     it('Should show preferences window when it has been created', (done) =>
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });
@@ -200,7 +194,6 @@ describe('Windows tests', () =>
 
     it('Should reset preferences window on close', (done) =>
     {
-        this.timeout(5000);
         const mainWindow = new BrowserWindow({
             show: false
         });

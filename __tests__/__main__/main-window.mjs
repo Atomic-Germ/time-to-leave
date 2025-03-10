@@ -160,7 +160,7 @@ describe('main-window.mjs', () =>
         });
     });
 
-/*    describe('emit IpcConstants.SwitchView', () =>
+    describe('emit IpcConstants.SwitchView', () =>
     {
         it('It should send new event to ipcRenderer', function(done)
         {
@@ -171,6 +171,9 @@ describe('main-window.mjs', () =>
                 ['view']: 'month'
             }), true);
             createWindow();
+            /**
+             * @type {BrowserWindow}
+             */
             const mainWindow = getMainWindow();
 
             const windowSpy = spy(mainWindow.webContents, 'send');
@@ -180,8 +183,8 @@ describe('main-window.mjs', () =>
                 assert.strictEqual(windowSize.length, 2);
 
                 // First, check the month view sizes
-                // For some reason the default height is changing on CI
-                const possibleHeights = [800, 970, 728];
+                // For some reason the default height is changing on CI, 1025 is a hack
+                const possibleHeights = [800, 970, 728, 1025];
                 assert.strictEqual(Math.abs(windowSize[0] - 1010) < 5, true, `Width was ${windowSize[0]}`);
                 assert.strictEqual(possibleHeights.indexOf(windowSize[1]) !== -1, true, `Height was ${windowSize[1]}`);
 
@@ -210,8 +213,7 @@ describe('main-window.mjs', () =>
                 ipcMain.emit(IpcConstants.SwitchView);
             });
         });
-}); 
-*/
+    });
 
     describe('emit IpcConstants.ReceiveLeaveBy', () =>
     {

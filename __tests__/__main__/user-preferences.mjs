@@ -52,21 +52,20 @@ describe('Preferences Main', () =>
     });
 
     describe('getDefaultWidthHeight()', () =>
+{
+    it('Month view', function()
     {
-        it('Month view', function()
-        {
-            const preferences = structuredClone(getDefaultPreferences());
-            assert.strictEqual(preferences['view'], 'month');
-            assert.deepStrictEqual(getDefaultWidthHeight(preferences), { width: 1010, height: 800 });
-        });
-
-        it('Day view', () =>
-        {
-            const preferences = structuredClone(getDefaultPreferences());
-            preferences['view'] = 'day';
-            assert.deepStrictEqual(getDefaultWidthHeight(preferences), { width: 500, height: 500 });
-        });
+        const preferences = JSON.parse(JSON.stringify(getDefaultPreferences()));
+        assert.strictEqual(preferences['view'], 'month');
+        assert.deepStrictEqual(getDefaultWidthHeight(preferences), { width: 1010, height: 800 });
     });
+    it('Day view', () =>
+    {
+        const preferences = JSON.parse(JSON.stringify(getDefaultPreferences()));
+        preferences['view'] = 'day';
+        assert.deepStrictEqual(getDefaultWidthHeight(preferences), { width: 500, height: 500 });
+    });
+});
 
     describe('switchCalendarView()', () =>
     {

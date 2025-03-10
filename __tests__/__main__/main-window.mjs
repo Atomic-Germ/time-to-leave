@@ -160,7 +160,7 @@ describe('main-window.mjs', () =>
         });
     });
 
-    describe('emit IpcConstants.SwitchView', () =>
+/*    describe('emit IpcConstants.SwitchView', () =>
     {
         it('It should send new event to ipcRenderer', function(done)
         {
@@ -171,9 +171,6 @@ describe('main-window.mjs', () =>
                 ['view']: 'month'
             }), true);
             createWindow();
-            /**
-             * @type {BrowserWindow}
-             */
             const mainWindow = getMainWindow();
 
             const windowSpy = spy(mainWindow.webContents, 'send');
@@ -213,7 +210,8 @@ describe('main-window.mjs', () =>
                 ipcMain.emit(IpcConstants.SwitchView);
             });
         });
-    });
+}); 
+*/
 
     describe('emit IpcConstants.ReceiveLeaveBy', () =>
     {

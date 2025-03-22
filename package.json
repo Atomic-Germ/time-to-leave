@@ -74,7 +74,7 @@
     "jsonschema": "1.5.0"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "electronmon": {
     "patterns": [

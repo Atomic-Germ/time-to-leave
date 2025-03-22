@@ -75,7 +75,7 @@ describe('Windows tests', () =>
 
         // Values can vary about 10px from 600, 500
         const size = Windows.getWaiverWindow().getSize();
-
+        console.log('Waiver window created:', size);
 
         assert.strictEqual(Math.abs(size[0] - 600) < 10, true);
         assert.strictEqual(Math.abs(size[1] - 500) < 10, true);

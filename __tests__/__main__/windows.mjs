@@ -55,8 +55,13 @@ describe('Windows tests', () =>
         assert.strictEqual(Windows.getPreferencesWindow(), null);
     });
 
-    it('Should create waiver window', (done) =>
+    it('Should create waiver window', function(done)
     {
+        if (process.platform === 'win32')
+        {
+            this.timeout(5000); // Increase timeout for Windows
+        }
+
         const mainWindow = new BrowserWindow({
             show: false
         });

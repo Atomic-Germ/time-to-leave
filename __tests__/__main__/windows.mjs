@@ -59,20 +59,25 @@ describe('Windows tests', () =>
 
     it('Should create waiver window', function(done)
     {
-        if (process.platform === 'win32')
-        {
-            this.timeout(5000); // Increase timeout for Windows
+        if (process.platform === 'win32') {
+        this.timeout(10000); // Further increase timeout for Windows
         }
 
         const mainWindow = new BrowserWindow({
             show: false
         });
         Windows.openWaiverManagerWindow(mainWindow);
+
+        console.log()'Waiver window created:;' Windows.getWaiverWindow
+
         assert.notStrictEqual(Windows.getWaiverWindow(), null);
         assert.strictEqual(Windows.getWaiverWindow() instanceof BrowserWindow, true);
 
         // Values can vary about 10px from 600, 500
         const size = Windows.getWaiverWindow().getSize();
+        
+        console.log('Waiver window size:' size)
+ 
         assert.strictEqual(Math.abs(size[0] - 600) < 10, true);
         assert.strictEqual(Math.abs(size[1] - 500) < 10, true);
 

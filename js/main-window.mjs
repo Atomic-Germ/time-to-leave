@@ -70,8 +70,8 @@ function createMenu()
 function createWindow()
 {
     // Create the browser window.
-    const widthHeight = getDefaultWidthHeight();
     const userPreferences = getUserPreferences();
+    const widthHeight = getDefaultWidthHeight(userPreferences);
     mainWindow = new BrowserWindow({
         width: widthHeight.width,
         height: widthHeight.height,
@@ -102,12 +102,6 @@ function createWindow()
         contextMenuTemplate[0].enabled = arg;
         global.contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
         global.tray.setContextMenu(global.contextMenu);
-    });
-
-    ipcMain.on(IpcConstants.ResizeMainWindow, () =>
-    {
-        const widthHeight = getDefaultWidthHeight();
-        mainWindow.setSize(widthHeight.width, widthHeight.height);
     });
 
     ipcMain.on(IpcConstants.SwitchView, () =>
@@ -183,6 +177,16 @@ function createWindow()
     });
 }
 
+/**
+ * Toggles the main window style to indicate an operation is processing
+ *
+ * @param {Boolean} enable Enable or not the style
+ */
+function toggleMainWindowWait(enable)
+{
+    getMainWindow()?.webContents.send(IpcConstants.ToggleMainWindowWait, enable);
+}
+
 function triggerStartupDialogs()
 {
     if (UpdateManager.shouldCheckForUpdates())
@@ -215,5 +219,6 @@ export {
     getLeaveByInterval,
     getMainWindow,
     resetMainWindow,
+    toggleMainWindowWait,
     triggerStartupDialogs,
 };

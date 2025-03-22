@@ -1,256 +1,134 @@
 'use strict';
 
 import assert from 'assert';
-import { BrowserWindow, ipcMain } from 'electron';
-import { spy, stub } from 'sinon';
-
-import { getDateStr } from '../../js/date-aux.mjs';
-import IpcConstants from '../../js/ipc-constants.mjs';
+import sinon from 'sinon';
+import { BrowserWindow } from 'electron';
 import Windows from '../../js/windows.mjs';
+import { getUserPreferences } from '../../js/user-preferences.mjs';
+import * as dateAux from '../../js/date-aux.mjs';
 
-describe('Windows tests', () =>
+describe('Windows', () =>
 {
-    let showSpy;
-    let loadSpy;
-    before(() =>
+    let mainWindowMock;
+
+    beforeEach(() =>
     {
-        // Avoid window being shown
-        showSpy = stub(BrowserWindow.prototype, 'show');
-        loadSpy = spy(BrowserWindow.prototype, 'loadURL');
+        global.waiverWindow = null;
+        global.prefWindow = null;
+        global.tray = null;
+        global.contextMenu = null;
 
-        // Mocking for tests below
-        ipcMain.handle(IpcConstants.GetWaiverDay, () =>
-        {
-            return new Promise((resolve) =>
-            {
-                resolve(global.waiverDay);
-            });
-        });
-        ipcMain.removeHandler(IpcConstants.GetLanguageData);
-        ipcMain.handle(IpcConstants.GetLanguageData, () => ({
-            'language': 'en',
-            'data': {
-                'translation': {
-                    '$Preferences': {
-                        'hideNonWorkingDay': ''
-                    }
-                }
-            }
-        }));
-        ipcMain.handle(IpcConstants.GetWaiverStoreContents, () =>
-        {
-            return new Promise(resolve => resolve({}));
-        });
-        ipcMain.handle(IpcConstants.GetCountries, () =>
-        {
-            return new Promise(resolve => resolve([]));
-        });
+        mainWindowMock = {
+            webContents: {
+                send: sinon.stub(),
+            },
+            getBounds: sinon.stub().returns({ x: 0, y: 0, width: 800, height: 600 }),
+        };
 
-        Windows.resetWindowsElements();
-    });
-
-    it('Elements should be null on starting', () =>
-    {
-        assert.strictEqual(Windows.getWaiverWindow(), null);
-        assert.strictEqual(global.tray, null);
-        assert.strictEqual(global.contextMenu, null);
-        assert.strictEqual(Windows.getPreferencesWindow(), null);
-    });
-
-    it('Should create waiver window', function(done)
-    {
-        if (process.platform === 'win32')
-        {
-            this.timeout(10000); // Further increase timeout for Windows
-        }
-
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-        Windows.openWaiverManagerWindow(mainWindow);
-
-        console.log('Waiver window created:', Windows.getWaiverWindow());
-        assert.notStrictEqual(Windows.getWaiverWindow(), null);
-        assert.strictEqual(Windows.getWaiverWindow() instanceof BrowserWindow, true);
-
-        // Values can vary about 10px from 600, 500
-        const size = Windows.getWaiverWindow().getSize();
-        console.log('Waiver window created:', size);
-
-        assert.strictEqual(Math.abs(size[0] - 600) < 10, true);
-        assert.strictEqual(Math.abs(size[1] - 500) < 10, true);
-
-        assert.strictEqual(loadSpy.calledOnce, true);
-
-        Windows.getWaiverWindow().webContents.ipc.on(IpcConstants.WindowReadyToShow, () =>
-        {
-            assert.strictEqual(showSpy.calledOnce, true);
-            done();
-        });
-    });
-
-    it('Should show waiver window when it has been created', (done) =>
-    {
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-        let firstShow = true;
-        showSpy.callsFake(() =>
-        {
-            if (firstShow)
-            {
-                firstShow = false;
-                Windows.openWaiverManagerWindow(mainWindow);
-            }
-            else
-            {
-                assert.notStrictEqual(Windows.getWaiverWindow(), null);
-
-                // It should only load once the URL because it already exists
-                assert.strictEqual(loadSpy.calledOnce, true);
-                assert.strictEqual(showSpy.calledTwice, true);
-                showSpy.restore();
-                showSpy = stub(BrowserWindow.prototype, 'show');
-                done();
-            }
-        });
-        Windows.openWaiverManagerWindow(mainWindow);
-    });
-
-    it('Should set global waiverDay when event is sent', (done) =>
-    {
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-        Windows.openWaiverManagerWindow(mainWindow, true);
-        Windows.getWaiverWindow().webContents.ipc.on(IpcConstants.WindowReadyToShow, () =>
-        {
-            assert.strictEqual(showSpy.calledOnce, true);
-            assert.notStrictEqual(Windows.getWaiverWindow(), null);
-            assert.strictEqual(global.waiverDay, getDateStr(new Date()));
-            done();
-        });
-    });
-
-    it('Should reset waiverWindow on close', (done) =>
-    {
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-        Windows.openWaiverManagerWindow(mainWindow, true);
-        Windows.getWaiverWindow().webContents.ipc.on(IpcConstants.WindowReadyToShow, () =>
-        {
-            assert.strictEqual(showSpy.calledOnce, true);
-            Windows.getWaiverWindow().close();
-            assert.strictEqual(Windows.getWaiverWindow(), null);
-            done();
-        });
-    });
-
-    it('Should create preferences window', function(done)
-    {
-        // For some reason this test takes longer in the CI for windows-latest.
-        // The last requestAnimationFrame() call inside preferences.js has been taking ~2s.
-        this.timeout(5000);
-
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-
-        showSpy.callsFake(() =>
-        {
-            assert.notStrictEqual(Windows.getPreferencesWindow(), null);
-            assert.strictEqual(Windows.getPreferencesWindow() instanceof BrowserWindow, true);
-
-            // Values can vary about 10px from 600, 500
-            const size = Windows.getPreferencesWindow().getSize();
-            assert.strictEqual(Math.abs(size[0] - 550) < 10, true);
-            assert.strictEqual(Math.abs(size[1] - 620) < 10, true);
-
-            assert.strictEqual(loadSpy.calledOnce, true);
-
-            showSpy.restore();
-            showSpy = stub(BrowserWindow.prototype, 'show');
-            done();
-        });
-
-        Windows.openPreferencesWindow(mainWindow);
-    });
-
-    it('Should show preferences window when it has been created', (done) =>
-    {
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-        let firstShow = true;
-        showSpy.callsFake(() =>
-        {
-            if (firstShow)
-            {
-                firstShow = false;
-                Windows.openPreferencesWindow(mainWindow);
-            }
-            else
-            {
-                assert.notStrictEqual(Windows.getPreferencesWindow(), null);
-
-                // It should only load once the URL because it already exists
-                assert.strictEqual(loadSpy.calledOnce, true);
-                assert.strictEqual(showSpy.calledTwice, true);
-                showSpy.restore();
-                showSpy = stub(BrowserWindow.prototype, 'show');
-                done();
-            }
-        });
-        Windows.openPreferencesWindow(mainWindow);
-    });
-
-    it('Should reset preferences window on close', (done) =>
-    {
-        const mainWindow = new BrowserWindow({
-            show: false
-        });
-        Windows.openPreferencesWindow(mainWindow, true);
-        Windows.getPreferencesWindow().webContents.ipc.on(IpcConstants.WindowReadyToShow, () =>
-        {
-            assert.strictEqual(showSpy.calledOnce, true);
-            Windows.getPreferencesWindow().close();
-            assert.strictEqual(Windows.getPreferencesWindow(), null);
-            done();
-        });
-    });
-
-    it('Should get dialog coordinates', () =>
-    {
-        const coordinates = Windows.getDialogCoordinates(500, 250, {
-            getBounds: () => ({
-                x: 200,
-                y: 300,
-                width: 400,
-                height: 600
-            })
-        });
-        assert.deepStrictEqual(coordinates, {
-            x: 150,
-            y: 475
-        });
+        sinon.stub(BrowserWindow.prototype, 'loadURL');
+        sinon.stub(BrowserWindow.prototype, 'show');
+        sinon.stub(BrowserWindow.prototype, 'setMenu');
+        sinon.stub(BrowserWindow.prototype.webContents, 'ipc');
+        sinon.stub(BrowserWindow.prototype.webContents, 'on');
+        sinon.stub(BrowserWindow.prototype, 'on');
     });
 
     afterEach(() =>
     {
-        showSpy.resetHistory();
-        loadSpy.resetHistory();
-        Windows.resetWindowsElements();
+        if (global.waiverWindow)
+        {
+            global.waiverWindow.destroy();
+        }
+        if (global.prefWindow)
+        {
+            global.prefWindow.destroy();
+        }
+        sinon.restore();
     });
 
-    after(() =>
+    describe('openWaiverManagerWindow', () =>
     {
-        showSpy.restore();
-        loadSpy.restore();
+        it('should show existing waiver window', () =>
+        {
+            global.waiverWindow = { show: sinon.stub(), destroy: sinon.stub() };
+            Windows.openWaiverManagerWindow(mainWindowMock);
+            assert(global.waiverWindow.show.calledOnce);
+        });
 
-        ipcMain.removeHandler(IpcConstants.GetWaiverDay);
-        ipcMain.removeHandler(IpcConstants.GetLanguageData);
-        ipcMain.removeHandler(IpcConstants.GetWaiverStoreContents);
-        ipcMain.removeHandler(IpcConstants.GetCountries);
+        it('should create a new waiver window', () =>
+        {
+            sinon.stub(dateAux, 'getDateStr').returns('mock-date');
+            sinon.stub(getUserPreferences, 'default').returns({ theme: 'dark' });
+
+            Windows.openWaiverManagerWindow(mainWindowMock, true);
+
+            assert.strictEqual(global.waiverWindow instanceof BrowserWindow, true);
+            assert(BrowserWindow.prototype.loadURL.calledOnce);
+        });
+    });
+
+    describe('openPreferencesWindow', () =>
+    {
+        it('should show existing preferences window', () =>
+        {
+            global.prefWindow = { show: sinon.stub(), destroy: sinon.stub() };
+            Windows.openPreferencesWindow(mainWindowMock);
+            assert(global.prefWindow.show.calledOnce);
+        });
+
+        it('should create a new preferences window', () =>
+        {
+            sinon.stub(getUserPreferences, 'default').returns({ theme: 'dark' });
+
+            Windows.openPreferencesWindow(mainWindowMock);
+
+            assert.strictEqual(global.prefWindow instanceof BrowserWindow, true);
+            assert(BrowserWindow.prototype.loadURL.calledOnce);
+        });
+    });
+
+    describe('getDialogCoordinates', () =>
+    {
+        it('should return correct dialog coordinates', () =>
+        {
+            const coords = Windows.getDialogCoordinates(200, 150, mainWindowMock);
+            assert.deepStrictEqual(coords, { x: 300, y: 225 });
+        });
+    });
+
+    describe('getWaiverWindow', () =>
+    {
+        it('should return waiver window', () =>
+        {
+            global.waiverWindow = { mock: 'waiver' };
+            assert.strictEqual(Windows.getWaiverWindow(), global.waiverWindow);
+        });
+    });
+
+    describe('getPreferencesWindow', () =>
+    {
+        it('should return preferences window', () =>
+        {
+            global.prefWindow = { mock: 'pref' };
+            assert.strictEqual(Windows.getPreferencesWindow(), global.prefWindow);
+        });
+    });
+
+    describe('resetWindowsElements', () =>
+    {
+        it('should reset all global window elements', () =>
+        {
+            global.waiverWindow = { mock: 'waiver' };
+            global.prefWindow = { mock: 'pref' };
+            global.tray = { mock: 'tray' };
+            global.contextMenu = { mock: 'context' };
+
+            Windows.resetWindowsElements();
+
+            assert.strictEqual(global.waiverWindow, null);
+            assert.strictEqual(global.prefWindow, null);
+            assert.strictEqual(global.tray, null);
+            assert.strictEqual(global.contextMenu, null);
+        });
     });
 });

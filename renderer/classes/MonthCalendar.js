@@ -93,13 +93,16 @@ class MonthCalendar extends BaseCalendar
                     `<img src="../assets/ttl.svg" alt="${title}" height="64" width="64">` +
                     '<div class="title-header-msg" aria-live="polite"></div>' +
                '</header>' +
-                '<table class="table-header"><tr>' +
-                    '<th class="th but-switch-view">' + switchView + '</th>' +
-                    '<th class="th but-left">' + leftBut + '</th>' +
-                    '<th class="th header-date"><div class="div-th-month-name" id="month-year"></div></th>' +
-                    '<th class="th but-right">' + rightBut + '</th>' +
-                    '<th class="th but-today">' + todayBut + '</th>' +
-                '</tr></table>';
+               '<nav class="calendar-controls" role="navigation" aria-label="Calendar navigation">' +
+                    '<div class="control-group">' +
+                      `<div class="control-item">${switchView}</div>` +
+                      `<div class="control-item">${leftBut}</div>` +
+                      '<div class="control-item date-selector">' +
+                      '<div class="header-date"><span id="header-date"></span></span><div class="header-date" id="month-year"></div></div>' +
+                    '</div>' +
+                      `<div class="control-item">${rightBut}</div>` +
+                    `<div class="control-item">${todayBut}</div>` +
+                '</div></nav>'
     }
 
     /*

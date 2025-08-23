@@ -205,9 +205,13 @@ html[data-theme="light"].wait {
   -webkit-user-drag: none;
 }
 
-.th-month-name {
+.header-date {
+  text-transform: capitalize;
   text-align: center;
-  font-size: 120%;
+  font-size: 115%;
+  margin: auto;
+  padding: 12px 0;
+  font-weight: bold;
 }
 
 .weekday {
@@ -306,6 +310,61 @@ html[data-theme="light"].wait {
   vertical-align: middle;
 }
 
+/* Calendar Controls */
+.calendar-controls {
+  width: 90%;
+  margin: 0 auto;
+  padding: 8px;
+  background: var(--table-header-bground);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.control-group {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.control-item {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0 7px;
+  height: 50px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--page-color);
+}
+
+.icon-button:focus {
+  outline: 2px solid var(--input-focus);
+  border-radius: 4px;
+}
+
+.icon-button:hover {
+  background-color: var(--input-hover-bground);
+  border-radius: 4px;
+}
+
+.date-selector {
+  width: 60%;
+}
+
+.date-selector input[type="date"] {
+  background: var(--input-bground);
+  color: var(--page-color);
+  border: 1px solid var(--table-border);
+  padding: 4px;
+  border-radius: 4px;
+}
+
 #calendar .table-body {
   overflow-y: auto;
   background-color: var(--table-bground);
@@ -379,10 +438,6 @@ html[data-theme="light"].wait {
 
 #calendar input[type="time" i]::-webkit-calendar-picker-indicator {
   width: 0px;
-}
-
-#header-date {
-  text-transform: capitalize;
 }
 
 #input-calendar-date::-webkit-datetime-edit {
@@ -1111,10 +1166,6 @@ html[data-view='month'] #overall-balance {
 
 html[data-view='day'] #calendar.container {
   width: calc(100vw - 30px)
-}
-
-html[data-view='day'] .th-month-name {
-  font-size: 115%;
 }
 
 html[data-view='day'] #leave-by-time {

@@ -83,20 +83,20 @@ class MonthCalendar extends BaseCalendar
      */
     _getPageHeader()
     {
-        const switchView = `<input id="switch-view" type="image" src="../assets/switch.svg" alt="${this._getTranslation('$BaseCalendar.switch-view')}" title="${this._getTranslation('$BaseCalendar.switch-view')}" height="24" width="24"></input>`;
-        const todayBut = `<input id="current-month" type="image" src="../assets/calendar.svg" alt="${this._getTranslation('$MonthCalendar.current-month')}" title="${this._getTranslation('$MonthCalendar.current-month')}" height="24" width="24"></input>`;
-        const leftBut = `<input id="prev-month" type="image" src="../assets/left-arrow.svg" alt="${this._getTranslation('$MonthCalendar.previous-month')}" title="${this._getTranslation('$MonthCalendar.previous-month')}" height="24" width="24"></input>`;
-        const rightBut = `<input id="next-month" type="image" src="../assets/right-arrow.svg" alt="${this._getTranslation('$MonthCalendar.next-month')}" title="${this._getTranslation('$MonthCalendar.next-month')}" height="24" width="24"></input>`;
+        const switchView = `<button type="button" id="switch-view" class="icon-button" aria-label="${this._getTranslation('$BaseCalendar.switch-view')}"><img src="../assets/switch.svg" alt="" role="presentation" height="24" width="24"></button>`;
+        const todayBut = `<button type="button" id="current-month" class="icon-button" aria-label="${this._getTranslation('$MonthCalendar.current-month')}"><img src="../assets/calendar.svg" alt="" role="presentation" height="24" width="24"></button>`;
+        const leftBut = `<button type="button" id="prev-month" class="icon-button" aria-label="${this._getTranslation('$MonthCalendar.previous-month')}"><img src="../assets/left-arrow.svg" alt="" role="presentation" height="24" width="24"></button>`;
+        const rightBut = `<button type="button" id="next-month" class="icon-button" aria-label="${this._getTranslation('$MonthCalendar.next-month')}"><img src="../assets/right-arrow.svg" alt="" role="presentation" height="24" width="24"></button>`;
         const title = 'Time to Leave';
-        return '<div class="title-header">'+
-                    `<div class="title-header-text">${title}</div>` +
+        return '<header class="title-header">'+
+                    `<h1 class="title-header-text">${title}</h1>` +
                     `<img src="../assets/ttl.svg" alt="${title}" height="64" width="64">` +
-                    '<div class="title-header-msg"></div>' +
-               '</div>' +
+                    '<div class="title-header-msg" aria-live="polite"></div>' +
+               '</header>' +
                 '<table class="table-header"><tr>' +
                     '<th class="th but-switch-view">' + switchView + '</th>' +
                     '<th class="th but-left">' + leftBut + '</th>' +
-                    '<th class="th th-month-name"><div class="div-th-month-name" id="month-year"></div></th>' +
+                    '<th class="th header-date"><div class="div-th-month-name" id="month-year"></div></th>' +
                     '<th class="th but-right">' + rightBut + '</th>' +
                     '<th class="th but-today">' + todayBut + '</th>' +
                 '</tr></table>';

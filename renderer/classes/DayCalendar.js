@@ -50,23 +50,26 @@ class DayCalendar extends BaseCalendar
      */
     _getPageHeader()
     {
-        const switchView = `<input id="switch-view" type="image" src="../assets/switch.svg" alt="${this._getTranslation('$BaseCalendar.switch-view')}" title="${this._getTranslation('$BaseCalendar.switch-view')}" height="24" width="24"></input>`;
-        const todayBut = `<input id="current-day" type="image" src="../assets/calendar.svg" alt="${this._getTranslation('$DayCalendar.current-day')}" title="${this._getTranslation('$DayCalendar.current-day')}" height="24" width="24"></input>`;
-        const leftBut = `<input id="prev-day" type="image" src="../assets/left-arrow.svg" alt="${this._getTranslation('$DayCalendar.previous-day')}" title="${this._getTranslation('$DayCalendar.previous-day')}" height="24" width="24"></input>`;
-        const rightBut = `<input id="next-day" type="image" src="../assets/right-arrow.svg" alt="${this._getTranslation('$DayCalendar.next-day')}" title="${this._getTranslation('$DayCalendar.next-day')}" height="24" width="24"></input>`;
+        const switchView = `<button type="button" id="switch-view" class="icon-button" aria-label="${this._getTranslation('$BaseCalendar.switch-view')}"><img src="../assets/switch.svg" alt="" role="presentation" height="24" width="24"></button>`;
+        const todayBut = `<button type="button" id="current-day" class="icon-button" aria-label="${this._getTranslation('$DayCalendar.current-day')}"><img src="../assets/calendar.svg" alt="" role="presentation" height="24" width="24"></button>`;
+        const leftBut = `<button type="button" id="prev-day" class="icon-button" aria-label="${this._getTranslation('$DayCalendar.previous-day')}"><img src="../assets/left-arrow.svg" alt="" role="presentation" height="24" width="24"></button>`;
+        const rightBut = `<button type="button" id="next-day" class="icon-button" aria-label="${this._getTranslation('$DayCalendar.next-day')}"><img src="../assets/right-arrow.svg" alt="" role="presentation" height="24" width="24"></button>`;
         const title = 'Time to Leave';
-        return '<div class="title-header-day">'+
-                    `<div class="title-header-text">${title}</div>` +
+        return '<header class="title-header-day">'+
+                    `<h1 class="title-header-text">${title}</h1>` +
                     `<img src="../assets/ttl.svg" alt="${title}" height="64" width="64">` +
-                    '<div class="title-header-msg"></div>' +
-               '</div>' +
-                '<table class="table-header"><tr>' +
-                    '<th class="th but-switch-view" colspan="2">' + switchView + '</th>' +
-                    '<th class="th but-left">' + leftBut + '</th>' +
-                    '<th class="th th-month-name" colspan="18"><div class="div-th-month-name"><span id="header-date"></span></span><input type="date" id="input-calendar-date" required></div></th>' +
-                    '<th class="th but-right">' + rightBut + '</th>' +
-                    '<th class="th but-today" colspan="2">' + todayBut + '</th>' +
-                '</tr></table>';
+                    '<div class="title-header-msg" aria-live="polite"></div>' +
+               '</header>' +
+                '<nav class="calendar-controls" role="navigation" aria-label="Calendar navigation">' +
+                    '<div class="control-group">' +
+                      `<div class="control-item">${switchView}</div>` +
+                      `<div class="control-item">${leftBut}</div>` +
+                      '<div class="control-item date-selector">' +
+                      '<div class="header-date"><span id="header-date"></span></span><input type="date" id="input-calendar-date" required></div>' +
+                    '</div>' +
+                      `<div class="control-item">${rightBut}</div>` +
+                    `<div class="control-item">${todayBut}</div>` +
+                '</div></nav>';
     }
 
     /**

@@ -10,13 +10,6 @@ import path from 'path';
 
 import { rootDir } from '../../js/app-config.mjs';
 
-// Mock KeyboardEvent for JSDOM
-class KeyboardEvent extends window.Event {
-    constructor(type, props) {
-        super(type);
-        Object.assign(this, props);
-    }
-}
 import {
     getDefaultPreferences,
     getPreferencesFilePath,
@@ -377,10 +370,11 @@ describe('Test Preferences Window', () =>
         it('removes success message after animation', (done) =>
         {
             showSuccess('Test message');
-            
+
             // Fast-forward timers
             const removeSpy = stub(Element.prototype, 'remove');
-            setTimeout(() => {
+            setTimeout(() =>
+            {
                 const message = document.querySelector('.success-message');
                 assert.ok(message.classList.contains('fade-out'));
                 assert.ok(removeSpy.called);
@@ -406,7 +400,7 @@ describe('Test Preferences Window', () =>
 
             const focusableElements = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
             assert.ok(focusableElements.length > 0, 'Dialog should have focusable elements');
-            
+
             const closeButton = dialog.querySelector('.dialog-close');
             assert.ok(closeButton, 'Dialog should have a close button');
             assert.strictEqual(closeButton.getAttribute('aria-label'), 'Close dialog');

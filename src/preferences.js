@@ -107,14 +107,13 @@ function renderWindowTheme()
     // Theme-handling should be towards the top. Applies theme early so it's more natural.
     const theme = 'theme';
 
-    /* istanbul ignore else */
+    // Check for saved theme data
     if (theme in preferences)
     {
         $('#' + theme).val(preferences[theme]);
     }
-    const selectedThemeOption = $('#' + theme)
-        .children('option:selected')
-        .val();
+
+    const selectedThemeOption = $('#' + theme).children('option:selected').val();
     preferences[theme] = selectedThemeOption;
     applyTheme(selectedThemeOption);
 }
@@ -171,8 +170,179 @@ function renderPreferencesWindow()
     notificationsInterval.prop('disabled', !repetition.is(':checked'));
 }
 
+function showError(inputElement, message)
+{
+    const errorId = inputElement.getAttribute('aria-describedby');
+    if (errorId)
+    {
+        const errorElement = document.getElementById(errorId);
+        if (errorElement)
+        {
+            errorElement.textContent = message;
+            inputElement.setAttribute('aria-invalid', 'true');
+        }
+    }
+}
+
+function clearError(inputElement)
+{
+    const errorId = inputElement.getAttribute('aria-describedby');
+    if (errorId)
+    {
+        const errorElement = document.getElementById(errorId);
+        if (errorElement)
+        {
+            errorElement.textContent = '';
+            inputElement.setAttribute('aria-invalid', 'false');
+        }
+    }
+}
+
+function showSuccess(message)
+{
+    const successAlert = document.createElement('div');
+    successAlert.className = 'success-message';
+    successAlert.setAttribute('role', 'status');
+    successAlert.setAttribute('aria-live', 'polite');
+    successAlert.textContent = message;
+
+    document.body.appendChild(successAlert);
+    setTimeout(() =>
+    {
+        successAlert.classList.add('fade-out');
+        setTimeout(() => successAlert.remove(), 1000);
+    }, 3000);
+}
+
+function setupFocusTrap(element)
+{
+    const focusableElements = element.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    element.addEventListener('keydown', function(e)
+    {
+        if (e.key === 'Tab')
+        {
+            if (e.shiftKey)
+            {
+                if (document.activeElement === firstFocusable)
+                {
+                    lastFocusable.focus();
+                    e.preventDefault();
+                }
+            }
+            else
+                if (document.activeElement === lastFocusable)
+                {
+                    firstFocusable.focus();
+                    e.preventDefault();
+                }
+        }
+    });
+}
+
+function handleKeyboardShortcuts(event)
+{
+    // Show keyboard shortcuts dialog
+    if (event.key === '?')
+    {
+        const dialog = document.getElementById('keyboard-shortcuts');
+        dialog.showModal();
+        return;
+    }
+
+    // Handle other shortcuts
+    if (event.altKey)
+    {
+        switch (event.key.toLowerCase())
+        {
+        case 'r':
+            document.getElementById('reset-button').click();
+            break;
+        case 't':
+            document.getElementById('theme').focus();
+            break;
+        }
+    }
+    else if (event.ctrlKey && event.key.toLowerCase() === 's')
+    {
+        event.preventDefault();
+        window.preferencesApi.notifyNewPreferences(preferences);
+    }
+}
+
+function setupRTL()
+{
+    const isRTL = document.documentElement.dir === 'rtl';
+    document.body.classList.toggle('rtl', isRTL);
+
+    // Adjust layouts for RTL
+    const flexBoxes = document.querySelectorAll('.flex-box');
+    flexBoxes.forEach(box =>
+    {
+        box.style.flexDirection = isRTL ? 'row-reverse' : 'row';
+    });
+}
+
+function handleDialogClose(dialog)
+{
+    if (dialog)
+    {
+        dialog.querySelector('.dialog-close').addEventListener('click', () =>
+        {
+            dialog.close();
+        });
+
+        dialog.addEventListener('keydown', (e) =>
+        {
+            if (e.key === 'Escape')
+            {
+                dialog.close();
+            }
+        });
+    }
+}
+
 function setupListeners()
 {
+    // Set up keyboard shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
+
+    // Set up RTL support
+    setupRTL();
+
+    // Set up dialog close handlers and focus trap for accessibility
+    const keyboardDialog = document.getElementById('keyboard-shortcuts');
+    handleDialogClose(keyboardDialog);
+    setupFocusTrap(keyboardDialog);
+
+    // Handle form validation
+    document.querySelectorAll('input[type="number"]').forEach(input =>
+    {
+        input.addEventListener('input', function()
+        {
+            if (this.validity.rangeOverflow)
+            {
+                showError(this, `Value must be less than or equal to ${this.max}`);
+            }
+            else if (this.validity.rangeUnderflow)
+            {
+                showError(this, `Value must be greater than or equal to ${this.min}`);
+            }
+            else if (this.validity.valueMissing)
+            {
+                showError(this, 'This field is required');
+            }
+            else
+            {
+                clearError(this);
+            }
+        });
+    });
+
     $('input[type="checkbox"]').on('change', function()
     {
         changeValue(this.name, this.checked);
@@ -203,6 +373,16 @@ function setupListeners()
     $('#view').on('change', function()
     {
         changeValue('view', this.value);
+    });
+
+    $('#save').on('click', function(event)
+    {
+        // Save preferences
+        window.rendererApi.setOriginalUserPreferences(preferences);
+        window.preferencesApi.notifyNewPreferences(preferences);
+        showSuccess('Preferences saved successfully');
+        event.preventDefault();
+        $('#close').trigger('click');
     });
 
     $('#reset-button').on('click', function()
@@ -264,20 +444,22 @@ function setupListeners()
 /* istanbul ignore next */
 $(() =>
 {
-    preferences = window.rendererApi.getOriginalUserPreferences();
-    requestAnimationFrame(() =>
+    try
     {
+        preferences = window.rendererApi.getOriginalUserPreferences();
+        console.log('Loaded preferences:', preferences);
+
         renderWindowTheme();
-        requestAnimationFrame(() =>
-        {
-            setTimeout(() =>
-            {
-                window.rendererApi.notifyWindowReadyToShow();
-            }, 100);
-        });
-    });
-    renderPreferencesWindow();
-    setupListeners();
+        renderPreferencesWindow();
+        setupListeners();
+
+        // Notify when window is ready
+        window.rendererApi.notifyWindowReadyToShow();
+    }
+    catch (error)
+    {
+        console.error('Error initializing preferences:', error);
+    }
     setupLanguages();
 });
 
@@ -288,4 +470,6 @@ export {
     listenerLanguage,
     setupListeners,
     renderPreferencesWindow,
+    showSuccess,
+    setupFocusTrap,
 };

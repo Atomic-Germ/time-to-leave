@@ -1,0 +1,108 @@
+/* Theme Template
+ * This template provides a structured starting point for creating new themes.
+ * All color values should meet WCAG 2.1 accessibility guidelines:
+ * - Normal text & UI components: minimum contrast ratio of 4.5:1 (WCAG AA)
+ * - Large text: minimum contrast ratio of 3:1 (WCAG AA)
+ * - Interactive elements & focus indicators: minimum contrast ratio of 3:1 (WCAG AA)
+ */
+
+html[data-theme="your-theme-name"] {
+  /* Brand Colors
+   * Define your theme's primary color palette here.
+   * Consider defining both base colors and their variants for consistency
+   */
+  --primary-base: /* Your primary brand color */;
+  --primary-light: /* Lighter variant of primary */;
+  --primary-lighter: /* Even lighter variant */;
+  --primary-dark: /* Darker variant of primary */;
+  --primary-darker: /* Even darker variant */;
+  
+  /* Base Page Colors
+   * These colors define your basic page layout
+   * WAI: Background/foreground should maintain 4.5:1 contrast ratio minimum
+   */
+  --page-bground: /* Main background color */;
+  --page-color: /* Main text color - ensure 4.5:1 contrast with background */;
+  
+  /* Table Layout Colors
+   * Define the visual hierarchy of your table elements
+   * WAI: Ensure sufficient contrast between adjacent cells
+   */
+  --table-bground: /* Table background */;
+  --input-bground: /* Input field background */;
+  --table-header-bground: /* Header row background */;
+  --table-border: /* Table border color - ensure visible against background */;
+  --table-total-border: /* Border for totals - consider using primary color */;
+  
+  /* Table Cell States
+   * Different cell states should be visually distinct but maintain readability
+   * WAI: Text contrast ratio of 4.5:1 minimum for each state
+   */
+  --table-cell-offtime-bground: /* Background for off-time cells */;
+  --table-cell-offtime-color: /* Text color for off-time cells */;
+  --table-cell-total-bground: /* Background for total cells */;
+  --table-cell-total-color: /* Text color for total cells */;
+  --table-header-label-bground: /* Background for header labels */;
+  --table-header-label-shadow: /* Optional shadow for depth */;
+  
+  /* Status and Interactive Colors
+   * These colors communicate state and interactivity
+   * WAI: Interactive elements need 3:1 contrast minimum
+   */
+  --error: /* Error state - typically red, ensure 4.5:1 contrast */;
+  --reset-color: /* Color for reset actions */;
+  --punch-bground: /* Background for punch button */;
+  --punch-color: /* Text color for punch button - ensure 4.5:1 contrast */;
+  --punch-disable-bground: /* Disabled punch button state */;
+  
+  /* Form Control Colors
+   * Define the appearance of interactive form elements
+   * WAI: All interactive elements need 3:1 contrast with adjacent colors
+   */
+  --slider-background-color: /* Slider track color */;
+  --slider-checked-color: /* Slider thumb/active color */;
+  --slider-unchecked-color: /* Slider inactive color */;
+  --weekday-background: /* Weekday selector background */;
+  --weekday-selected: /* Selected weekday background */;
+  
+  /* System States
+   * These define various system and UI state colors
+   * WAI: Ensure state changes are communicated by more than just color
+   */
+  --svg-invert: /* 0 for dark icons, 1 for light icons */;
+  --disabled-input-bground: /* Background for disabled inputs */;
+  --title-color: /* Color for titles - ensure 4.5:1 contrast */;
+  --input-border: /* Input border color - ensure 3:1 contrast */;
+  --tab-font-color: /* Tab text color - ensure 4.5:1 contrast */;
+  --tab-waiver-color: /* Waiver tab specific color */;
+  --tab-waiver-border: /* Waiver tab border color */;
+  
+  /* Focus States
+   * WAI: Focus indicators must have 3:1 contrast against all adjacent colors
+   * and be at least 2px thick for borders/outlines
+   */
+  --outline: /* Focus outline - minimum 2px, ensure 3:1 contrast */;
+}
+
+/* Theme-specific Enhancements
+ * Add any theme-specific styles here, such as:
+ * - Custom borders or shadows
+ * - Special effects or transitions
+ * - Component-specific overrides
+ * WAI: Ensure any decorative elements don't interfere with readability
+ */
+html[data-theme="your-theme-name"] .specific-component {
+  /* Your theme-specific styles */
+}
+
+/* State-specific Overrides
+ * Define how your theme handles different states
+ * WAI: State changes should be clear and have sufficient contrast
+ */
+html[data-theme="your-theme-name"].wait {
+  /* Define wait state appearance */
+}
+
+html[data-theme="your-theme-name"] .text-danger {
+  /* Error text styling - ensure 4.5:1 contrast */
+}

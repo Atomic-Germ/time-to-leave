@@ -1,5 +1,10 @@
 /* stylelint-disable no-descending-specificity */
 
+/* Import themes */
+@import url('themes/light.css');
+@import url('themes/dark.css');
+@import url('themes/business-dress.css');
+
 /* Font from https://fonts.google.com/specimen/Montserrat */
 @font-face {
   font-family: Montserrat;
@@ -14,36 +19,41 @@
 /* This is an implicit, and an explicit declaration of the Default color scheme */
 html,
 html[data-theme="light"] {
+  --purple-base: rgb(117 108 177);
+  --purple-light: rgb(147 138 207);
+  --purple-lighter: rgb(177 168 237);
+  --purple-dark: rgb(87 78 147);
+  --purple-darker: rgb(57 48 117);
   --page-bground: white;
   --page-color: black;
   --table-bground: white;
   --input-bground: transparent;
   --table-header-bground: var(--table-bground);
   --table-border: rgb(203 203 203);
-  --table-total-border: rgb(164 158 207);
+  --table-total-border: var(--purple-base);
   --table-cell-offtime-bground: rgb(245 245 245);
-  --table-cell-offtime-color: rgb(133 133 133);
+  --table-cell-offtime-color: var(--purple-darker);
   --table-cell-total-bground: var(--table-cell-offtime-bground);
-  --table-cell-total-color: var(--table-cell-offtime-color);
+  --table-cell-total-color: var(--purple-darker);
   --table-header-label-bground: var(--table-bground);
   --table-header-label-shadow: var(--table-border);
-  --error: red;
-  --reset-color: rgb(242 93 77);
-  --punch-bground: var(--table-total-border);
-  --punch-color: black;
+  --error: rgb(220 53 69);
+  --reset-color: rgb(220 53 69);
+  --punch-bground: var(--purple-base);
+  --punch-color: white;
   --punch-disable-bground: rgb(134 134 134);
   --slider-background-color: rgb(220 220 220);
-  --slider-checked-color: var(--table-total-border);
+  --slider-checked-color: var(--purple-base);
   --slider-unchecked-color: white;
   --weekday-background: var(--slider-background-color);
-  --weekday-selected: var(--punch-bground);
+  --weekday-selected: var(--purple-base);
   --svg-invert: 0;
   --disabled-input-bground: rgb(175 175 175);
-  --title-color: rgb(51 51 51);
-  --input-border: rgb(77 77 77);
-  --tab-font-color: rgb(51 51 51);
+  --title-color: var(--purple-darker);
+  --input-border: var(--purple-dark);
+  --tab-font-color: var(--purple-darker);
   --tab-waiver-color: white;
-  --tab-waiver-border: rgb(220 220 220);
+  --tab-waiver-border: var(--purple-light);
   --datepicker-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMTEuOTkgMkM2LjQ3IDIgMiA2LjQ4IDIgMTJzNC40NyAxMCA5Ljk5IDEwQzE3LjUyIDIyIDIyIDE3LjUyIDIyIDEyUzE3LjUyIDIgMTEuOTkgMnpNMTIgMjBjLTQuNDIgMC04LTMuNTgtOC04czMuNTgtOCA4LTggOCAzLjU4IDggOC0zLjU4IDgtOCA4eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIuNSA3SDExdjZsNS4yNSAzLjE1Ljc1LTEuMjMtNC41LTIuNjd6Ii8+PC9zdmc+") 1x);
   --calendar-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=") 1x);
   --day-calendar-select-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiPg0KICAgIDxwb2x5Z29uIHBvaW50cz0iNTAgODUsIDEwMCAwLCAwIDAiIGZpbGw9ImJsYWNrIj48L3BvbHlnb24+DQo8L3N2Zz4=") 1x);
@@ -52,35 +62,40 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
+  --purple-base: rgb(117 108 177);
+  --purple-light: rgb(147 138 207);
+  --purple-lighter: rgb(177 168 237);
+  --purple-dark: rgb(87 78 147);
+  --purple-darker: rgb(57 48 117);
   --page-bground: rgb(39 39 39);
   --page-color: white;
   --table-bground: rgb(39 39 39);
   --table-header-bground: var(--table-bground);
   --table-border: rgb(90 90 90);
   --input-bground: transparent;
-  --table-total-border: rgb(95 92 121);
+  --table-total-border: var(--purple-base);
   --table-cell-offtime-bground: rgb(71 71 71);
-  --table-cell-offtime-color: rgb(151 151 151);
+  --table-cell-offtime-color: var(--purple-lighter);
   --table-cell-total-bground: var(--table-cell-offtime-bground);
-  --table-cell-total-color: var(--table-cell-offtime-color);
+  --table-cell-total-color: var(--purple-lighter);
   --table-header-label-bground: var(--table-bground);
   --table-header-label-shadow: var(--table-border);
-  --error: red;
-  --punch-bground: rgb(164 158 207);
+  --error: rgb(255 99 109);
+  --punch-bground: var(--purple-base);
   --punch-color: white;
   --punch-disable-bground: rgb(134 134 134);
   --slider-background-color: var(--table-cell-offtime-bground);
-  --slider-checked-color: var(--punch-bground);
+  --slider-checked-color: var(--purple-base);
   --slider-unchecked-color: white;
   --weekday-background: var(--slider-background-color);
-  --weekday-selected: var(--punch-bground);
+  --weekday-selected: var(--purple-base);
   --svg-invert: 1;
   --disabled-input-bground: rgb(80 80 80);
-  --title-color: rgb(var(--page-color));
-  --input-border: rgb(77 77 77);
-  --tab-font-color: white;
-  --tab-waiver-color: rgb(77 77 77);
-  --tab-waiver-border: rgb(220 220 220);
+  --title-color: var(--purple-lighter);
+  --input-border: var(--purple-light);
+  --tab-font-color: var(--purple-lighter);
+  --tab-waiver-color: var(--purple-lighter);
+  --tab-waiver-border: var(--purple-base);
   --datepicker-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTExLjk5IDJDNi40NyAyIDIgNi40OCAyIDEyczQuNDcgMTAgOS45OSAxMEMxNy41MiAyMiAyMiAxNy41MiAyMiAxMlMxNy41MiAyIDExLjk5IDJ6TTEyIDIwYy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiLz48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMi41IDdIMTF2Nmw1LjI1IDMuMTUuNzUtMS4yMy00LjUtMi42N3oiLz48L3N2Zz4=") 1x);
   --calendar-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTIwIDNoLTFWMWgtMnYySDdWMUg1djJINGMtMS4xIDAtMiAuOS0yIDJ2MTZjMCAxLjEuOSAyIDIgMmgxNmMxLjEgMCAyLS45IDItMlY1YzAtMS4xLS45LTItMi0yem0wIDE4SDRWOGgxNnYxM3oiLz48cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDB6Ii8+PC9zdmc+") 1x);
   --day-calendar-select-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiPg0KICAgIDxwb2x5Z29uIHBvaW50cz0iNTAgODUsIDEwMCAwLCAwIDAiIGZpbGw9IndoaXRlIj48L3BvbHlnb24+DQo8L3N2Zz4=") 1x);
@@ -88,40 +103,54 @@ html[data-theme="dark"] {
   --delete-icon: image-set(url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath d='M11.452 2.597L7.964 6.086l3.488 3.488a1.33 1.33 0 0 1 0 1.879c-.26.26-.6.39-.94.39s-.68-.13-.94-.39L6.086 7.964l-3.488 3.488c-.26.26-.6.39-.94.39s-.68-.13-.94-.39a1.33 1.33 0 0 1 0-1.879l3.488-3.488L.72 2.597a1.33 1.33 0 0 1 0-1.878 1.33 1.33 0 0 1 1.878 0l3.488 3.488L9.574.72a1.33 1.33 0 0 1 1.878 0 1.33 1.33 0 0 1 0 1.878z' fill='%23fff'/%3E%3C/svg%3E") 1x);
 }
 
-html[data-theme="cadent-star"] {
-  --page-bground: transparent;
-  --page-color: black;
-  --table-bground: rgb(255 238 227 / 30%);
-  --input-bground: transparent;
-  --table-header-bground: rgb(255 238 227 / 90%);
-  --table-border: #28292f;
-  --table-total-border: rgb(121 121 121);
-  --table-cell-offtime-bground: rgb(0 0 0 / 10%);
-  --table-cell-offtime-color: rgb(0 0 0 / 50%);
-  --table-cell-total-bground: transparent;
-  --table-cell-total-color: var(--table-cell-offtime-color);
-  --table-header-label-bground: rgb(255 238 227 / 90%);
+html[data-theme="business-dress"] {
+  /* Base colors with high contrast */
+  --page-bground: rgb(255 255 255);
+  --page-color: rgb(33 33 33);  /* >7:1 contrast ratio */
+  
+  /* Table styling with subtle depth */
+  --table-bground: rgb(252 250 248);  /* Very light warm gray */
+  --table-header-bground: rgb(248 246 244);
+  --table-border: rgb(51 51 51);  /* >7:1 contrast with background */
+  --table-total-border: rgb(51 51 51);
+  
+  /* Cell styling with proper contrast */
+  --table-cell-offtime-bground: rgb(245 245 245);
+  --table-cell-offtime-color: rgb(71 71 71);  /* >4.5:1 contrast ratio */
+  --table-cell-total-bground: rgb(240 240 240);
+  --table-cell-total-color: rgb(51 51 51);  /* >7:1 contrast ratio */
+  --table-header-label-bground: var(--table-header-bground);
   --table-header-label-shadow: var(--table-border);
-  --error: red;
-  --punch-bground: var(--table-total-border);
-  --punch-color: rgb(228 228 228);
-  --punch-disable-bground: rgb(134 134 134);
-  --slider-background-color: rgb(220 220 220);
-  --slider-checked-color: var(--table-total-border);
-  --slider-unchecked-color: white;
-  --weekday-background: var(--slider-background-color);
-  --weekday-selected: var(--punch-bground);
+  
+  /* Interactive elements with clear visibility */
+  --error: rgb(200 0 0);  /* >4.5:1 contrast ratio */
+  --punch-bground: rgb(51 51 51);
+  --punch-color: rgb(255 255 255);  /* >7:1 contrast ratio */
+  --punch-disable-bground: rgb(128 128 128);
+  
+  /* Form controls with proper contrast */
+  --input-bground: rgb(255 255 255);
+  --slider-background-color: rgb(200 200 200);
+  --slider-checked-color: rgb(51 51 51);
+  --slider-unchecked-color: rgb(255 255 255);
+  --weekday-background: rgb(240 240 240);
+  --weekday-selected: rgb(51 51 51);
+  
+  /* UI accents with good visibility */
+  --disabled-input-bground: rgb(200 200 200);
+  --title-color: rgb(33 33 33);  /* >7:1 contrast ratio */
+  --input-border: rgb(71 71 71);  /* >4.5:1 contrast ratio */
+  --tab-font-color: rgb(33 33 33);
+  --tab-waiver-color: rgb(255 255 255);
+  --tab-waiver-border: rgb(71 71 71);
+  
+  /* Icon colors */
   --svg-invert: 0;
-  --disabled-input-bground: transparent;
-  --title-color: rgb(51 51 51);
-  --input-border: transparent;
-  --tab-font-color: black;
-  --tab-waiver-color: transparent;
-  --tab-waiver-border: black;
+  --outline-solid: 2px solid rgb(51 51 51);
   --datepicker-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMTEuOTkgMkM2LjQ3IDIgMiA2LjQ4IDIgMTJzNC40NyAxMCA5Ljk5IDEwQzE3LjUyIDIyIDIyIDE3LjUyIDIyIDEyUzE3LjUyIDIgMTEuOTkgMnpNMTIgMjBjLTQuNDIgMC04LTMuNTgtOC04czMuNTgtOCA4LTggOCAzLjU4IDggOC0zLjU4IDgtOCA4eiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIuNSA3SDExdjZsNS4yNSAzLjE1Ljc1LTEuMjMtNC41LTIuNjd6Ii8+PC9zdmc+") 1x);
   --calendar-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJXaW5kb3dUZXh0IiBkPSJNMjAgM2gtMVYxaC0ydjJIN1YxSDV2Mkg0Yy0xLjEgMC0yIC45LTIgMnYxNmMwIDEuMS45IDIgMiAyaDE2YzEuMSAwIDItLjkgMi0yVjVjMC0xLjEtLjktMi0yLTJ6bTAgMThINFY4aDE2djEzeiIvPjxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik0wIDBoMjR2MjRIMHoiLz48L3N2Zz4=") 1x);
   --day-calendar-select-icon: image-set(url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiPg0KICAgIDxwb2x5Z29uIHBvaW50cz0iNTAgODUsIDEwMCAwLCAwIDAiIGZpbGw9ImJsYWNrIj48L3BvbHlnb24+DQo8L3N2Zz4=") 1x);
-  --outline: 2px dashed black;
+  --outline-dashed: 2px dashed black;
 }
 
 /* There are some libraries that impose their own colors. These may need to be overriden for specific themes */
@@ -144,25 +173,11 @@ html[data-theme="cadent-star"] {
   z-index: 1;
 }
 
-html[data-theme="cadent-star"] ::-webkit-scrollbar-thumb {
-  background-color: #ff9aa2;
-}
-
-html[data-theme="cadent-star"] ::-webkit-scrollbar-track {
-  background-color: #c7ceea;
-}
-
 html[data-theme="dark"] .text-danger {
   color: rgb(226 93 90);
 }
 
-html[data-theme="cadent-star"] .text-danger {
-  color: rgb(226 93 90);
-}
 
-html[data-theme="cadent-star"] body {
-  background-image: linear-gradient(to right, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb, #b5ead7, #c7ceea);
-}
 
 body {
   background-color: var(--page-bground);
@@ -187,10 +202,6 @@ html.wait {
 
 html[data-theme="dark"].wait {
   filter: opacity(0.95);
-}
-
-html[data-theme="cadent-star"].wait {
-  filter: opacity(0.75);
 }
 
 html[data-theme="light"].wait {
@@ -309,6 +320,32 @@ html[data-theme="light"].wait {
 #calendar .table-body {
   overflow-y: auto;
   background-color: var(--table-bground);
+}
+
+/* Business Dress specific table enhancements */
+html[data-theme="business-dress"] #calendar table {
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
+  overflow: hidden; /* Ensures border-radius clips content */
+}
+
+html[data-theme="business-dress"] #calendar .table-header,
+html[data-theme="business-dress"] #calendar .table-body {
+  border-radius: 4px;
+  background-color: var(--table-bground);
+}
+
+/* Ensure borders don't interfere with radius */
+html[data-theme="business-dress"] #calendar tr:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+html[data-theme="business-dress"] #calendar .table-header th:first-child {
+  border-top-left-radius: 4px;
+}
+
+html[data-theme="business-dress"] #calendar .table-header th:last-child {
+  border-top-right-radius: 4px;
 }
 
 #calendar tr {
@@ -557,8 +594,9 @@ html[data-theme="light"].wait {
   border: none;
 }
 
-/* The switch - the box around the slider */
 
+
+/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -587,6 +625,17 @@ html[data-theme="light"].wait {
   transition: outline-color 0s;
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .slider,
+  .slider::before,
+  .common-window,
+  html.wait {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 .slider::before {
   position: absolute;
   content: "";
@@ -600,8 +649,15 @@ input:checked + .slider {
   background-color: var(--slider-checked-color);
 }
 
+/* Enhanced focus styles for better accessibility */
+:focus-visible {
+  outline: 3px solid #0078D4;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 input:focus + .slider {
-  box-shadow: 0 0 1px var(--slider-checked-color);
+  box-shadow: 0 0 0 3px var(--slider-checked-color);
   outline: var(--outline);
 }
 
@@ -626,6 +682,147 @@ input:checked + .slider::before {
 input:disabled + .slider {
   background-color: var(--disabled-input-bground);
 }
+
+/* Skip link for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #0078D4;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skip-link {
+        transition: none;
+    }
+}
+
+/* Keyboard shortcuts dialog */
+dialog {
+    padding: 1rem;
+    max-width: 500px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--background);
+    color: var(--text-color);
+}
+
+dialog::backdrop {
+    background: rgb(0 0 0 / 50%);
+}
+
+.shortcuts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.shortcuts-list li {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+kbd {
+    background: var(--kbd-background, #f7f7f7);
+    border: 1px solid var(--kbd-border, #ccc);
+    border-radius: 3px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9em;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
+}
+
+.dialog-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* RTL Support */
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.rtl .header-title {
+    text-align: right;
+}
+
+.rtl .arrow.left {
+    transform: rotate(-45deg);
+}
+
+.rtl .arrow.right {
+    transform: rotate(135deg);
+}
+
+.rtl input[type="number"],
+.rtl input[type="text"] {
+    text-align: left;
+}
+
+.rtl .dialog-close {
+    right: auto;
+    left: 0.5rem;
+}
+
+/* Ensure RTL layout works with flexbox */
+.rtl .flex-box {
+    flex-direction: row-reverse;
+}
+
+
+
+/* High Contrast Themes */
+html[data-theme="high-contrast-light"] {
+    --page-bground: #fff;
+    --page-color: #000;
+    --table-bground: #fff;
+    --input-bground: #fff;
+    --table-header-bground: #fff;
+    --table-border: #000;
+    --table-total-border: #000;
+    --table-cell-offtime-bground: #fff;
+    --table-cell-offtime-color: #000;
+    --table-cell-total-bground: #fff;
+    --table-cell-total-color: #000;
+    --table-header-label-bground: #fff;
+    --table-header-label-shadow: #000;
+    --error: #D80000;
+    --reset-color: #D80000;
+    --punch-bground: #000;
+    --punch-color: #fff;
+    --punch-disable-bground: #666;
+    --slider-background-color: #000;
+    --slider-checked-color: #000;
+    --slider-unchecked-color: #fff;
+    --weekday-background: #fff;
+    --weekday-selected: #000;
+    --svg-invert: 0;
+    --disabled-input-bground: #666;
+    --title-color: #000;
+    --input-border: #000;
+    --tab-font-color: #000;
+    --tab-waiver-color: #fff;
+    --tab-waiver-border: #000;
+    --outline: 3px solid #000;
+}
+
+
 
 /* Hide spinners to clean up number inputs */
 input[type="number"]::-webkit-outer-spin-button,
@@ -740,8 +937,73 @@ input[type="number"] {
   color: #fff;
 }
 
-#preferences-window input[type="text"]:invalid {
-  color: rgb(255 71 71);
+#preferences-window input[type="text"]:invalid,
+#preferences-window input[type="number"]:invalid {
+  color: #D92323;  /* Darker red for better contrast */
+  border-color: #D92323;
+}
+
+.error-message {
+  color: var(--error-color, #D92323);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  min-height: 1.25rem;
+}
+
+.success-message {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: var(--success-color, #28a745);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.success-message.fade-out {
+  animation: fade-out 0.3s ease-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success-message {
+    animation: none;
+  }
+
+  .success-message.fade-out {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.form-field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 #preferences-window .flex-box {
@@ -937,6 +1199,27 @@ html[data-view='month'] .arrow.left {
 
 html[data-view='month'] .arrow.right {
   margin-right: 5px;
+}
+
+/* Enhanced keyboard navigation */
+[role="button"],
+[role="tab"],
+.calendar-cell {
+  cursor: pointer;
+}
+
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible,
+.calendar-cell:focus-visible {
+  outline: 3px solid #0078D4;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Ensure interactive elements are reachable via keyboard */
+.calendar-cell {
+  outline: var(--outline-dashed);
+  outline-offset: 2px;
 }
 
 html[data-view='month'] #calendar-table-body {

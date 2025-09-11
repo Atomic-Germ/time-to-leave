@@ -109,3 +109,4 @@ missing.md
 
 # Mac
 .DS_Store
+.early.coverage

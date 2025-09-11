@@ -10,13 +10,30 @@
     <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" charset="utf-8"></script>
     <script type="module" src="preferences.js"></script>
+    
+    <!-- Keyboard shortcuts help dialog -->
+    <dialog id="keyboard-shortcuts" aria-labelledby="shortcuts-title" aria-describedby="shortcuts-desc">
+        <h2 id="shortcuts-title" data-i18n="$Generic.keyboardShortcuts">Keyboard Shortcuts</h2>
+        <div id="shortcuts-desc">
+            <ul class="shortcuts-list">
+                <li><kbd>?</kbd> <span data-i18n="$Generic.showShortcuts">Show keyboard shortcuts</span></li>
+                <li><kbd>Esc</kbd> <span data-i18n="$Generic.closeDialog">Close dialog</span></li>
+                <li><kbd>Ctrl</kbd> + <kbd>S</kbd> <span data-i18n="$Generic.saveChanges">Save changes</span></li>
+                <li><kbd>Alt</kbd> + <kbd>R</kbd> <span data-i18n="$Generic.resetSettings">Reset settings</span></li>
+                <li><kbd>Alt</kbd> + <kbd>T</kbd> <span data-i18n="$Generic.switchTheme">Switch theme</span></li>
+            </ul>
+        </div>
+        <button class="dialog-close" aria-label="Close dialog">×</button>
+    </dialog>
 </head>
 
 <body id="preferences-window" class="common-window">
     <div>
+        <a href="#main-content" class="skip-link" data-i18n="$Generic.skipToMain">Skip to main content</a>
         <div class="header-title" data-i18n="$Preferences.userPreferences">
             User preferences
         </div>
+        <main id="main-content" tabindex="-1">
 
         <section>
             <div class="section-title" data-i18n="$Preferences.workingDays">Working days</div>
@@ -57,17 +74,36 @@
 
         <section>
             <div class="section-title" data-i18n="$Preferences.notification">Notification</div>
-            <div class="flex-box">
-                <p><i class="far fa-bell"></i> <span data-i18n="$Preferences.notification">Notification</span></p>
-                <label class="switch"><input type="checkbox" id="notification" name="notification"><span class="slider round"></span></label>
+            <div class="flex-box" role="group" aria-labelledby="notification-settings">
+                <p id="notification-settings"><i class="far fa-bell" aria-hidden="true"></i> <span data-i18n="$Preferences.notification">Notification</span></p>
+                <label class="switch">
+                    <input type="checkbox" id="notification" name="notification" aria-label="Enable notifications">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-redo"></i> <span data-i18n="$Preferences.allowRecurringNotifications">Allow recurring notifications</span></p>
-                <label class="switch"><input type="checkbox" id="repetition" name="repetition"><span class="slider round"></span></label>
+                <p id="recurring-label"><i class="fas fa-redo" aria-hidden="true"></i> <span data-i18n="$Preferences.allowRecurringNotifications">Allow recurring notifications</span></p>
+                <label class="switch">
+                    <input type="checkbox" id="repetition" name="repetition" aria-labelledby="recurring-label">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box mb-2">
-                <p><i class="fas fa-stopwatch"></i><span data-i18n="$Preferences.minutesBetweenNotifications">Minutes between notifications</span></p>
-                <input type="number" name="notifications-interval" id="notifications-interval" min="1" max="30" value="5" required onblur="this.value = this.checkValidity() ? this.value : 5">
+                <p id="interval-label"><i class="fas fa-stopwatch" aria-hidden="true"></i><span data-i18n="$Preferences.minutesBetweenNotifications">Minutes between notifications</span></p>
+                <div class="form-field-container">
+                    <input type="number" 
+                        name="notifications-interval" 
+                        id="notifications-interval" 
+                        min="1" 
+                        max="30" 
+                        value="5" 
+                        required 
+                        onblur="this.value = this.checkValidity() ? this.value : 5"
+                        aria-labelledby="interval-label"
+                        aria-invalid="false"
+                        aria-describedby="interval-error">
+                    <div id="interval-error" class="error-message" role="alert" aria-live="polite"></div>
+                </div>
             </div>
             
         </section>
@@ -75,13 +111,16 @@
         <section>
             <div class="section-title" data-i18n="$Preferences.appBehavior">App Behavior</div>
             <div class="flex-box">
-                <p><i class="fas fa-globe"></i><span data-i18n="$Preferences.language">Language</span></p>
-                <select class="selects-right" id="language" name="language">
+                <p><i class="fas fa-globe" aria-hidden="true"></i><span data-i18n="$Preferences.language">Language</span></p>
+                <select class="selects-right" id="language" name="language" aria-label="Select language">
                 </select>
             </div>
             <div class="flex-box">
-                <p><i class="far fa-play-circle"></i><span data-i18n="$Preferences.startOnLogin">Start on Login</span></p>
-                <label id='start-at-login' class="switch"><input type="checkbox" name="start-at-login"><span class="slider round"></span></label>
+                <p><i class="far fa-play-circle" aria-hidden="true"></i><span data-i18n="$Preferences.startOnLogin">Start on Login</span></p>
+                <label id='start-at-login' class="switch">
+                    <input type="checkbox" name="start-at-login" aria-label="Enable start on login">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
                 <p></i><span data-i18n="$Preferences.minimizeToTray">Minimize button should minimize to tray</span></p>
@@ -111,12 +150,12 @@
                 </select>
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-swatchbook"></i><span data-i18n="$Preferences.themes">Themes</span></p>
-                <select class="selects-right" id="theme" name="theme">
+                <p><i class="fas fa-swatchbook" aria-hidden="true"></i><span data-i18n="$Preferences.themes">Themes</span></p>
+                <select class="selects-right" id="theme" name="theme" aria-label="Select theme">
                     <option value="system-default" data-i18n="$Preferences.systemDefault" selected>System Default</option>
                     <option value="light" data-i18n="$Preferences.light">Light</option>
                     <option value="dark" data-i18n="$Preferences.dark">Dark</option>
-                    <option value="cadent-star" data-i18n="$Preferences.cadentStar">Cadent Star</option>
+                    <option value="business-dress" data-i18n="$Preferences.businessDress">Business Dress</option>
                 </select>
             </div>
         </section>

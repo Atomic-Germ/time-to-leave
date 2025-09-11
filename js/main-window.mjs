@@ -94,7 +94,10 @@ function createWindow()
     createMenu();
 
     // and load the main html of the app as the default window
+    // and load the main html of the app as the default window
     mainWindow.loadFile(path.join(rootDir, 'src/calendar.html'));
+
+    // Removed remote module initialization
 
     ipcMain.on(IpcConstants.ToggleTrayPunchTime, (_event, arg) =>
     {
@@ -115,6 +118,8 @@ function createWindow()
         const notification = Notification.createLeaveNotification(element);
         if (notification) notification.show();
     });
+
+    // Theme-related IPC handlers removed
 
     leaveByInterval = setInterval(() =>
     {

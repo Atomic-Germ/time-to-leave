@@ -20,6 +20,7 @@ Working on your first Pull Request? You can learn how from this _free_ series [H
     - [Tests](#tests)
         - [Run locally](#run-locally)
             - [Running specific tests](#running-specific-tests)
+    - [Themes](#themes)
     - [Releasing](#releasing)
 - [Opening a Pull Request (PR)](#opening-a-pull-request-pr)
 
@@ -92,6 +93,18 @@ npm run lint:standard
 # markdown
 npm run lint:markdown
 ```
+
+## Themes
+
+Time to Leave supports custom themes through CSS files. Theme files are automatically detected and managed by the application. For detailed information about creating, managing, and applying themes, see [THEMES.md](THEMES.md).
+
+To keep the theme system up-to-date, run:
+
+```bash
+npm run refresh-themes
+```
+
+This will synchronize the theme list with the available CSS files and update the application configuration.
 
 ## Tests
 
@@ -181,14 +194,14 @@ npm run package:deb
 
 These will create the respective file under `release-builds/` directory.
 
-# Opening a Pull Request (PR)
+## Opening a Pull Request (PR)
 
 All PRs are very welcome, and we'll do our best to review them as fast as possible.
 If you want to work on a specific issue, just shout out to us and we'll assign the issue to you.
 Once you are done, just submit a PR with a relevant description of the change, and provide screenshots, if applicable.
 Issues without activity for 7 days will be deemed stale and unassigned, unless justified.
-Tip: Before pushing the PR, make sure the [tests](#Tests) are passing, and that no [lint](#Linting--formatting) issue is present. :)
+Tip: Before pushing the PR, make sure the [tests](#tests) are passing, and that no [lint](#linting--formatting) issue is present. :)
 
-# Feeling kind of lost?
+## Feeling kind of lost?
 
 Check out the [architecture diagram on CodeSee](https://app.codesee.io/maps/public/798d8e40-19c3-11ec-b873-35f335ec68d2).

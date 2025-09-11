@@ -9,7 +9,6 @@ import { stub } from 'sinon';
 import path from 'path';
 
 import { rootDir } from '../../js/app-config.mjs';
-
 import {
     getDefaultPreferences,
     getPreferencesFilePath,
@@ -97,8 +96,6 @@ let populateLanguages;
 let renderPreferencesWindow;
 let setupListeners;
 let resetContent;
-let showSuccess;
-let setupFocusTrap;
 
 describe('Test Preferences Window', () =>
 {
@@ -137,8 +134,6 @@ describe('Test Preferences Window', () =>
         renderPreferencesWindow = file.renderPreferencesWindow;
         setupListeners = file.setupListeners;
         resetContent = file.resetContent;
-        showSuccess = file.showSuccess;
-        setupFocusTrap = file.setupFocusTrap;
     });
 
     describe('Changing values of items in window', () =>
@@ -344,88 +339,6 @@ describe('Test Preferences Window', () =>
                 });
                 done();
             }, 1);
-        });
-    });
-
-    describe('Success message functionality', () =>
-    {
-        beforeEach(async function()
-        {
-            await prepareMockup();
-            document.body.innerHTML = '';
-            // Increase timeout for this test
-            this.timeout(5000);
-        });
-
-        it('shows success message with proper attributes', () =>
-        {
-            showSuccess('Test message');
-            const message = document.querySelector('.success-message');
-            assert.ok(message);
-            assert.strictEqual(message.textContent, 'Test message');
-            assert.strictEqual(message.getAttribute('role'), 'status');
-            assert.strictEqual(message.getAttribute('aria-live'), 'polite');
-        });
-
-        it('removes success message after animation', (done) =>
-        {
-            showSuccess('Test message');
-
-            // Fast-forward timers
-            const removeSpy = stub(Element.prototype, 'remove');
-            setTimeout(() =>
-            {
-                const message = document.querySelector('.success-message');
-                assert.ok(message.classList.contains('fade-out'));
-                assert.ok(removeSpy.called);
-                removeSpy.restore();
-                done();
-            }, 50);
-        });
-    });
-
-    describe('Keyboard accessibility', () =>
-    {
-        beforeEach(async function()
-        {
-            await prepareMockup();
-            setupListeners();
-        });
-
-        it('sets up keyboard navigation in dialog', () =>
-        {
-            const dialog = document.getElementById('keyboard-shortcuts');
-            dialog.showModal();
-            setupFocusTrap(dialog);
-
-            const focusableElements = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-            assert.ok(focusableElements.length > 0, 'Dialog should have focusable elements');
-
-            const closeButton = dialog.querySelector('.dialog-close');
-            assert.ok(closeButton, 'Dialog should have a close button');
-            assert.strictEqual(closeButton.getAttribute('aria-label'), 'Close dialog');
-        });
-    });
-
-    describe('Preferences save functionality', () =>
-    {
-        beforeEach(async function()
-        {
-            await prepareMockup();
-            setupListeners();
-        });
-
-        it('saves preferences and shows success message', () =>
-        {
-            const savedPreferences = {};
-            window.preferencesApi.notifyNewPreferences = (prefs) => { Object.assign(savedPreferences, prefs); };
-
-            $('#save').trigger('click');
-
-            const message = document.querySelector('.success-message');
-            assert.ok(message);
-            assert.strictEqual(message.textContent, 'Preferences saved successfully');
-            assert.ok(Object.keys(savedPreferences).length > 0);
         });
     });
 

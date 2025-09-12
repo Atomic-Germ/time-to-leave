@@ -246,6 +246,12 @@ function setupFocusTrap(element)
 
 function handleKeyboardShortcuts(event)
 {
+    // Check if document is available (for test environment compatibility)
+    if (typeof document === 'undefined')
+    {
+        return;
+    }
+
     // Show keyboard shortcuts dialog
     if (event.key === '?')
     {
@@ -276,6 +282,12 @@ function handleKeyboardShortcuts(event)
 
 function setupRTL()
 {
+    // Check if document is available (for test environment compatibility)
+    if (typeof document === 'undefined')
+    {
+        return;
+    }
+
     const isRTL = document.documentElement.dir === 'rtl';
     document.body.classList.toggle('rtl', isRTL);
 
@@ -308,6 +320,12 @@ function handleDialogClose(dialog)
 
 function setupListeners()
 {
+    // Check if document is available (for test environment compatibility)
+    if (typeof document === 'undefined')
+    {
+        return;
+    }
+
     // Set up keyboard shortcuts
     document.addEventListener('keydown', handleKeyboardShortcuts);
 
@@ -447,7 +465,6 @@ $(() =>
     try
     {
         preferences = window.rendererApi.getOriginalUserPreferences();
-        console.log('Loaded preferences:', preferences);
 
         renderWindowTheme();
         renderPreferencesWindow();

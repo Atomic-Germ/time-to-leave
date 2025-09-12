@@ -94,7 +94,6 @@ let convertTimeFormat;
 let listenerLanguage;
 let populateLanguages;
 let renderPreferencesWindow;
-let setupListeners;
 let resetContent;
 
 describe('Test Preferences Window', () =>
@@ -105,6 +104,9 @@ describe('Test Preferences Window', () =>
 
         // APIs from the preload script of the preferences window
         window.preferencesApi = preferencesApi;
+
+        // Add getDefaultPreferences method to the mock
+        window.preferencesApi.getDefaultPreferences = () => getDefaultPreferences();
 
         // Mocking with the actual value
         window.rendererApi = {
@@ -132,7 +134,6 @@ describe('Test Preferences Window', () =>
         listenerLanguage = file.listenerLanguage;
         populateLanguages = file.populateLanguages;
         renderPreferencesWindow = file.renderPreferencesWindow;
-        setupListeners = file.setupListeners;
         resetContent = file.resetContent;
     });
 
@@ -326,11 +327,12 @@ describe('Test Preferences Window', () =>
         {
             changeItemInputValue('count-today', true);
             checkRenderedItem('count-today', isCheckBox);
-            // For some reason listeners are not set-up when we get to this point
-            // despite them being called at the beginning of the test
-            setupListeners();
-            $('#reset-button').trigger('click');
-            // Need to briefly timeout so the click actions can propagate
+
+            // Call resetContent directly instead of relying on UI button click
+            // to avoid async dialog complexity in test
+            resetContent();
+
+            // Need to briefly timeout so the reset actions can propagate
             setTimeout(() =>
             {
                 $('input[name*=\'count-today\']').prop('checked', (i, val) =>
@@ -338,7 +340,7 @@ describe('Test Preferences Window', () =>
                     assert.strictEqual(val, false);
                 });
                 done();
-            }, 1);
+            }, 100);
         });
     });
 

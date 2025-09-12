@@ -18,7 +18,18 @@ describe('Application launch', function()
 
     beforeEach(async function()
     {
-        electronApp = await electron.launch({ args: ['main.mjs'], env: process.env, cwd: rootDir});
+        // Add --no-sandbox for CI environments where sandbox permissions aren't available
+        const launchArgs = ['main.mjs'];
+        if (process.env.CI)
+        {
+            launchArgs.push('--no-sandbox', '--disable-setuid-sandbox');
+        }
+
+        electronApp = await electron.launch({
+            args: launchArgs,
+            env: process.env,
+            cwd: rootDir
+        });
     });
 
     afterEach(async function()

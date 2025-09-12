@@ -22,6 +22,7 @@ html[data-theme="business-dress"] {
   --error: rgb(200, 0, 0);  /* >4.5:1 contrast ratio */
   --punch-bground: rgb(51, 51, 51);
   --punch-color: rgb(255, 255, 255);  /* >7:1 contrast ratio */
+  --punch-invert: 1;  /* Invert for white text */
   --punch-disable-bground: rgb(128, 128, 128);
   
   /* Form controls with proper contrast */

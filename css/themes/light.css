@@ -24,6 +24,7 @@ html[data-theme="light"] {
   --reset-color: rgb(220 53 69);
   --punch-bground: var(--purple-base);
   --punch-color: white;
+  --punch-invert: 1;  /* Invert for white text */
   --punch-disable-bground: rgb(134 134 134);
   --slider-background-color: rgb(220 220 220);
   --slider-checked-color: var(--purple-base);

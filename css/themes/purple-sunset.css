@@ -22,6 +22,7 @@ html[data-theme="purple-sunset"] {
   --error: rgb(239, 68, 68);  /* Red for errors - >4.5:1 contrast ratio */
   --punch-bground: rgb(236, 72, 153);  /* Pink accent #EC4899 */
   --punch-color: rgb(255, 255, 255);  /* White text - >7:1 contrast ratio */
+  --punch-invert: 1;  /* Invert for white text */
   --punch-disable-bground: rgb(107, 114, 128);  /* Gray for disabled */
   
   /* Form controls with proper contrast */

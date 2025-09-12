@@ -22,6 +22,7 @@ html[data-theme="dark"] {
   --error: rgb(255 99 109);
   --punch-bground: var(--purple-base);
   --punch-color: white;
+  --punch-invert: 1;  /* Invert for white text */
   --punch-disable-bground: rgb(134 134 134);
   --slider-background-color: var(--table-cell-offtime-bground);
   --slider-checked-color: var(--purple-base);

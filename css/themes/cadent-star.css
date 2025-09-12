@@ -22,6 +22,7 @@ html[data-theme="cadent-star"] {
   --error: rgb(200, 0, 0);  /* >4.5:1 contrast ratio */
   --punch-bground: var(--table-total-border);
   --punch-color: rgb(0, 0, 0);  /* >7:1 contrast ratio */
+  --punch-invert: 0;  /* No invert for black text */
   --punch-disable-bground: rgb(128, 128, 128);
   
   /* Form controls with proper contrast */

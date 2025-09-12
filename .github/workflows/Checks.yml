@@ -57,33 +57,33 @@ jobs:
           ELECTRON_VERSION=$(node -e "console.log(require('./package.json').devDependencies.electron)" | tr -d '^~')
           echo "Electron version: $ELECTRON_VERSION"
           
-          # Fetch Electron releases to get Chrome version
-          ELECTRON_RELEASES=$(curl -s "https://api.github.com/repos/electron/electron/releases" | head -5000)
-          CHROME_VERSION=$(echo "$ELECTRON_RELEASES" | grep -A 10 "\"tag_name\": \"v$ELECTRON_VERSION\"" | grep "\"chrome\":" | head -1 | sed 's/.*"chrome": "\([^"]*\)".*/\1/')
-          
-          if [ -z "$CHROME_VERSION" ]; then
-            echo "Could not determine Chrome version from Electron releases, trying alternative approach..."
-            # Fallback: extract major version and estimate
-            ELECTRON_MAJOR=$(echo "$ELECTRON_VERSION" | cut -d'.' -f1)
-            case "$ELECTRON_MAJOR" in
-              "33") CHROME_VERSION="138";;
-              "32") CHROME_VERSION="137";;
-              "31") CHROME_VERSION="136";;
-              "30") CHROME_VERSION="135";;
-              "29") CHROME_VERSION="134";;
-              "28") CHROME_VERSION="133";;
-              "27") CHROME_VERSION="132";;
-              "26") CHROME_VERSION="131";;
-              "25") CHROME_VERSION="130";;
-              *) CHROME_VERSION="138";;  # Default fallback
-            esac
-            echo "Using estimated Chrome version: $CHROME_VERSION"
-          else
-            echo "Detected Chrome version: $CHROME_VERSION"
-          fi
+          # Use Electron version mapping instead of API call (more reliable)
+          echo "Using Electron version mapping for Chrome version..."
+          ELECTRON_MAJOR=$(echo "$ELECTRON_VERSION" | cut -d'.' -f1)
+          case "$ELECTRON_MAJOR" in
+            "39") CHROME_VERSION="142";;
+            "38") CHROME_VERSION="141";;
+            "37") CHROME_VERSION="140";;
+            "36") CHROME_VERSION="139";;
+            "35") CHROME_VERSION="138";;
+            "34") CHROME_VERSION="137";;
+            "33") CHROME_VERSION="136";;
+            "32") CHROME_VERSION="135";;
+            "31") CHROME_VERSION="134";;
+            "30") CHROME_VERSION="133";;
+            "29") CHROME_VERSION="132";;
+            "28") CHROME_VERSION="131";;
+            "27") CHROME_VERSION="130";;
+            "26") CHROME_VERSION="129";;
+            "25") CHROME_VERSION="128";;
+            *) 
+              echo "Unknown Electron version $ELECTRON_MAJOR, using latest stable Chrome"
+              CHROME_VERSION="140";;  # Default to stable
+          esac
+          echo "Mapped Chrome version: $CHROME_VERSION"
           
           # Extract major version for ChromeDriver
-          CHROME_MAJOR=$(echo "$CHROME_VERSION" | cut -d'.' -f1)
+          CHROME_MAJOR="$CHROME_VERSION"
           echo "Chrome major version: $CHROME_MAJOR"
           
           # For Chrome 115+, use the new Chrome for Testing API

@@ -25,7 +25,10 @@ describe('Preferences Unit Tests - Time Format Conversion', () =>
         global.window.rendererApi = {
             notifyWindowReadyToShow: () => {},
             getLanguageMap: () => ({}),
-            getOriginalUserPreferences: () => ({})
+            getOriginalUserPreferences: () => ({}),
+            getLanguageDataPromise: () => Promise.resolve({}),
+            setOriginalUserPreferences: () => {},
+            showDialog: () => Promise.resolve({})
         };
 
         // Import the function we want to test

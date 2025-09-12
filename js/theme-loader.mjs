@@ -9,21 +9,16 @@ export async function getAvailableThemes(themesPath)
 {
     try
     {
-        console.log('Looking for themes in:', themesPath);
         const files = await readdir(themesPath);
-        console.log('Found files:', files);
 
         const themes = files
             .filter(file => file.endsWith('.css') && !file.endsWith('.template') && file !== 'index.css')
             .map(file => file.replace('.css', ''));
 
-        console.log('Available themes:', themes);
         return themes;
     }
-    catch (error)
+    catch (_error) // eslint-disable-line no-unused-vars
     {
-        console.error('Error reading themes directory:', error);
-        console.error('Theme path was:', themesPath);
         // Return default themes as fallback
         return ['light', 'dark'];
     }

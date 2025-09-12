@@ -25,7 +25,10 @@ describe('Preferences Unit Tests - Error Handling', () =>
         global.window.rendererApi = {
             notifyWindowReadyToShow: () => {},
             getLanguageMap: () => ({}),
-            getOriginalUserPreferences: () => ({})
+            getOriginalUserPreferences: () => ({}),
+            getLanguageDataPromise: () => Promise.resolve({}),
+            setOriginalUserPreferences: () => {},
+            showDialog: () => Promise.resolve({})
         };
 
         // Import the functions we want to test

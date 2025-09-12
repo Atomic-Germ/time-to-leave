@@ -63,6 +63,10 @@ export default [{
         'no-extra-semi': 'error',
         'no-lonely-if': 'error',
         'no-var': 'error',
+        'no-unused-vars': ['error', {
+            'argsIgnorePattern': '^_',
+            'caughtErrorsIgnorePattern': '^_'
+        }],
 
         'prefer-const': ['error', {
             'destructuring': 'all',

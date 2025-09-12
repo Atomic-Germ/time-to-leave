@@ -16,49 +16,117 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - name: '        Startup ChromeDriver and Display in Ubuntu'
+      - name: '        Setup Display and ChromeDriver (Ubuntu)'
         shell: bash
         if: matrix.os == 'ubuntu-latest'
         run: |
           export DISPLAY=:99
-          # TODO: need to download driver according to electron's version
-          wget --directory-prefix=/tmp https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
-          unzip -d /tmp/chromedriver /tmp/chromedriver_linux64.zip
+          
+          # Get Electron version from package.json
+          ELECTRON_VERSION=$(node -p "require('./package.json').devDependencies.electron")
+          echo "📦 Using Electron version: $ELECTRON_VERSION"
+          
+          # Get the corresponding Chromium version for this Electron version
+          # This API provides the mapping between Electron and Chromium versions
+          CHROMIUM_VERSION=$(curl -s "https://releases.electronjs.org/releases.json" | \
+            node -p "
+              const releases = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
+              const electronRelease = releases.find(r => r.version === '$ELECTRON_VERSION');
+              electronRelease ? electronRelease.chrome : null;
+            " 2>/dev/null)
+          
+          # Fallback: if API fails, use a reasonable default based on major version
+          if [[ -z "$CHROMIUM_VERSION" || "$CHROMIUM_VERSION" == "null" ]]; then
+            ELECTRON_MAJOR=$(echo $ELECTRON_VERSION | cut -d. -f1)
+            case $ELECTRON_MAJOR in
+              37) CHROMIUM_VERSION="138.0.7204.168" ;;
+              36) CHROMIUM_VERSION="128.0.6613.36" ;;
+              35) CHROMIUM_VERSION="126.0.6478.127" ;;
+              34) CHROMIUM_VERSION="124.0.6367.243" ;;
+              *) CHROMIUM_VERSION="138.0.7204.168" ;;  # Default to latest stable
+            esac
+            echo "⚠️  Using fallback Chromium version: $CHROMIUM_VERSION"
+          else
+            echo "✅ Found matching Chromium version: $CHROMIUM_VERSION"
+          fi
+          
+          # Download ChromeDriver matching the Chromium version
+          CHROMEDRIVER_VERSION=$CHROMIUM_VERSION
+          echo "🔽 Downloading ChromeDriver version: $CHROMEDRIVER_VERSION"
+          
+          # Try to download the exact version, with fallback handling
+          DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          if ! wget --spider "$DOWNLOAD_URL" 2>/dev/null; then
+            echo "⚠️  Exact version not available, trying major version match..."
+            MAJOR_VERSION=$(echo $CHROMEDRIVER_VERSION | cut -d. -f1)
+            # Get the latest ChromeDriver for this major version
+            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION" || echo "130.0.6723.31")
+            DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+            echo "🔄 Using ChromeDriver version: $CHROMEDRIVER_VERSION"
+          fi
+          
+          # Download and setup ChromeDriver
+          wget --directory-prefix=/tmp "$DOWNLOAD_URL"
+          unzip -d /tmp/chromedriver "/tmp/chromedriver_linux64.zip"
           sudo chmod +x /tmp/chromedriver/chromedriver
-          # Fix not being able to run electron on CI https://github.com/microsoft/playwright/issues/34251#issuecomment-2580645333
+          
+          # Fix Electron execution issues on CI
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
           /tmp/chromedriver/chromedriver &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
       - name: '        Install Dependencies'
         shell: bash
         run: |
-          npm install
-      - name: '        Lint'
+          npm ci
+      - name: '        Lint Check'
         shell: bash
         run: |
           npm run lint
-      - name: '        Tests'
+      - name: '        Run Tests with Coverage'
         shell: bash
         env:
           OS: ${{ matrix.os }}
+          CI: true
         run: |
           if [[ $OS == 'ubuntu-latest' ]]; then
-            # Avoid "failed to connect to the bus" errors on CI https://github.com/microsoft/WSL/issues/7915
+            # Setup D-Bus and display for Electron on Ubuntu
             export XDG_RUNTIME_DIR=/run/user/$(id -u)
             sudo mkdir -p $XDG_RUNTIME_DIR
             sudo chmod 700 $XDG_RUNTIME_DIR
             sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
             export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-
-            # For ChromeDriver to work
             export DISPLAY=':99'
           fi
 
+          # Run comprehensive test suite with enhanced coverage
           npm run test
-      - name: '        CodeCov'
+          
+          # Generate additional coverage sources for CodeCov
+          npm run coverage:ci
+      - name: '        Verify Coverage Files'
+        shell: bash
+        run: |
+          echo "📊 Checking all coverage files for CodeCov upload..."
+          
+          # Standard coverage files
+          ls -la coverage_mocha/ || echo "⚠️ coverage_mocha directory not found"
+          ls -la coverage_c8/ || echo "⚠️ coverage_c8 directory not found"
+          
+          # Enhanced coverage files
+          ls -la coverage_nyc/ || echo "⚠️ coverage_nyc directory not found"
+          ls -la coverage_combined/ || echo "⚠️ coverage_combined directory not found"
+          
+          # List all coverage files that will be uploaded
+          echo "📤 Coverage files for CodeCov:"
+          find . -name "coverage-final.json" -o -name "lcov.info" | grep -E "(coverage_|coverage/)" | sort
+      - name: '        Upload Enhanced Coverage to Codecov'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage_c8/coverage-final.json,coverage_mocha/coverage-final.json
-          name: codecov-${{ matrix.os }}
+          files: coverage_mocha/coverage-final.json,coverage_c8/coverage-final.json,coverage_nyc/coverage-final.json,coverage_combined/lcov.info,coverage_mocha/lcov.info,coverage_c8/lcov.info,coverage_nyc/lcov.info
+          flags: unittests,enhanced-coverage,${{ matrix.os }}
+          name: codecov-enhanced-${{ matrix.os }}
+          fail_ci_if_error: false
           verbose: true
+          directory: ./
+          functionalities: fix

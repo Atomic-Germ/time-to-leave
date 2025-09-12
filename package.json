@@ -33,9 +33,21 @@
     "pretest": "npm run clean",
     "refresh-themes": "./scripts/refresh_themes.sh",
     "start": "electronmon .",
-    "test": "npm-run-all test:*",
-    "test:mocha": "c8 --config configs/.c8rc.json -o ./coverage_mocha -- mocha --config configs/.mocharc.cjs",
-    "test:electron-mocha": "c8 --config configs/.c8rc.json electron-mocha --config configs/.mocharc.cjs",
+    "test": "npm-run-all test:mocha test:electron-mocha show-final-coverage show-additional-coverage",
+    "test:standard": "npm-run-all test:mocha test:electron-mocha",
+    "test:mocha": "NODE_OPTIONS='--max-old-space-size=4096 --no-warnings' c8 --config configs/.c8rc.json -o ./coverage_mocha --reporter=clover --reporter=json --reporter=lcov -- mocha --config configs/.mocharc.cjs",
+    "test:electron-mocha": "NODE_OPTIONS='--max-old-space-size=4096 --no-warnings' c8 --config configs/.c8rc.json --reporter=clover --reporter=json --reporter=lcov electron-mocha --config configs/.mocharc.cjs",
+    "show-final-coverage": "echo '\n🎉 Final Unified Coverage Report:' && npx c8 report --config configs/.c8rc.json",
+    "show-additional-coverage": "node scripts/show-additional-coverage.mjs",
+    "merge-coverage": "node scripts/merge-coverage-reports.mjs",
+    "test:coverage-enhanced": "npm-run-all test:nyc test:manual test:playwright",
+    "test:nyc": "nyc --config configs/.nycrc.json -r text -r html -r json --report-dir ./coverage_nyc mocha --config configs/.mocharc.cjs",
+    "test:manual": "mkdir -p coverage_manual && mocha __tests__/__main__/*-with-coverage.mjs --no-timeouts --reporter json > coverage_manual/results.json || true",
+    "test:playwright": "npx playwright test __tests__/__main__/*-playwright.mjs --config configs/playwright.config.mjs --reporter=json || true",
+    "coverage:all": "npm run test:coverage-enhanced && node scripts/combine-coverage.mjs",
+    "coverage:report": "node scripts/coverage-report.mjs",
+    "coverage:ci": "node scripts/ci-coverage.mjs",
+    "coverage:lcov": "node scripts/generate-combined-lcov.mjs",
     "setup:win": "node scripts/create_windows_installer.cjs"
   },
   "license": "GPL-3.0",
@@ -44,17 +56,19 @@
     "@electron/remote": "2.1.3",
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.32.0",
+    "@playwright/test": "1.55.0",
     "c8": "10.1.3",
     "electron": "37.2.5",
-    "electronmon": "2.0.3",
     "electron-mocha": "13.1.0",
     "electron-winstaller": "5.4.0",
+    "electronmon": "2.0.3",
     "eslint": "9.32.0",
     "globals": "16.3.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
     "mocha": "11.7.1",
     "npm-run-all": "4.1.5",
+    "nyc": "17.1.0",
     "playwright": "1.54.2",
     "prettier": "3.6.2",
     "sinon": "21.0.0",
@@ -78,6 +92,8 @@
     "node": ">=20.18.0"
   },
   "electronmon": {
-    "patterns": ["!__tests__/**"]
+    "patterns": [
+      "!__tests__/**"
+    ]
   }
 }

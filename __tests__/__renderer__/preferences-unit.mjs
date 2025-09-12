@@ -104,7 +104,7 @@ describe('Preferences Unit Tests - Error Handling', () =>
             {
                 showSuccess('Test success message');
             }
-            catch (_error) // eslint-disable-line no-unused-vars
+            catch (_error)
             {
                 errorThrown = true;
             }

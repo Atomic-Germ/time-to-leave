@@ -17,7 +17,7 @@ export async function getAvailableThemes(themesPath)
 
         return themes;
     }
-    catch (_error) // eslint-disable-line no-unused-vars
+    catch (_error)
     {
         // Return default themes as fallback
         return ['light', 'dark'];

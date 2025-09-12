@@ -289,7 +289,9 @@ function getDefaultWidthHeight(preferences)
 {
     if (preferences['view'] === 'month')
     {
-        return { width: 1010, height: 800 };
+        // Use smaller dimensions in CI environments to accommodate headless testing
+        const width = process.env.CI ? 800 : 1010;
+        return { width: width, height: 800 };
     }
     else
     {

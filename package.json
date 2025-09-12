@@ -38,7 +38,7 @@
     "test:standard": "npm-run-all test:mocha test:electron-mocha",
     "test:mocha": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --no-warnings\" c8 --config configs/.c8rc.json -o ./coverage_mocha --reporter=clover --reporter=json --reporter=lcov -- mocha --config configs/.mocharc.cjs",
     "test:electron-mocha": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --no-warnings\" c8 --config configs/.c8rc.json --reporter=clover --reporter=json --reporter=lcov electron-mocha --config configs/.mocharc.cjs",
-    "test:electron-mocha:ci": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --no-warnings\" ELECTRON_ENABLE_LOGGING=1 ELECTRON_NO_ATTACH_CONSOLE=1 c8 --config configs/.c8rc.json --reporter=clover --reporter=json --reporter=lcov electron-mocha --config configs/.mocharc.cjs --no-sandbox --disable-setuid-sandbox --headless --disable-gpu --disable-dev-shm-usage",
+    "test:electron-mocha:ci": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --no-warnings\" CI=true ELECTRON_ENABLE_LOGGING=1 ELECTRON_NO_ATTACH_CONSOLE=1 c8 --config configs/.c8rc.json --reporter=clover --reporter=json --reporter=lcov electron-mocha --config configs/.mocharc.cjs --no-sandbox --disable-setuid-sandbox --headless --disable-gpu --disable-dev-shm-usage",
     "show-final-coverage": "echo '\n🎉 Final Unified Coverage Report:' && npx c8 report --config configs/.c8rc.json",
     "show-additional-coverage": "node scripts/show-additional-coverage.mjs",
     "merge-coverage": "node scripts/merge-coverage-reports.mjs",

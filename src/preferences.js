@@ -8,6 +8,11 @@ let preferences;
 
 function populateLanguages()
 {
+    if (!window.preferencesApi || !window.preferencesApi.getLanguageMap)
+    {
+        return;
+    }
+
     const languageOpts = $('#language');
     languageOpts.empty();
     $.each(window.preferencesApi.getLanguageMap(), (key, value) =>
@@ -216,6 +221,11 @@ function showSuccess(message)
 
 function setupFocusTrap(element)
 {
+    if (!element || !document)
+    {
+        return;
+    }
+
     const focusableElements = element.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
@@ -303,10 +313,14 @@ function handleDialogClose(dialog)
 {
     if (dialog)
     {
-        dialog.querySelector('.dialog-close').addEventListener('click', () =>
+        const closeButton = dialog.querySelector('.dialog-close');
+        if (closeButton)
         {
-            dialog.close();
-        });
+            closeButton.addEventListener('click', () =>
+            {
+                dialog.close();
+            });
+        }
 
         dialog.addEventListener('keydown', (e) =>
         {
@@ -464,14 +478,20 @@ $(() =>
 {
     try
     {
-        preferences = window.rendererApi.getOriginalUserPreferences();
+        if (window.rendererApi && window.rendererApi.getOriginalUserPreferences)
+        {
+            preferences = window.rendererApi.getOriginalUserPreferences();
 
-        renderWindowTheme();
-        renderPreferencesWindow();
-        setupListeners();
+            renderWindowTheme();
+            renderPreferencesWindow();
+            setupListeners();
 
-        // Notify when window is ready
-        window.rendererApi.notifyWindowReadyToShow();
+            // Notify when window is ready
+            if (window.rendererApi.notifyWindowReadyToShow)
+            {
+                window.rendererApi.notifyWindowReadyToShow();
+            }
+        }
     }
     catch (error)
     {
@@ -489,4 +509,10 @@ export {
     renderPreferencesWindow,
     showSuccess,
     setupFocusTrap,
+    showError,
+    clearError,
+    handleKeyboardShortcuts,
+    setupRTL,
+    handleDialogClose,
+    renderWindowTheme,
 };

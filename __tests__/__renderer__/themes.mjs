@@ -18,6 +18,12 @@ describe('Theme Functions', function()
     {
         // Stub $ and window.matchMedia for applyTheme()
         global.$ = stub().returns({'attr': stub()});
+
+        // Create matchMedia if it doesn't exist, then stub it
+        if (!global.window.matchMedia)
+        {
+            global.window.matchMedia = () => ({matches: false});
+        }
         stub(global.window, 'matchMedia').returns({matches: true});
     });
 
@@ -73,6 +79,9 @@ describe('Theme Functions', function()
     after(() =>
     {
         global.$ = $_backup;
-        window.matchMedia.restore();
+        if (global.window.matchMedia && global.window.matchMedia.restore)
+        {
+            global.window.matchMedia.restore();
+        }
     });
 });

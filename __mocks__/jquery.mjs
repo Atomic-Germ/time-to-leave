@@ -3,6 +3,7 @@ import jQuery from 'jquery';
 import jsdom from 'jsdom';
 
 global.window = new jsdom.JSDOM().window;
+global.document = global.window.document;
 global.$ = jQuery(window);
 
 // Mocking matchMedia since it's not usually defined but we use it

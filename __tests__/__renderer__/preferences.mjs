@@ -142,6 +142,31 @@ describe('Test Preferences Window', () =>
         beforeEach(async function()
         {
             await prepareMockup();
+
+            // Re-establish window APIs after DOM reset
+            window.preferencesApi = preferencesApi;
+            window.preferencesApi.getDefaultPreferences = () => getDefaultPreferences();
+            window.rendererApi = {
+                getLanguageDataPromise: () =>
+                {
+                    return new Promise((resolve) => resolve({
+                        'language': 'en',
+                        'data': {}
+                    }));
+                },
+                getOriginalUserPreferences: () => { return testPreferences; },
+                notifyWindowReadyToShow: () => { windowReady = true; },
+                showDialog: () => { return new Promise((resolve) => resolve({ response: 0 })); },
+            };
+            window.preferencesApi.notifyNewPreferences = () => {};
+
+            // Manually call resetContent which sets preferences and calls renderPreferencesWindow
+            resetContent();
+
+            // Ensure preferences are set to our test values after resetContent
+            Object.assign(testPreferences, getDefaultPreferences());
+
+            // Force a re-render with our test preferences
             renderPreferencesWindow();
             populateLanguages();
             listenerLanguage();
@@ -307,6 +332,25 @@ describe('Test Preferences Window', () =>
         beforeEach(async function()
         {
             await prepareMockup();
+
+            // Re-establish window APIs after DOM reset
+            window.preferencesApi = preferencesApi;
+            window.preferencesApi.getDefaultPreferences = () => getDefaultPreferences();
+            window.rendererApi = {
+                getLanguageDataPromise: () =>
+                {
+                    return new Promise((resolve) => resolve({
+                        'language': 'en',
+                        'data': {}
+                    }));
+                },
+                getOriginalUserPreferences: () => { return testPreferences; },
+                notifyWindowReadyToShow: () => { windowReady = true; },
+                showDialog: () => { return new Promise((resolve) => resolve({ response: 0 })); },
+            };
+            window.preferencesApi.notifyNewPreferences = () => {};
+
+            // Manually call resetContent which sets preferences and calls renderPreferencesWindow
             resetContent();
             populateLanguages();
             listenerLanguage();
@@ -342,10 +386,5 @@ describe('Test Preferences Window', () =>
                 done();
             }, 100);
         });
-    });
-
-    after(() =>
-    {
-        i18nTranslator.getTranslationInLanguageData.restore();
     });
 });

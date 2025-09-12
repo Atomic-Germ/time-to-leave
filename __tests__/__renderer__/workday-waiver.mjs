@@ -83,7 +83,12 @@ describe('Test Workday Waiver Window', function()
     before(async() =>
     {
         stub(i18nTranslator, 'translatePage').returnsThis();
-        stub(i18nTranslator, 'getTranslationInLanguageData').returnsThis();
+
+        // Only stub if not already stubbed
+        if (!i18nTranslator.getTranslationInLanguageData.isSinonProxy)
+        {
+            stub(i18nTranslator, 'getTranslationInLanguageData').returnsThis();
+        }
 
         // Using dynamic imports because when the file is imported a $() callback is triggered and
         // methods must be mocked before-hand

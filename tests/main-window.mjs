@@ -18,11 +18,19 @@ describe('Application launch', function()
 
     beforeEach(async function()
     {
-        // Add --no-sandbox for CI environments where sandbox permissions aren't available
+        // Add flags for CI environments where sandbox permissions and display aren't available
         const launchArgs = ['main.mjs'];
         if (process.env.CI)
         {
-            launchArgs.push('--no-sandbox', '--disable-setuid-sandbox');
+            launchArgs.push(
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--headless',
+                '--disable-gpu',
+                '--disable-dev-shm-usage',
+                '--no-first-run',
+                '--disable-extensions'
+            );
         }
 
         electronApp = await electron.launch({

@@ -191,7 +191,7 @@ jobs:
           fi
 
           # Run comprehensive test suite with enhanced coverage
-          npm run test
+          npm run test:ci
           
           # Generate additional coverage sources for CodeCov
           npm run coverage:ci

@@ -50,64 +50,118 @@ jobs:
             echo "✅ Found matching Chromium version: $CHROMIUM_VERSION"
           fi
           
-          # Download ChromeDriver matching the Chromium version
-          CHROMEDRIVER_VERSION=$CHROMIUM_VERSION
-          echo "🔽 Downloading ChromeDriver version: $CHROMEDRIVER_VERSION"
+          # Download ChromeDriver automatically using Chrome for Testing API
+          echo "Attempting to automatically determine ChromeDriver version..."
           
-          # Try to download the exact version, with fallback handling
-          DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-          if ! wget --spider "$DOWNLOAD_URL" 2>/dev/null; then
-            echo "⚠️  Exact version not available, trying major version match..."
-            MAJOR_VERSION=$(echo $CHROMEDRIVER_VERSION | cut -d. -f1)
+          # Get the latest Electron version info to determine Chrome version
+          ELECTRON_VERSION=$(node -e "console.log(require('./package.json').devDependencies.electron)" | tr -d '^~')
+          echo "Electron version: $ELECTRON_VERSION"
+          
+          # Fetch Electron releases to get Chrome version
+          ELECTRON_RELEASES=$(curl -s "https://api.github.com/repos/electron/electron/releases" | head -5000)
+          CHROME_VERSION=$(echo "$ELECTRON_RELEASES" | grep -A 10 "\"tag_name\": \"v$ELECTRON_VERSION\"" | grep "\"chrome\":" | head -1 | sed 's/.*"chrome": "\([^"]*\)".*/\1/')
+          
+          if [ -z "$CHROME_VERSION" ]; then
+            echo "Could not determine Chrome version from Electron releases, trying alternative approach..."
+            # Fallback: extract major version and estimate
+            ELECTRON_MAJOR=$(echo "$ELECTRON_VERSION" | cut -d'.' -f1)
+            case "$ELECTRON_MAJOR" in
+              "33") CHROME_VERSION="138";;
+              "32") CHROME_VERSION="137";;
+              "31") CHROME_VERSION="136";;
+              "30") CHROME_VERSION="135";;
+              "29") CHROME_VERSION="134";;
+              "28") CHROME_VERSION="133";;
+              "27") CHROME_VERSION="132";;
+              "26") CHROME_VERSION="131";;
+              "25") CHROME_VERSION="130";;
+              *) CHROME_VERSION="138";;  # Default fallback
+            esac
+            echo "Using estimated Chrome version: $CHROME_VERSION"
+          else
+            echo "Detected Chrome version: $CHROME_VERSION"
+          fi
+          
+          # Extract major version for ChromeDriver
+          CHROME_MAJOR=$(echo "$CHROME_VERSION" | cut -d'.' -f1)
+          echo "Chrome major version: $CHROME_MAJOR"
+          
+          # For Chrome 115+, use the new Chrome for Testing API
+          if [ "$CHROME_MAJOR" -ge "115" ]; then
+            echo "Using Chrome for Testing API for Chrome $CHROME_MAJOR..."
             
-            # Try to get the latest ChromeDriver for this major version
-            LATEST_RELEASE_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION"
-            CHROMEDRIVER_VERSION=$(curl -s "$LATEST_RELEASE_URL" 2>/dev/null)
+            # Get stable Chrome version from Chrome for Testing API
+            STABLE_VERSIONS=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json")
+            STABLE_VERSION=$(echo "$STABLE_VERSIONS" | grep -o '"Stable":{"channel":"Stable","version":"[^"]*"' | cut -d'"' -f8)
             
-            # Check if we got a valid response (not XML error)
-            if [[ -z "$CHROMEDRIVER_VERSION" || "$CHROMEDRIVER_VERSION" == *"<Error>"* || "$CHROMEDRIVER_VERSION" == *"<?xml"* ]]; then
-              echo "⚠️  ChromeDriver API returned error for version $MAJOR_VERSION, using fallback..."
-              # Use known stable versions based on major version
-              case $MAJOR_VERSION in
-                138) CHROMEDRIVER_VERSION="130.0.6723.31" ;;  # Chrome 138 uses ChromeDriver 130
-                137) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                136) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                135) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                134) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                133) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                132) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                131) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                130) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
-                129) CHROMEDRIVER_VERSION="129.0.6668.58" ;;
-                128) CHROMEDRIVER_VERSION="128.0.6613.36" ;;
-                *) CHROMEDRIVER_VERSION="130.0.6723.31" ;;  # Default to latest stable
+            if [ -n "$STABLE_VERSION" ]; then
+              echo "Using stable Chrome for Testing version: $STABLE_VERSION"
+              CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$STABLE_VERSION/linux64/chromedriver-linux64.zip"
+            else
+              echo "Could not get stable version, falling back to manual version selection"
+              # Use a known good version for newer Chrome versions
+              case "$CHROME_MAJOR" in
+                "142") CHROMEDRIVER_VERSION="142.0.7405.0";;
+                "141") CHROMEDRIVER_VERSION="141.0.7390.16";;
+                "140") CHROMEDRIVER_VERSION="140.0.7339.82";;
+                "139") CHROMEDRIVER_VERSION="139.0.7315.25";;
+                "138") CHROMEDRIVER_VERSION="138.0.7252.35";;
+                "137") CHROMEDRIVER_VERSION="137.0.7179.37";;
+                "136") CHROMEDRIVER_VERSION="136.0.7106.59";;
+                "135") CHROMEDRIVER_VERSION="135.0.7033.97";;
+                *) CHROMEDRIVER_VERSION="140.0.7339.82";;  # Default to stable
               esac
+              CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
+            fi
+          else
+            # For Chrome 114 and below, use the legacy API
+            echo "Using legacy ChromeDriver API for Chrome $CHROME_MAJOR..."
+            CHROMEDRIVER_VERSION_RESPONSE=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR")
+            
+            # Check if the response is XML (indicating an error)
+            if echo "$CHROMEDRIVER_VERSION_RESPONSE" | grep -q "<?xml"; then
+              echo "Legacy ChromeDriver API returned XML error for version $CHROME_MAJOR"
+              echo "Falling back to system ChromeDriver installation"
+              sudo apt-get update
+              sudo apt-get install -y chromium-driver
+              exit 0
+            else
+              CHROMEDRIVER_VERSION="$CHROMEDRIVER_VERSION_RESPONSE"
+              echo "ChromeDriver version from legacy API: $CHROMEDRIVER_VERSION"
+              CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+            fi
+          fi
+          
+          # Download and install ChromeDriver
+          echo "Downloading ChromeDriver from: $CHROMEDRIVER_URL"
+          
+          if wget -q "$CHROMEDRIVER_URL" -O chromedriver.zip; then
+            echo "Successfully downloaded ChromeDriver"
+            unzip chromedriver.zip
+            
+            # Handle different zip structures
+            if [ -f "chromedriver-linux64/chromedriver" ]; then
+              sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+            elif [ -f "chromedriver" ]; then
+              sudo mv chromedriver /usr/local/bin/
+            else
+              echo "Could not find chromedriver binary in zip file"
+              ls -la
+              echo "Falling back to system package manager installation"
+              sudo apt-get update
+              sudo apt-get install -y chromium-driver
+              exit 0
             fi
             
-            DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-            echo "🔄 Using ChromeDriver version: $CHROMEDRIVER_VERSION"
-          fi
-          
-          # Download and setup ChromeDriver
-          echo "📥 Downloading ChromeDriver from: $DOWNLOAD_URL"
-          if wget --directory-prefix=/tmp "$DOWNLOAD_URL" 2>/dev/null; then
-            echo "✅ ChromeDriver downloaded successfully"
-            unzip -d /tmp/chromedriver "/tmp/chromedriver_linux64.zip"
-            sudo chmod +x /tmp/chromedriver/chromedriver
+            sudo chmod +x /usr/local/bin/chromedriver
+            echo "ChromeDriver installed successfully"
+            /usr/local/bin/chromedriver --version
           else
-            echo "❌ Failed to download ChromeDriver, using system default..."
-            # Install system ChromeDriver as fallback
+            echo "Failed to download ChromeDriver from $CHROMEDRIVER_URL"
+            echo "Falling back to system package manager installation"
             sudo apt-get update
-            sudo apt-get install -y chromium-chromedriver
-            # Create symlink to expected location
-            sudo mkdir -p /tmp/chromedriver
-            sudo ln -sf /usr/bin/chromedriver /tmp/chromedriver/chromedriver
+            sudo apt-get install -y chromium-driver
           fi
-          
-          # Fix Electron execution issues on CI
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-          /tmp/chromedriver/chromedriver &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
       - name: '        Install Dependencies'
         shell: bash
         run: |

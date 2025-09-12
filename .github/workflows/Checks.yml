@@ -92,7 +92,7 @@ jobs:
             
             # Get stable Chrome version from Chrome for Testing API
             STABLE_VERSIONS=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json")
-            STABLE_VERSION=$(echo "$STABLE_VERSIONS" | grep -o '"Stable":{"channel":"Stable","version":"[^"]*"' | cut -d'"' -f8)
+            STABLE_VERSION=$(echo "$STABLE_VERSIONS" | grep -o '"Stable":{"channel":"Stable","version":"[0-9.]*"' | grep -o '[0-9.]*')
             
             if [ -n "$STABLE_VERSION" ]; then
               echo "Using stable Chrome for Testing version: $STABLE_VERSION"

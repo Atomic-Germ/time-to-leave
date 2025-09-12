@@ -59,16 +59,50 @@ jobs:
           if ! wget --spider "$DOWNLOAD_URL" 2>/dev/null; then
             echo "⚠️  Exact version not available, trying major version match..."
             MAJOR_VERSION=$(echo $CHROMEDRIVER_VERSION | cut -d. -f1)
-            # Get the latest ChromeDriver for this major version
-            CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION" || echo "130.0.6723.31")
+            
+            # Try to get the latest ChromeDriver for this major version
+            LATEST_RELEASE_URL="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_VERSION"
+            CHROMEDRIVER_VERSION=$(curl -s "$LATEST_RELEASE_URL" 2>/dev/null)
+            
+            # Check if we got a valid response (not XML error)
+            if [[ -z "$CHROMEDRIVER_VERSION" || "$CHROMEDRIVER_VERSION" == *"<Error>"* || "$CHROMEDRIVER_VERSION" == *"<?xml"* ]]; then
+              echo "⚠️  ChromeDriver API returned error for version $MAJOR_VERSION, using fallback..."
+              # Use known stable versions based on major version
+              case $MAJOR_VERSION in
+                138) CHROMEDRIVER_VERSION="130.0.6723.31" ;;  # Chrome 138 uses ChromeDriver 130
+                137) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                136) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                135) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                134) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                133) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                132) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                131) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                130) CHROMEDRIVER_VERSION="130.0.6723.31" ;;
+                129) CHROMEDRIVER_VERSION="129.0.6668.58" ;;
+                128) CHROMEDRIVER_VERSION="128.0.6613.36" ;;
+                *) CHROMEDRIVER_VERSION="130.0.6723.31" ;;  # Default to latest stable
+              esac
+            fi
+            
             DOWNLOAD_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
             echo "🔄 Using ChromeDriver version: $CHROMEDRIVER_VERSION"
           fi
           
           # Download and setup ChromeDriver
-          wget --directory-prefix=/tmp "$DOWNLOAD_URL"
-          unzip -d /tmp/chromedriver "/tmp/chromedriver_linux64.zip"
-          sudo chmod +x /tmp/chromedriver/chromedriver
+          echo "📥 Downloading ChromeDriver from: $DOWNLOAD_URL"
+          if wget --directory-prefix=/tmp "$DOWNLOAD_URL" 2>/dev/null; then
+            echo "✅ ChromeDriver downloaded successfully"
+            unzip -d /tmp/chromedriver "/tmp/chromedriver_linux64.zip"
+            sudo chmod +x /tmp/chromedriver/chromedriver
+          else
+            echo "❌ Failed to download ChromeDriver, using system default..."
+            # Install system ChromeDriver as fallback
+            sudo apt-get update
+            sudo apt-get install -y chromium-chromedriver
+            # Create symlink to expected location
+            sudo mkdir -p /tmp/chromedriver
+            sudo ln -sf /usr/bin/chromedriver /tmp/chromedriver/chromedriver
+          fi
           
           # Fix Electron execution issues on CI
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0

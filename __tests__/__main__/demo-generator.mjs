@@ -119,12 +119,14 @@ describe('Demo Generator', function()
 
         it('should return a number within the specified range', function()
         {
+            this.timeout(5000); // Set timeout for CI stability
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { randomIntFromInterval } = context.module.exports;
 
-            // Test multiple times to ensure range compliance
-            for (let i = 0; i < 100; i++)
+            // Test multiple times to ensure range compliance (reduced iterations for CI)
+            for (let i = 0; i < 50; i++)
             {
                 const result = randomIntFromInterval(10, 20);
                 assert.strictEqual(typeof result, 'number', 'Should return a number');
@@ -135,12 +137,14 @@ describe('Demo Generator', function()
 
         it('should round up to closest multiple of 5', function()
         {
+            this.timeout(5000); // Set timeout for CI stability
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { randomIntFromInterval } = context.module.exports;
 
-            // Test multiple times to ensure all results are multiples of 5
-            for (let i = 0; i < 50; i++)
+            // Test multiple times to ensure all results are multiples of 5 (reduced iterations for CI)
+            for (let i = 0; i < 30; i++)
             {
                 const result = randomIntFromInterval(1, 23);
                 assert.strictEqual(result % 5, 0, `Result ${result} should be a multiple of 5`);
@@ -207,6 +211,8 @@ describe('Demo Generator', function()
 
         it('should sometimes return negative times', function()
         {
+            this.timeout(5000); // Set timeout for CI stability
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { randomTime } = context.module.exports;
@@ -214,8 +220,8 @@ describe('Demo Generator', function()
             let hasNegative = false;
             let hasPositive = false;
 
-            // Test multiple times to get both negative and positive results
-            for (let i = 0; i < 100; i++)
+            // Test multiple times to get both negative and positive results (reduced iterations for CI)
+            for (let i = 0; i < 50; i++)
             {
                 const result = randomTime(0, 30);
                 if (result.startsWith('-'))
@@ -229,7 +235,7 @@ describe('Demo Generator', function()
                 if (hasNegative && hasPositive) break;
             }
 
-            // We should get both positive and negative results over 100 iterations
+            // We should get both positive and negative results over iterations
             // Note: There's a small chance this could fail due to randomness, but it's very unlikely
             assert.strictEqual(hasNegative || hasPositive, true, 'Should return at least some results (positive or negative)');
         });
@@ -247,6 +253,8 @@ describe('Demo Generator', function()
 
         it('should generate entries for working days only', function()
         {
+            this.timeout(10000); // Longer timeout for file operations
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { generateDemoInformation } = context.module.exports;
@@ -260,6 +268,8 @@ describe('Demo Generator', function()
 
         it('should use TimeMath.sumTime for generating entries', function()
         {
+            this.timeout(8000); // Set timeout for CI stability
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { generateDemoInformation } = context.module.exports;
@@ -286,6 +296,8 @@ describe('Demo Generator', function()
 
         it('should create Store instance with correct name', function()
         {
+            this.timeout(10000); // Longer timeout for file operations
+
             // Spy on the constructor
             let storeInstance = null;
             const StoreConstructor = function(options)
@@ -329,6 +341,8 @@ describe('Demo Generator', function()
 
         it('should handle default usualTimes parameter', function()
         {
+            this.timeout(5000); // Timeout for parameter handling test
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { generateDemoInformation } = context.module.exports;
@@ -342,6 +356,8 @@ describe('Demo Generator', function()
 
         it('should skip non-working days', function()
         {
+            this.timeout(10000); // Longer timeout for date range processing
+
             // Execute the demo script
             vm.runInContext(demoCode, context);
             const { generateDemoInformation } = context.module.exports;

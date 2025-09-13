@@ -16,13 +16,31 @@ test.describe('Enhanced Preload Script Coverage with Playwright', () =>
 
     test.beforeEach(async() =>
     {
+        // Configure Electron launch args for CI environments
+        const electronArgs = [path.join(process.cwd(), 'main.mjs')];
+
+        // Add CI-specific flags for headless environments
+        if (process.env.CI)
+        {
+            electronArgs.push(
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--headless',
+                '--disable-gpu',
+                '--disable-dev-shm-usage',
+                '--disable-web-security',
+                '--no-first-run'
+            );
+        }
+
         // Launch Electron app with coverage enabled
         electronApp = await electron.launch({
-            args: [path.join(process.cwd(), 'main.mjs')],
+            args: electronArgs,
             env: {
                 ...process.env,
                 NODE_ENV: 'test',
-                COVERAGE_ENABLED: 'true'
+                COVERAGE_ENABLED: 'true',
+                CI: process.env.CI || 'false'
             }
         });
 

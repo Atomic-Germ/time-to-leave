@@ -16,6 +16,7 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,
     workers: 1, // Electron tests should run sequentially
+    timeout: process.env.CI ? 30000 : 10000, // Increased timeout for CI
     reporter: [
         [path.resolve(__dirname, 'playwright-reporter.mjs'), { outputDir: 'coverage_playwright' }],
         ['json', { outputFile: 'coverage_playwright/results.json' }]
@@ -25,6 +26,10 @@ export default defineConfig({
         trace: 'on-first-retry',
         /* Collect coverage data */
         javaScriptCoverage: true,
+        /* CI-specific settings */
+        headless: !!process.env.CI,
+        screenshot: 'only-on-failure',
+        video: process.env.CI ? 'retain-on-failure' : 'off'
     },
 
     projects: [

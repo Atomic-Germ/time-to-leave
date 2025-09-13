@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-    testDir: '../__tests__/__main__',
+    testDir: path.resolve(__dirname, '../__tests__/__main__'),
     testMatch: '*-playwright.mjs',
     fullyParallel: false,
     forbidOnly: !!process.env.CI,

@@ -166,6 +166,10 @@ jobs:
         shell: bash
         run: |
           npm ci
+      - name: '        Install Playwright Browsers'
+        shell: bash
+        run: |
+          npx playwright install --with-deps chromium
       - name: '        Lint Check'
         shell: bash
         run: |

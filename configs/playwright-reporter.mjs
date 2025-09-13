@@ -48,15 +48,8 @@ class TimeToLeaveReporter
             duration: duration
         });
 
-        const emoji = this._getStatusEmoji(status);
+        const emoji = this._getStatusIcon(status);
         console.log(`   ${emoji} ${status.toUpperCase()} (${(duration / 1000).toFixed(1)}s)`);
-
-        // Extract coverage from stdout if available
-        if (result.stdout && result.stdout.length > 0)
-        {
-            const stdoutText = result.stdout.map(item => item.text).join('\n');
-            this._extractCoverageFromOutput(stdoutText);
-        }
 
         // Process coverage data from stdout
         this._processCoverageFromOutput(result.stdout, test.title);

@@ -5,16 +5,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.678Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
-    "filename": "calendar-api.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.115Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -23,7 +14,16 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+    "filename": "calendar-api.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -32,7 +32,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -41,16 +41,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
-    "filename": "time-math.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -59,7 +50,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -68,70 +59,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/src/calendar.js",
-    "filename": "calendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-    "filename": "themes.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
-    "filename": "CalendarFactory.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
-    "filename": "notification-channel.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/ipc-constants.mjs",
-    "filename": "ipc-constants.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
-    "filename": "DayCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
-    "testName": "should capture comprehensive preload script execution coverage"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
-    "filename": "MonthCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -140,43 +68,70 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
-    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
-    "filename": "date-aux.mjs",
+    "url": "file:///Users/caseyjparker/test/src/calendar.js",
+    "filename": "calendar.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
-    "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
-    "filename": "date-db-formatter.mjs",
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "filename": "themes.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
-    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
-    "filename": "workday-waiver-aux.js",
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "filename": "CalendarFactory.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
-    "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
-    "filename": "date-to-string-util.mjs",
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "filename": "notification-channel.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.116Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/ipc-constants.mjs",
+    "filename": "ipc-constants.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.116Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "filename": "DayCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.116Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "filename": "MonthCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.116Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -185,7 +140,52 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.679Z",
+    "timestamp": "2025-09-13T23:12:27.117Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
+    "filename": "time-math.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.117Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "filename": "workday-waiver-aux.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.117Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
+    "filename": "date-db-formatter.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.117Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
+    "filename": "date-aux.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.117Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
+    "filename": "date-to-string-util.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:27.117Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -194,7 +194,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:21.680Z",
+    "timestamp": "2025-09-13T23:12:27.117Z",
     "testName": "should capture comprehensive preload script execution coverage"
   },
   {
@@ -203,7 +203,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.969Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -212,7 +212,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.969Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -221,16 +221,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/ipc-constants.mjs",
-    "filename": "ipc-constants.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -239,79 +230,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-    "filename": "themes.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
-    "filename": "time-math.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/src/configs/app.config.mjs",
-    "filename": "app.config.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/src/calendar.js",
-    "filename": "calendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
-    "filename": "notification-channel.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
-    "filename": "CalendarFactory.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-    "filename": "themes.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
-    "filename": "MonthCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -320,61 +239,25 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
-    "filename": "DayCalendar.js",
+    "url": "file:///Users/caseyjparker/test/src/configs/app.config.mjs",
+    "filename": "app.config.mjs",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
-    "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
-    "filename": "date-db-formatter.mjs",
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "filename": "themes.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
-    "filename": "workday-waiver-aux.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
-    "filename": "date-aux.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
-    "filename": "date-to-string-util.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
-    "testName": "should exercise preferences API through preload"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
-    "filename": "BaseCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -383,7 +266,124 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/src/calendar.js",
+    "filename": "calendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "filename": "CalendarFactory.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "filename": "themes.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "filename": "notification-channel.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "filename": "DayCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "filename": "MonthCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/ipc-constants.mjs",
+    "filename": "ipc-constants.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
+    "filename": "time-math.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "filename": "workday-waiver-aux.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
+    "filename": "date-db-formatter.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
+    "filename": "date-to-string-util.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
+    "filename": "date-aux.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "filename": "BaseCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -392,7 +392,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:23.421Z",
+    "timestamp": "2025-09-13T23:12:28.970Z",
     "testName": "should exercise preferences API through preload"
   },
   {
@@ -401,16 +401,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
-    "filename": "calendar-api.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -419,7 +410,16 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+    "filename": "calendar-api.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -428,7 +428,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -437,7 +437,25 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
+    "filename": "time-math.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "filename": "themes.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -446,25 +464,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
-    "filename": "time-math.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-    "filename": "themes.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -473,16 +473,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
-    "filename": "CalendarFactory.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -491,7 +482,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -500,7 +491,16 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "filename": "CalendarFactory.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -509,16 +509,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
-    "filename": "MonthCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -527,43 +518,16 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
-    "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
-    "filename": "date-db-formatter.mjs",
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "filename": "MonthCalendar.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
-    "filename": "workday-waiver-aux.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
-    "filename": "BaseCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
-    "testName": "should test IPC communication patterns"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
-    "filename": "date-aux.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -572,7 +536,34 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
+    "filename": "date-db-formatter.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
+    "filename": "date-aux.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "filename": "BaseCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -581,7 +572,16 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "filename": "workday-waiver-aux.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -590,7 +590,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:25.175Z",
+    "timestamp": "2025-09-13T23:12:30.788Z",
     "testName": "should test IPC communication patterns"
   },
   {
@@ -599,7 +599,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -608,7 +608,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -617,16 +617,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/ipc-constants.mjs",
-    "filename": "ipc-constants.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -635,70 +626,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
-    "filename": "time-math.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/src/configs/app.config.mjs",
-    "filename": "app.config.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-    "filename": "themes.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/src/calendar.js",
-    "filename": "calendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
-    "filename": "notification-channel.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-    "filename": "themes.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
-    "filename": "CalendarFactory.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -707,52 +635,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
-    "filename": "DayCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
-    "filename": "MonthCalendar.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
-    "filename": "date-aux.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
-    "filename": "workday-waiver-aux.js",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
-    "testName": "should capture renderer bridge functionality"
-  },
-  {
-    "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
-    "filename": "date-to-string-util.mjs",
-    "coveragePercent": 0,
-    "totalChars": 0,
-    "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -761,16 +644,97 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
-    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
-    "filename": "BaseCalendar.js",
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "filename": "themes.js",
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/src/configs/app.config.mjs",
+    "filename": "app.config.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/src/calendar.js",
+    "filename": "calendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "filename": "themes.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "filename": "CalendarFactory.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "filename": "notification-channel.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "filename": "MonthCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/ipc-constants.mjs",
+    "filename": "ipc-constants.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "filename": "DayCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
+    "filename": "date-aux.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -779,7 +743,43 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "filename": "workday-waiver-aux.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.572Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
+    "filename": "date-to-string-util.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.573Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
+    "filename": "time-math.mjs",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.573Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "filename": "BaseCalendar.js",
+    "coveragePercent": 0,
+    "totalChars": 0,
+    "coveredChars": 0,
+    "timestamp": "2025-09-13T23:12:32.573Z",
     "testName": "should capture renderer bridge functionality"
   },
   {
@@ -788,7 +788,7 @@
     "coveragePercent": 0,
     "totalChars": 0,
     "coveredChars": 0,
-    "timestamp": "2025-09-13T23:01:26.894Z",
+    "timestamp": "2025-09-13T23:12:32.573Z",
     "testName": "should capture renderer bridge functionality"
   }
 ]

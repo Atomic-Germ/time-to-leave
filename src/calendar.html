@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="">
+<html data-theme="" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -19,8 +19,24 @@
 </head>
 
 <body>
-    <div id="calendar" class="container"></div>
-    <div id="footer" class="footer"></div>
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link" data-i18n="$Generic.skipToMain">Skip to main content</a>
+    
+    <!-- Main application content -->
+    <main id="main-content" class="container" role="main" aria-label="Time tracking calendar">
+        <header class="app-header" role="banner">
+            <h1 class="sr-only" data-i18n="$Calendar.appTitle">Time to Leave - Work Time Tracker</h1>
+        </header>
+        
+        <section id="calendar" aria-label="Calendar view" role="region">
+            <!-- Calendar content will be dynamically loaded here -->
+        </section>
+    </main>
+    
+    <!-- Application footer -->
+    <footer id="footer" class="footer" role="contentinfo" aria-label="Application information">
+        <!-- Footer content will be dynamically loaded here -->
+    </footer>
 </body>
 
 </html>

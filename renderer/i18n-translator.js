@@ -1,18 +1,26 @@
 'use strict';
 
-function getDataRecursive(array, keyList)
+function getDataRecursive(data, keyList)
 {
     if (keyList.length === 0)
     {
         throw new Error('Empty key list');
     }
+
+    // Safety check for undefined data
+    if (!data || typeof data !== 'object')
+    {
+        return undefined;
+    }
+
     if (keyList.length === 1)
     {
-        return array[keyList];
+        return data[keyList[0]];
     }
     else
     {
-        return getDataRecursive(array[keyList[0]], keyList.splice(1));
+        const remainingKeys = keyList.slice(1); // Use slice instead of splice to avoid mutation
+        return getDataRecursive(data[keyList[0]], remainingKeys);
     }
 }
 
@@ -20,8 +28,18 @@ class i18nTranslator
 {
     static getTranslationInLanguageData(languageData, key)
     {
+        // Safety check for undefined languageData
+        if (!languageData || !languageData.translation)
+        {
+            console.warn(`Missing language data or translation section for key: ${key}`);
+            return key; // Return the key itself as fallback
+        }
+
         const keyList = key.split('.');
-        return getDataRecursive(languageData['translation'], keyList);
+        const result = getDataRecursive(languageData['translation'], keyList);
+
+        // Return the key as fallback if translation is not found
+        return result !== undefined ? result : key;
     }
 
     static translatePage(language, languageData, windowName)

@@ -36,16 +36,16 @@ All Events Coverage Summary: {
     "passes": 7,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-12T19:44:12.676Z",
-    "end": "2025-09-12T19:44:12.687Z",
-    "duration": 11
+    "start": "2025-09-13T21:20:09.748Z",
+    "end": "2025-09-13T21:20:09.758Z",
+    "duration": 10
   },
   "tests": [
     {
       "title": "should track coverage while generating demo data",
       "fullTitle": "Demo Generator with Coverage Tracking should track coverage while generating demo data",
       "file": "/Users/caseyjparker/test/__tests__/__main__/demo-generator-with-coverage.mjs",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -63,7 +63,7 @@ All Events Coverage Summary: {
       "title": "should track coverage while loading CommonJS preload script",
       "fullTitle": "Preload CJS with Coverage Tracking should track coverage while loading CommonJS preload script",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -72,7 +72,7 @@ All Events Coverage Summary: {
       "title": "should handle error conditions with coverage tracking",
       "fullTitle": "Preload CJS with Coverage Tracking should handle error conditions with coverage tracking",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -81,7 +81,7 @@ All Events Coverage Summary: {
       "title": "should track coverage for squirrel install event",
       "fullTitle": "Squirrel with Coverage Tracking should track coverage for squirrel install event",
       "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -99,7 +99,7 @@ All Events Coverage Summary: {
       "title": "should track all squirrel event types",
       "fullTitle": "Squirrel with Coverage Tracking should track all squirrel event types",
       "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -112,7 +112,7 @@ All Events Coverage Summary: {
       "title": "should track coverage while generating demo data",
       "fullTitle": "Demo Generator with Coverage Tracking should track coverage while generating demo data",
       "file": "/Users/caseyjparker/test/__tests__/__main__/demo-generator-with-coverage.mjs",
-      "duration": 1,
+      "duration": 2,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -130,7 +130,7 @@ All Events Coverage Summary: {
       "title": "should track coverage while loading CommonJS preload script",
       "fullTitle": "Preload CJS with Coverage Tracking should track coverage while loading CommonJS preload script",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -139,7 +139,7 @@ All Events Coverage Summary: {
       "title": "should handle error conditions with coverage tracking",
       "fullTitle": "Preload CJS with Coverage Tracking should handle error conditions with coverage tracking",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -148,7 +148,7 @@ All Events Coverage Summary: {
       "title": "should track coverage for squirrel install event",
       "fullTitle": "Squirrel with Coverage Tracking should track coverage for squirrel install event",
       "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -166,7 +166,7 @@ All Events Coverage Summary: {
       "title": "should track all squirrel event types",
       "fullTitle": "Squirrel with Coverage Tracking should track all squirrel event types",
       "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}

@@ -1,13 +1,13 @@
 /* Cadent Star theme */
 html[data-theme="cadent-star"] {
   /* Base colors with high contrast */
-  --page-bground: rgb(255, 255, 255);
-  --page-color: rgb(33, 33, 33);  /* >7:1 contrast ratio */
+  --page-bground: rgb(255 255 255);
+  --page-color: rgb(33 33 33);  /* >7:1 contrast ratio */
   
   /* Table styling with subtle depth */
-  --table-bground: rgb(255, 255, 255);
+  --table-bground: rgb(255 255 255);
   --table-header-bground: var(--table-bground);
-  --table-border: rgb(117, 108, 177);  /* >7:1 contrast with background */
+  --table-border: rgb(117 108 177);  /* >7:1 contrast with background */
   --table-total-border: var(--table-border);
   
   /* Cell styling with proper contrast */
@@ -19,17 +19,17 @@ html[data-theme="cadent-star"] {
   --table-header-label-shadow: var(--table-border);
   
   /* Interactive elements with clear visibility */
-  --error: rgb(200, 0, 0);  /* >4.5:1 contrast ratio */
+  --error: rgb(200 0 0);  /* >4.5:1 contrast ratio */
   --punch-bground: var(--table-total-border);
-  --punch-color: rgb(0, 0, 0);  /* >7:1 contrast ratio */
+  --punch-color: rgb(0 0 0);  /* >7:1 contrast ratio */
   --punch-invert: 0;  /* No invert for black text */
-  --punch-disable-bground: rgb(128, 128, 128);
+  --punch-disable-bground: rgb(128 128 128);
   
   /* Form controls with proper contrast */
-  --input-bground: rgb(255, 255, 255);
+  --input-bground: rgb(255 255 255);
   --slider-background-color: rgb(220 220 220);
   --slider-checked-color: var(--table-total-border);
-  --slider-unchecked-color: rgb(255, 255, 255);
+  --slider-unchecked-color: rgb(255 255 255);
   --weekday-background: var(--slider-background-color);
   --weekday-selected: var(--punch-bground);
   
@@ -38,18 +38,18 @@ html[data-theme="cadent-star"] {
   --title-color: rgb(51 51 51);  /* >7:1 contrast ratio */
   --input-border: rgb(77 77 77);  /* >4.5:1 contrast ratio */
   --tab-font-color: rgb(51 51 51);
-  --tab-waiver-color: rgb(255, 255, 255);
+  --tab-waiver-color: rgb(255 255 255);
   --tab-waiver-border: rgb(220 220 220);
   
   /* Icon colors */
   --svg-invert: 0;
-  --outline: 2px solid rgb(51, 51, 51);
+  --outline: 2px solid rgb(51 51 51);
 }
 
 /* Cadent Star specific table enhancements */
 html[data-theme="cadent-star"] #calendar table {
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 5%);
   overflow: hidden; /* Ensures border-radius clips content */
 }
 

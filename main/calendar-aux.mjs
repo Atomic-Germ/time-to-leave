@@ -8,11 +8,13 @@ import IpcConstants from '../js/ipc-constants.mjs';
 
 const calendarStore = new Store({name: 'flexible-store'});
 
+// TODO: Add tests for getCalendarStore() function to verify store access
 function getCalendarStore()
 {
     return calendarStore.store;
 }
 
+// TODO: Add tests for setupCalendarStore() function to verify IPC handler registration and functionality
 function setupCalendarStore()
 {
     ipcMain.handle(IpcConstants.GetStoreContents, () =>

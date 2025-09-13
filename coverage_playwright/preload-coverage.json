@@ -1,0 +1,262 @@
+[
+  {
+    "url": "node:electron/js2c/renderer_init",
+    "timestamp": "2025-09-13T21:20:12.688Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-bridge.mjs",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/renderer-api.mjs",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/i18n-translator.js",
+    "timestamp": "2025-09-13T21:20:12.689Z",
+    "testName": "should capture comprehensive preload script execution coverage"
+  },
+  {
+    "url": "node:electron/js2c/renderer_init",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-bridge.mjs",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/renderer-api.mjs",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/i18n-translator.js",
+    "timestamp": "2025-09-13T21:20:14.539Z",
+    "testName": "should exercise preferences API through preload"
+  },
+  {
+    "url": "node:electron/js2c/renderer_init",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-bridge.mjs",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/renderer-api.mjs",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/i18n-translator.js",
+    "timestamp": "2025-09-13T21:20:16.444Z",
+    "testName": "should test IPC communication patterns"
+  },
+  {
+    "url": "node:electron/js2c/renderer_init",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-bridge.mjs",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/renderer-api.mjs",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/CalendarFactory.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/themes.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/notification-channel.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/DayCalendar.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  },
+  {
+    "url": "file:///Users/caseyjparker/test/renderer/i18n-translator.js",
+    "timestamp": "2025-09-13T21:20:18.231Z",
+    "testName": "should capture renderer bridge functionality"
+  }
+]

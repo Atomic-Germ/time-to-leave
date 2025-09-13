@@ -32,6 +32,7 @@ function getLeaveByInterval()
     return leaveByInterval;
 }
 
+// TODO: Add tests for createMenu() function to verify menu structure and platform-specific behavior
 function createMenu()
 {
     const menu = Menu.buildFromTemplate([

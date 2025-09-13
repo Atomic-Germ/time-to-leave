@@ -10,11 +10,13 @@ const hd = new Holidays();
 const waiverStore = new Store({name: 'waived-workdays'});
 
 // Waiver Store handlers
+// TODO: Add tests for getWaiverStore() function to verify store access
 function getWaiverStore()
 {
     return waiverStore.store;
 }
 
+// TODO: Add tests for setupWorkdayWaiverStoreHandlers() function to verify IPC handler registration
 function setupWorkdayWaiverStoreHandlers()
 {
     ipcMain.handle(IpcConstants.GetWaiverStoreContents, () =>
@@ -42,6 +44,7 @@ function setupWorkdayWaiverStoreHandlers()
 
 // Holiday handlers
 
+// TODO: Add tests for InitHolidays() function to verify proper holiday library initialization with different parameter combinations
 function InitHolidays(country, state, city)
 {
     if (state !== undefined && city !== undefined)

@@ -46,9 +46,9 @@
         "testDir": "/Users/caseyjparker/test/__tests__/__main__",
         "testIgnore": [],
         "testMatch": [
-          "*-playwright.mjs"
+          "**/*-playwright.mjs"
         ],
-        "timeout": 30000
+        "timeout": 10000
       }
     ],
     "shard": null,
@@ -78,7 +78,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 10000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "electron-coverage",
@@ -88,7 +88,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1879,
+                      "duration": 2364,
                       "errors": [],
                       "stdout": [
                         {
@@ -103,7 +103,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-09-13T23:12:25.423Z",
+                      "startTime": "2025-09-13T23:51:13.193Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -113,7 +113,7 @@
               ],
               "id": "fa49a7dbb393425440da-ce15cfb012e63c11a347",
               "file": "preload-coverage-playwright.mjs",
-              "line": 106,
+              "line": 124,
               "column": 5
             },
             {
@@ -122,7 +122,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 10000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "electron-coverage",
@@ -132,7 +132,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1815,
+                      "duration": 1856,
                       "errors": [],
                       "stdout": [
                         {
@@ -147,7 +147,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-09-13T23:12:27.317Z",
+                      "startTime": "2025-09-13T23:51:15.570Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -157,7 +157,7 @@
               ],
               "id": "fa49a7dbb393425440da-2ce22c3d7805038e0249",
               "file": "preload-coverage-playwright.mjs",
-              "line": 163,
+              "line": 181,
               "column": 5
             },
             {
@@ -166,7 +166,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 10000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "electron-coverage",
@@ -176,7 +176,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1800,
+                      "duration": 1784,
                       "errors": [],
                       "stdout": [
                         {
@@ -191,7 +191,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-09-13T23:12:29.141Z",
+                      "startTime": "2025-09-13T23:51:17.436Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -201,7 +201,7 @@
               ],
               "id": "fa49a7dbb393425440da-d7cd55b174a41d8b2a3e",
               "file": "preload-coverage-playwright.mjs",
-              "line": 211,
+              "line": 229,
               "column": 5
             },
             {
@@ -210,7 +210,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 30000,
+                  "timeout": 10000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "electron-coverage",
@@ -220,7 +220,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1793,
+                      "duration": 1800,
                       "errors": [],
                       "stdout": [
                         {
@@ -235,7 +235,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-09-13T23:12:30.951Z",
+                      "startTime": "2025-09-13T23:51:19.230Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -245,7 +245,7 @@
               ],
               "id": "fa49a7dbb393425440da-24d7fe9609c654ef7ee7",
               "file": "preload-coverage-playwright.mjs",
-              "line": 261,
+              "line": 279,
               "column": 5
             }
           ]
@@ -255,8 +255,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-09-13T23:12:24.886Z",
-    "duration": 7883.384999999999,
+    "startTime": "2025-09-13T23:51:12.575Z",
+    "duration": 8475.959,
     "expected": 4,
     "skipped": 0,
     "unexpected": 0,

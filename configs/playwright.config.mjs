@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
  */
 export default defineConfig({
     testDir: path.resolve(__dirname, '../__tests__/__main__'),
-    testMatch: '*-playwright.mjs',
+    testMatch: ['**/*-playwright.mjs'],
     fullyParallel: false,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,

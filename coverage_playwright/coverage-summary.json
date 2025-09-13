@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-13T23:12:32.573Z",
+  "timestamp": "2025-09-13T23:51:20.850Z",
   "totalFiles": 19,
   "files": {
     "calendar-bridge.mjs": {
@@ -9,18 +9,18 @@
       "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-bridge.mjs",
       "lastTest": "should capture renderer bridge functionality"
     },
-    "renderer-api.mjs": {
-      "coveragePercent": 0,
-      "totalChars": 0,
-      "coveredChars": 0,
-      "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/renderer-api.mjs",
-      "lastTest": "should capture renderer bridge functionality"
-    },
     "calendar-api.mjs": {
       "coveragePercent": 0,
       "totalChars": 0,
       "coveredChars": 0,
       "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/calendar-api.mjs",
+      "lastTest": "should capture renderer bridge functionality"
+    },
+    "renderer-api.mjs": {
+      "coveragePercent": 0,
+      "totalChars": 0,
+      "coveredChars": 0,
+      "url": "file:///Users/caseyjparker/test/renderer/preload-scripts/renderer-api.mjs",
       "lastTest": "should capture renderer bridge functionality"
     },
     "ipc-constants.mjs": {
@@ -37,13 +37,6 @@
       "url": "file:///Users/caseyjparker/test/js/user-preferences.mjs",
       "lastTest": "should capture renderer bridge functionality"
     },
-    "themes.js": {
-      "coveragePercent": 0,
-      "totalChars": 0,
-      "coveredChars": 0,
-      "url": "file:///Users/caseyjparker/test/renderer/themes.js",
-      "lastTest": "should capture renderer bridge functionality"
-    },
     "app.config.mjs": {
       "coveragePercent": 0,
       "totalChars": 0,
@@ -56,6 +49,13 @@
       "totalChars": 0,
       "coveredChars": 0,
       "url": "file:///Users/caseyjparker/test/js/time-math.mjs",
+      "lastTest": "should capture renderer bridge functionality"
+    },
+    "themes.js": {
+      "coveragePercent": 0,
+      "totalChars": 0,
+      "coveredChars": 0,
+      "url": "file:///Users/caseyjparker/test/renderer/themes.js",
       "lastTest": "should capture renderer bridge functionality"
     },
     "calendar.js": {
@@ -93,18 +93,11 @@
       "url": "file:///Users/caseyjparker/test/renderer/classes/MonthCalendar.js",
       "lastTest": "should capture renderer bridge functionality"
     },
-    "BaseCalendar.js": {
+    "date-aux.mjs": {
       "coveragePercent": 0,
       "totalChars": 0,
       "coveredChars": 0,
-      "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
-      "lastTest": "should capture renderer bridge functionality"
-    },
-    "workday-waiver-aux.js": {
-      "coveragePercent": 0,
-      "totalChars": 0,
-      "coveredChars": 0,
-      "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+      "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
       "lastTest": "should capture renderer bridge functionality"
     },
     "date-db-formatter.mjs": {
@@ -114,18 +107,25 @@
       "url": "file:///Users/caseyjparker/test/js/date-db-formatter.mjs",
       "lastTest": "should capture renderer bridge functionality"
     },
-    "date-aux.mjs": {
-      "coveragePercent": 0,
-      "totalChars": 0,
-      "coveredChars": 0,
-      "url": "file:///Users/caseyjparker/test/js/date-aux.mjs",
-      "lastTest": "should capture renderer bridge functionality"
-    },
     "date-to-string-util.mjs": {
       "coveragePercent": 0,
       "totalChars": 0,
       "coveredChars": 0,
       "url": "file:///Users/caseyjparker/test/js/date-to-string-util.mjs",
+      "lastTest": "should capture renderer bridge functionality"
+    },
+    "workday-waiver-aux.js": {
+      "coveragePercent": 0,
+      "totalChars": 0,
+      "coveredChars": 0,
+      "url": "file:///Users/caseyjparker/test/renderer/workday-waiver-aux.js",
+      "lastTest": "should capture renderer bridge functionality"
+    },
+    "BaseCalendar.js": {
+      "coveragePercent": 0,
+      "totalChars": 0,
+      "coveredChars": 0,
+      "url": "file:///Users/caseyjparker/test/renderer/classes/BaseCalendar.js",
       "lastTest": "should capture renderer bridge functionality"
     },
     "i18n-translator.js": {

@@ -89,3 +89,30 @@ export function resetCoverage()
 {
     collectors.clear();
 }
+
+// Output final coverage report in a JSON-safe way
+export function outputFinalCoverage()
+{
+    const reports = getAllReports();
+    if (reports.length > 0)
+    {
+        // Create a structured coverage summary
+        const coverageSummary = {
+            manualCoverageResults: reports.map(report => ({
+                file: report.file,
+                summary: report.summary,
+                details: {
+                    statements: report.statements.length,
+                    branches: report.branches.length,
+                    functions: report.functions.length,
+                    lines: report.lines.length
+                }
+            })),
+            timestamp: new Date().toISOString(),
+            totalFiles: reports.length
+        };
+
+        // Use console.error so it doesn't interfere with Mocha's JSON output
+        console.error('MANUAL_COVERAGE_DATA:', JSON.stringify(coverageSummary));
+    }
+}

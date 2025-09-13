@@ -18,23 +18,89 @@ class AdditionalCoverageReporter
         const manualDir = 'coverage_manual';
         if (fs.existsSync(manualDir))
         {
+            // First try to parse Mocha test results
             const resultsFile = path.join(manualDir, 'results.json');
+            const coverageFile = path.join(manualDir, 'coverage-data.log');
+
+            let testStats = null;
+            let coverageData = null;
+
+            // Parse test results if available
             if (fs.existsSync(resultsFile))
             {
                 try
                 {
                     const results = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
-                    console.log('\n📊 Manual Instrumentation Coverage:');
-                    console.log(`   Tests run: ${results.stats?.tests || 'N/A'}`);
-                    console.log(`   Passes: ${results.stats?.passes || 'N/A'}`);
-                    console.log(`   Failures: ${results.stats?.failures || 'N/A'}`);
-                    console.log(`   Duration: ${results.stats?.duration || 'N/A'}ms`);
-                    this.hasReports = true;
+                    testStats = results.stats;
                 }
                 catch (_)
                 {
-                    console.log('\n📊 Manual Instrumentation Coverage: Unable to parse results');
+                    // Ignore parsing errors for test results
                 }
+            }
+
+            // Parse coverage data if available
+            if (fs.existsSync(coverageFile))
+            {
+                try
+                {
+                    const coverageLog = fs.readFileSync(coverageFile, 'utf8');
+                    const coverageMatches = coverageLog.match(/MANUAL_COVERAGE_DATA: (.+)/g);
+                    if (coverageMatches && coverageMatches.length > 0)
+                    {
+                        // Collect all coverage data from multiple test files
+                        const allCoverageResults = [];
+                        let totalFiles = 0;
+
+                        for (const match of coverageMatches)
+                        {
+                            const dataMatch = match.match(/MANUAL_COVERAGE_DATA: (.+)/);
+                            if (dataMatch)
+                            {
+                                const data = JSON.parse(dataMatch[1]);
+                                allCoverageResults.push(...data.manualCoverageResults);
+                                totalFiles += data.totalFiles;
+                            }
+                        }
+
+                        coverageData = {
+                            manualCoverageResults: allCoverageResults,
+                            totalFiles: totalFiles
+                        };
+                    }
+                }
+                catch (_)
+                {
+                    // Ignore parsing errors
+                }
+            }
+
+            // Display the information we have
+            console.log('\n📊 Manual Instrumentation Coverage:');
+            if (testStats)
+            {
+                console.log(`   Tests run: ${testStats.tests || 'N/A'}`);
+                console.log(`   Passes: ${testStats.passes || 'N/A'}`);
+                console.log(`   Failures: ${testStats.failures || 'N/A'}`);
+                console.log(`   Duration: ${testStats.duration || 'N/A'}ms`);
+            }
+
+            if (coverageData)
+            {
+                console.log(`   Files with coverage: ${coverageData.totalFiles}`);
+                coverageData.manualCoverageResults.forEach(result =>
+                {
+                    console.log(`   ${result.file}: ${result.summary.statements} statements, ${result.summary.functions} functions, ${result.summary.branches} branches`);
+                });
+            }
+
+            if (testStats || coverageData)
+            {
+                this.hasReports = true;
+            }
+            else
+            {
+                console.log('   No valid coverage data found');
             }
         }
     }

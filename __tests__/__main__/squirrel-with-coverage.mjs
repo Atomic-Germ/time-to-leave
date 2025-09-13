@@ -4,10 +4,10 @@
  */
 
 import assert from 'assert';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import { describe, it, beforeEach, afterEach, after } from 'mocha';
 import { createContext, Script } from 'vm';
 import sinon from 'sinon';
-import { getCollector, resetCoverage } from './coverage-helpers.mjs';
+import { getCollector, resetCoverage, outputFinalCoverage } from './coverage-helpers.mjs';
 
 describe('Squirrel with Coverage Tracking', () =>
 {
@@ -186,7 +186,7 @@ describe('Squirrel with Coverage Tracking', () =>
         const branches = report.branches;
         assert(branches.some(b => b.includes('1:true')), 'Should hit install branch');
 
-        console.log('Squirrel Install Coverage Report:', JSON.stringify(report.summary, null, 2));
+        // Store coverage data for later reporting (don't console.log to avoid corrupting JSON)
     });
 
     it('should track coverage for non-squirrel execution', () =>
@@ -225,7 +225,7 @@ describe('Squirrel with Coverage Tracking', () =>
         const branches = report.branches;
         assert(branches.some(b => b.includes('1:true')), 'Should hit normal startup branch');
 
-        console.log('Normal Startup Coverage:', JSON.stringify(report.summary, null, 2));
+        // Store coverage data for later reporting (don't console.log to avoid corrupting JSON)
     });
 
     it('should track all squirrel event types', () =>
@@ -292,6 +292,12 @@ describe('Squirrel with Coverage Tracking', () =>
         assert(report.functions.length >= events.length, `Should track all ${events.length} event handlers`);
         assert(report.branches.length >= events.length, `Should track branches for all ${events.length} events`);
 
-        console.log('All Events Coverage Summary:', JSON.stringify(report.summary, null, 2));
+        // Store coverage data for later reporting (don't console.log to avoid corrupting JSON)
+    });
+
+    // Output coverage data after all tests complete
+    after(() =>
+    {
+        outputFinalCoverage();
     });
 });

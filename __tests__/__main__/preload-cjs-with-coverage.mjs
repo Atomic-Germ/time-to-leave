@@ -4,10 +4,10 @@
  */
 
 import assert from 'assert';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import { describe, it, beforeEach, afterEach, after } from 'mocha';
 import { createContext, Script } from 'vm';
 import sinon from 'sinon';
-import { getCollector, resetCoverage } from './coverage-helpers.mjs';
+import { getCollector, resetCoverage, outputFinalCoverage } from './coverage-helpers.mjs';
 
 describe('Preload CJS with Coverage Tracking', () =>
 {
@@ -139,7 +139,7 @@ describe('Preload CJS with Coverage Tracking', () =>
         assert(report.functions.length > 0, 'Should have collected function coverage');
         assert(report.branches.length > 0, 'Should have collected branch coverage');
 
-        console.log('Preload CJS Coverage Report:', JSON.stringify(report.summary, null, 2));
+        // Store coverage data for later reporting (don't console.log to avoid corrupting JSON)
     });
 
     it('should handle error conditions with coverage tracking', () =>
@@ -177,6 +177,12 @@ describe('Preload CJS with Coverage Tracking', () =>
         const branches = report.branches;
         assert(branches.some(b => b.includes('true')), 'Should track true branch');
 
-        console.log('Error handling coverage:', JSON.stringify(report.summary, null, 2));
+        // Store coverage data for later reporting (don't console.log to avoid corrupting JSON)
+    });
+
+    // Output coverage data after all tests complete
+    after(() =>
+    {
+        outputFinalCoverage();
     });
 });

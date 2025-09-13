@@ -1,4 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Playwright configuration for Electron coverage testing
@@ -12,7 +17,7 @@ export default defineConfig({
     retries: process.env.CI ? 2 : 0,
     workers: 1, // Electron tests should run sequentially
     reporter: [
-        ['html', { outputFolder: 'coverage_playwright/html-report' }],
+        [path.resolve(__dirname, 'playwright-reporter.mjs'), { outputDir: 'coverage_playwright' }],
         ['json', { outputFile: 'coverage_playwright/results.json' }]
     ],
     use: {

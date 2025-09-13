@@ -6,8 +6,8 @@ Normal app startup
     "passes": 7,
     "pending": 0,
     "failures": 0,
-    "start": "2025-09-13T21:54:43.493Z",
-    "end": "2025-09-13T21:54:43.504Z",
+    "start": "2025-09-13T21:57:11.890Z",
+    "end": "2025-09-13T21:57:11.901Z",
     "duration": 11
   },
   "tests": [
@@ -33,7 +33,7 @@ Normal app startup
       "title": "should track coverage while loading CommonJS preload script",
       "fullTitle": "Preload CJS with Coverage Tracking should track coverage while loading CommonJS preload script",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -42,7 +42,7 @@ Normal app startup
       "title": "should handle error conditions with coverage tracking",
       "fullTitle": "Preload CJS with Coverage Tracking should handle error conditions with coverage tracking",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -69,7 +69,7 @@ Normal app startup
       "title": "should track all squirrel event types",
       "fullTitle": "Squirrel with Coverage Tracking should track all squirrel event types",
       "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -100,7 +100,7 @@ Normal app startup
       "title": "should track coverage while loading CommonJS preload script",
       "fullTitle": "Preload CJS with Coverage Tracking should track coverage while loading CommonJS preload script",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -109,7 +109,7 @@ Normal app startup
       "title": "should handle error conditions with coverage tracking",
       "fullTitle": "Preload CJS with Coverage Tracking should handle error conditions with coverage tracking",
       "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
-      "duration": 0,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}
@@ -136,7 +136,7 @@ Normal app startup
       "title": "should track all squirrel event types",
       "fullTitle": "Squirrel with Coverage Tracking should track all squirrel event types",
       "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
-      "duration": 2,
+      "duration": 1,
       "currentRetry": 0,
       "speed": "fast",
       "err": {}

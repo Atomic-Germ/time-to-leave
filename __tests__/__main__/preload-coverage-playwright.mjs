@@ -47,43 +47,53 @@ test.describe('Enhanced Preload Script Coverage with Playwright', () =>
             // Collect coverage data
             const jsCoverage = await page.coverage.stopJSCoverage();
 
-            // Filter and process preload script coverage
-            const preloadCoverage = jsCoverage.filter(entry =>
-                entry.url.includes('preload') ||
-                entry.url.includes('renderer') ||
-                entry.url.includes('bridge')
-            );
-
-            // Store coverage data for reporting
-            coverageData.push(...preloadCoverage.map(coverage => ({
-                url: coverage.url,
-                source: coverage.text,
-                ranges: coverage.ranges,
-                timestamp: new Date().toISOString(),
-                testName: test.info().title
-            })));
-
-            // Calculate and log coverage metrics
-            preloadCoverage.forEach(coverage =>
+            // Filter for our project files (be more inclusive but exclude node_modules)
+            const relevantCoverage = jsCoverage.filter(entry =>
             {
-                // Handle cases where text might be undefined
-                const totalChars = coverage.text ? coverage.text.length : 0;
-                const ranges = coverage.ranges || [];
-                const coveredChars = ranges.reduce((sum, range) =>
-                    sum + (range.end - range.start), 0);
-                const coveragePercent = totalChars > 0 ? ((coveredChars / totalChars) * 100).toFixed(2) : 0;
-
-                console.log(`Coverage for ${coverage.url}: ${coveragePercent}% (${coveredChars}/${totalChars})`);
-
-                // Log uncovered sections for debugging
-                if (coveragePercent < 100)
-                {
-                    const uncoveredRanges = findUncoveredRanges(coverage.text, ranges);
-                    console.log(`Uncovered sections: ${uncoveredRanges.length}`);
-                }
+                const url = entry.url || '';
+                return (
+                    url.startsWith('file:///') &&  // Only file URLs (not node: internal)
+                    url.includes('/test/') &&  // Files in our test project
+                    !url.includes('node_modules') &&  // Exclude dependencies
+                    (url.includes('.js') || url.includes('.mjs')) &&  // JavaScript files
+                    (url.includes('/js/') || url.includes('/src/') || url.includes('/renderer/') || url.includes('/main/'))  // Project directories
+                );
             });
 
-            // Save detailed coverage data
+            // Process and store coverage data
+            const processedCoverage = relevantCoverage.map(coverage =>
+            {
+                const totalChars = coverage.text ? coverage.text.length : 0;
+                const ranges = coverage.ranges || [];
+                const coveredChars = ranges.reduce((sum, range) => sum + (range.end - range.start), 0);
+                const coveragePercent = totalChars > 0 ? ((coveredChars / totalChars) * 100) : 0;
+
+                return {
+                    url: coverage.url,
+                    filename: coverage.url.split('/').pop(),
+                    coveragePercent: parseFloat(coveragePercent.toFixed(2)),
+                    totalChars,
+                    coveredChars,
+                    ranges: coverage.ranges,
+                    timestamp: new Date().toISOString(),
+                    testName: test.info().title
+                };
+            });
+
+            coverageData.push(...processedCoverage);
+
+            // Log coverage summary for this test
+            if (relevantCoverage.length > 0)
+            {
+                const avgCoverage = processedCoverage.reduce((sum, item) => sum + item.coveragePercent, 0) / processedCoverage.length;
+                console.log(`📊 Coverage: ${processedCoverage.length} files, ${avgCoverage.toFixed(1)}% average`);
+            }
+            else
+            {
+                console.log(`📊 Coverage: No relevant files captured from ${jsCoverage.length} total entries`);
+            }
+
+            // Save coverage data
             await saveCoverageData(coverageData);
         }
 
@@ -304,51 +314,78 @@ test.describe('Enhanced Preload Script Coverage with Playwright', () =>
     });
 });
 
-// Helper function to find uncovered ranges
-function findUncoveredRanges(source, coveredRanges)
-{
-    // Safety checks for invalid inputs
-    if (!source || !coveredRanges || !Array.isArray(coveredRanges))
-    {
-        return [];
-    }
-
-    const uncovered = [];
-    let lastEnd = 0;
-
-    coveredRanges.sort((a, b) => a.start - b.start);
-
-    for (const range of coveredRanges)
-    {
-        if (range.start > lastEnd)
-        {
-            uncovered.push({ start: lastEnd, end: range.start });
-        }
-        lastEnd = Math.max(lastEnd, range.end);
-    }
-
-    if (lastEnd < source.length)
-    {
-        uncovered.push({ start: lastEnd, end: source.length });
-    }
-
-    return uncovered;
-}
-
-// Helper function to save coverage data
+// Helper function to save coverage data with lcov-compatible format
 async function saveCoverageData(coverageData)
 {
     const coverageDir = 'coverage_playwright';
-    const coverageFile = path.join(coverageDir, 'preload-coverage.json');
 
     try
     {
         await fs.promises.mkdir(coverageDir, { recursive: true });
-        await fs.promises.writeFile(coverageFile, JSON.stringify(coverageData, null, 2));
-        console.log(`Coverage data saved to ${coverageFile}`);
+
+        // Save detailed JSON coverage data
+        const detailFile = path.join(coverageDir, 'preload-coverage.json');
+        await fs.promises.writeFile(detailFile, JSON.stringify(coverageData, null, 2));
+
+        // Generate summary for easy consumption
+        const summary = generateCoverageSummary(coverageData);
+        const summaryFile = path.join(coverageDir, 'coverage-summary.json');
+        await fs.promises.writeFile(summaryFile, JSON.stringify(summary, null, 2));
+
+        console.log(`Coverage data saved to ${detailFile}`);
     }
     catch (error)
     {
         console.error('Error saving coverage data:', error);
     }
+}
+
+// Helper function to generate coverage summary
+function generateCoverageSummary(coverageData)
+{
+    const summary = {
+        timestamp: new Date().toISOString(),
+        totalFiles: 0,
+        files: {},
+        overall: {
+            totalChars: 0,
+            coveredChars: 0,
+            coveragePercent: 0
+        }
+    };
+
+    // Group by filename and calculate metrics
+    const fileGroups = {};
+    for (const item of coverageData)
+    {
+        const filename = item.filename || item.url.split('/').pop();
+        if (!fileGroups[filename])
+        {
+            fileGroups[filename] = [];
+        }
+        fileGroups[filename].push(item);
+    }
+
+    // Calculate summary for each file
+    for (const [filename, items] of Object.entries(fileGroups))
+    {
+        const latestItem = items[items.length - 1]; // Use most recent coverage data
+        summary.files[filename] = {
+            coveragePercent: latestItem.coveragePercent,
+            totalChars: latestItem.totalChars,
+            coveredChars: latestItem.coveredChars,
+            url: latestItem.url,
+            lastTest: latestItem.testName
+        };
+
+        summary.overall.totalChars += latestItem.totalChars;
+        summary.overall.coveredChars += latestItem.coveredChars;
+    }
+
+    summary.totalFiles = Object.keys(summary.files).length;
+    summary.overall.coveragePercent = summary.overall.totalChars > 0
+        ? parseFloat(((summary.overall.coveredChars / summary.overall.totalChars) * 100).toFixed(2))
+        : 0;
+
+    return summary;
 }

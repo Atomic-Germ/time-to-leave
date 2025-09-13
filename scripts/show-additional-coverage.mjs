@@ -164,6 +164,12 @@ class AdditionalCoverageReporter
     async showCombinedCoverage()
     {
         const combinedDir = 'coverage_combined';
+        const c8Dir = 'coverage_mocha';
+
+        console.log('\n🔗 Combined Coverage Report:');
+
+        // Check manual instrumentation coverage
+        let hasManualCoverage = false;
         if (fs.existsSync(combinedDir))
         {
             const combinedFile = path.join(combinedDir, 'combined-coverage.json');
@@ -172,23 +178,165 @@ class AdditionalCoverageReporter
                 try
                 {
                     const combined = JSON.parse(fs.readFileSync(combinedFile, 'utf8'));
+
+                    // Show manual coverage files
+                    if (combined.sources && Object.keys(combined.sources).length > 0)
+                    {
+                        console.log('\n   Manual Instrumentation Coverage:');
+                        for (const [filename, fileData] of Object.entries(combined.sources))
+                        {
+                            console.log(`   📄 ${filename}`);
+
+                            if (fileData.sources)
+                            {
+                                for (const [, metrics] of Object.entries(fileData.sources))
+                                {
+                                    if (metrics.statements)
+                                    {
+                                        const stmtPct = ((metrics.statements.covered / metrics.statements.total) * 100).toFixed(1);
+                                        console.log(`      Statements: ${metrics.statements.covered}/${metrics.statements.total} (${stmtPct}%)`);
+                                    }
+                                    if (metrics.functions)
+                                    {
+                                        const funcPct = ((metrics.functions.covered / metrics.functions.total) * 100).toFixed(1);
+                                        console.log(`      Functions: ${metrics.functions.covered}/${metrics.functions.total} (${funcPct}%)`);
+                                    }
+                                    if (metrics.branches)
+                                    {
+                                        const branchPct = ((metrics.branches.covered / metrics.branches.total) * 100).toFixed(1);
+                                        console.log(`      Branches: ${metrics.branches.covered}/${metrics.branches.total} (${branchPct}%)`);
+                                    }
+                                }
+                            }
+                        }
+                        hasManualCoverage = true;
+                    }
+
                     if (combined.summary)
                     {
-                        console.log('\n🔗 Combined Coverage Report:');
+                        console.log('\n   Combined Summary:');
                         console.log(`   Total Files: ${combined.summary.totalFiles}`);
                         console.log(`   Covered Files: ${combined.summary.coveredFiles}`);
                         console.log(`   Statements: ${combined.summary.statements.percentage}%`);
                         console.log(`   Branches: ${combined.summary.branches.percentage}%`);
                         console.log(`   Functions: ${combined.summary.functions.percentage}%`);
                         console.log(`   Lines: ${combined.summary.lines.percentage}%`);
-                        this.hasReports = true;
                     }
                 }
                 catch (_)
                 {
-                    console.log('\n🔗 Combined Coverage Report: Unable to parse data');
+                    console.log('   Unable to parse manual coverage data');
                 }
             }
+        }
+
+        // Check C8 coverage
+        let hasC8Coverage = false;
+        if (fs.existsSync(c8Dir))
+        {
+            const c8File = path.join(c8Dir, 'coverage-final.json');
+            if (fs.existsSync(c8File))
+            {
+                try
+                {
+                    const c8Data = JSON.parse(fs.readFileSync(c8File, 'utf8'));
+
+                    if (Object.keys(c8Data).length > 0)
+                    {
+                        console.log('\n   C8 Mocha Test Coverage:');
+
+                        let totalStatements = 0, coveredStatements = 0;
+                        let totalFunctions = 0, coveredFunctions = 0;
+                        let totalBranches = 0, coveredBranches = 0;
+
+                        for (const [filepath, fileData] of Object.entries(c8Data))
+                        {
+                            const filename = filepath.split('/').pop();
+
+                            // Calculate coverage for this file
+                            const statements = fileData.s || {};
+                            const functions = fileData.f || {};
+                            const branches = fileData.b || {};
+
+                            const fileStatements = Object.keys(statements).length;
+                            const fileCoveredStatements = Object.values(statements).filter(count => count > 0).length;
+
+                            const fileFunctions = Object.keys(functions).length;
+                            const fileCoveredFunctions = Object.values(functions).filter(count => count > 0).length;
+
+                            const fileBranches = Object.keys(branches).length;
+                            const fileCoveredBranches = Object.values(branches).filter(branchArray =>
+                                Array.isArray(branchArray) ? branchArray.some(count => count > 0) : branchArray > 0
+                            ).length;
+
+                            // Add to totals
+                            totalStatements += fileStatements;
+                            coveredStatements += fileCoveredStatements;
+                            totalFunctions += fileFunctions;
+                            coveredFunctions += fileCoveredFunctions;
+                            totalBranches += fileBranches;
+                            coveredBranches += fileCoveredBranches;
+
+                            // Show individual file stats if they have coverage data
+                            if (fileStatements > 0 || fileFunctions > 0 || fileBranches > 0)
+                            {
+                                console.log(`   📄 ${filename}`);
+                                if (fileStatements > 0)
+                                {
+                                    const stmtPct = ((fileCoveredStatements / fileStatements) * 100).toFixed(1);
+                                    console.log(`      Statements: ${fileCoveredStatements}/${fileStatements} (${stmtPct}%)`);
+                                }
+                                if (fileFunctions > 0)
+                                {
+                                    const funcPct = ((fileCoveredFunctions / fileFunctions) * 100).toFixed(1);
+                                    console.log(`      Functions: ${fileCoveredFunctions}/${fileFunctions} (${funcPct}%)`);
+                                }
+                                if (fileBranches > 0)
+                                {
+                                    const branchPct = ((fileCoveredBranches / fileBranches) * 100).toFixed(1);
+                                    console.log(`      Branches: ${fileCoveredBranches}/${fileBranches} (${branchPct}%)`);
+                                }
+                            }
+                        }
+
+                        // Show C8 totals
+                        if (totalStatements > 0 || totalFunctions > 0 || totalBranches > 0)
+                        {
+                            console.log('\n   C8 Summary:');
+                            if (totalStatements > 0)
+                            {
+                                const stmtPct = ((coveredStatements / totalStatements) * 100).toFixed(1);
+                                console.log(`   Statements: ${coveredStatements}/${totalStatements} (${stmtPct}%)`);
+                            }
+                            if (totalFunctions > 0)
+                            {
+                                const funcPct = ((coveredFunctions / totalFunctions) * 100).toFixed(1);
+                                console.log(`   Functions: ${coveredFunctions}/${totalFunctions} (${funcPct}%)`);
+                            }
+                            if (totalBranches > 0)
+                            {
+                                const branchPct = ((coveredBranches / totalBranches) * 100).toFixed(1);
+                                console.log(`   Branches: ${coveredBranches}/${totalBranches} (${branchPct}%)`);
+                            }
+                        }
+
+                        hasC8Coverage = true;
+                    }
+                }
+                catch (error)
+                {
+                    console.log('   Unable to parse C8 coverage data:', error.message);
+                }
+            }
+        }
+
+        if (hasManualCoverage || hasC8Coverage)
+        {
+            this.hasReports = true;
+        }
+        else
+        {
+            console.log('   No coverage data found');
         }
     }
 

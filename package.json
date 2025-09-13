@@ -45,7 +45,7 @@
     "test:coverage-enhanced": "npm-run-all test:nyc test:manual test:playwright",
     "test:nyc": "nyc --config configs/.nycrc.json -r text -r html -r json --report-dir ./coverage_nyc mocha --config configs/.mocharc.cjs",
     "test:manual": "mkdir -p coverage_manual && npx mocha __tests__/__main__/*-with-coverage.mjs --no-timeouts --reporter json > coverage_manual/results.json 2> coverage_manual/coverage-data.log || true",
-    "test:playwright": "npx playwright test __tests__/__main__/*-playwright.mjs --config configs/playwright.config.mjs --reporter=json || true",
+    "test:playwright": "npx playwright test __tests__/__main__/*-playwright.mjs --config configs/playwright.config.mjs",
     "coverage:all": "npm run test:coverage-enhanced && node scripts/combine-coverage.mjs",
     "coverage:report": "node scripts/coverage-report.mjs",
     "coverage:ci": "node scripts/ci-coverage.mjs",

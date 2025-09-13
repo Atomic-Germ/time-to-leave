@@ -215,10 +215,9 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage_mocha/coverage-final.json,coverage_c8/coverage-final.json,coverage_nyc/coverage-final.json,coverage_combined/lcov.info,coverage_mocha/lcov.info,coverage_c8/lcov.info,coverage_nyc/lcov.info
+          files: coverage_mocha/coverage-final.json,coverage_c8/coverage-final.json,coverage_nyc/coverage-final.json,coverage_combined/lcov.info,coverage_mocha/lcov.info,coverage_c8/lcov.info,coverage_nyc/lcov.info,coverage_playwright/lcov.info
           flags: unittests,enhanced-coverage,${{ matrix.os }}
           name: codecov-enhanced-${{ matrix.os }}
           fail_ci_if_error: false
           verbose: true
           directory: ./
-          functionalities: fix

@@ -112,6 +112,11 @@ These instructions help AI coding agents understand the Time to Leave codebase, 
 - **Context gathering:** Always read related files (tests, configs, examples) before modifying core functionality.
 - **Pattern consistency:** Look for similar implementations in the codebase before creating new solutions.
 - **Validation approach:** Run tests after changes with `npm test:mocha` for quick validation.
+- **Commit discipline:** Make one commit per logical grouping of changes before moving to the next task. Each commit should represent a complete, working feature or fix that can stand alone. Examples:
+    - ✅ "feat: add theme switching functionality" (includes CSS, JS, and HTML changes for complete feature)
+    - ✅ "fix: resolve IPC communication timeout issues" (includes all related fixes for specific bug)
+    - ✅ "improve: enhance test coverage for calendar module" (includes test files and any test utilities)
+    - ❌ Don't mix unrelated changes like "fix bugs and add new feature and update docs"
 - **Key files for context:**
     - `js/ipc-constants.mjs` - for IPC channel naming
     - `configs/.c8rc.json` - for understanding test coverage scope

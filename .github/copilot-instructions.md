@@ -66,7 +66,7 @@ These instructions help AI coding agents understand the Time to Leave codebase, 
 - Debug main: `npm run debug:main`; debug UI: `npm run debug:render`.
 - Lint checks: `npm run lint` (ESLint, Stylelint, Prettier); fix: `npm run lint-fix`.
 - Clean workspace: `npm run clean`.
-- Monitor CI: `gh run view` (latest run details), `gh run watch` (live CI monitoring).
+- Monitor CI: `gh run view` (latest run details), `gh run watch <run-id>` (live CI monitoring with specific run ID).
 
 ## 9. Packaging & Releases
 
@@ -116,9 +116,10 @@ These instructions help AI coding agents understand the Time to Leave codebase, 
 - **CI Monitoring:** Use GitHub CLI commands to monitor CI runs:
     - `sleep 15 && gh run list --branch accessability --limit 1 --repo Atomic-Germ/time-to-leave` - Find specific run after push
     - `gh run view` - View details of the latest CI run
-    - `gh run watch` - Live monitoring of currently running CI
+    - `gh run watch <run-id>` - Live monitoring of specific CI run (requires run ID from `gh run list`)
     - `gh run list --limit 5` - Show recent CI runs with status
     - `gh run view <run-id> --log` - View logs for specific run
+    - **Example workflow:** After push, use `sleep 15 && gh run list --branch accessability --limit 1 --repo Atomic-Germ/time-to-leave` to get run ID, then `sleep 180 && gh run view 17688285277 --repo Atomic-Germ/time-to-leave` (where 17688285277 is the ID from previous step)
 - **Commit discipline:** Make one commit per logical grouping of changes before moving to the next task. Each commit should represent a complete, working feature or fix that can stand alone. Examples:
     - ✅ "feat: add theme switching functionality" (includes CSS, JS, and HTML changes for complete feature)
     - ✅ "fix: resolve IPC communication timeout issues" (includes all related fixes for specific bug)

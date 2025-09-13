@@ -32,7 +32,8 @@ export default defineConfig({
             name: 'electron-coverage',
             use: {
                 ...devices['Desktop Chrome'],
-                channel: 'chrome' // Use system Chrome for Electron testing
+                // Use Playwright's Chromium in CI, system Chrome locally
+                ...(process.env.CI ? {} : { channel: 'chrome' })
             },
         },
     ],

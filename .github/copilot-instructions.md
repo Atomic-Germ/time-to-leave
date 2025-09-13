@@ -66,6 +66,7 @@ These instructions help AI coding agents understand the Time to Leave codebase, 
 - Debug main: `npm run debug:main`; debug UI: `npm run debug:render`.
 - Lint checks: `npm run lint` (ESLint, Stylelint, Prettier); fix: `npm run lint-fix`.
 - Clean workspace: `npm run clean`.
+- Monitor CI: `gh run view` (latest run details), `gh run watch` (live CI monitoring).
 
 ## 9. Packaging & Releases
 
@@ -112,6 +113,12 @@ These instructions help AI coding agents understand the Time to Leave codebase, 
 - **Context gathering:** Always read related files (tests, configs, examples) before modifying core functionality.
 - **Pattern consistency:** Look for similar implementations in the codebase before creating new solutions.
 - **Validation approach:** Run tests after changes with `npm test:mocha` for quick validation.
+- **CI Monitoring:** Use GitHub CLI commands to monitor CI runs:
+    - `sleep 15 && gh run list --branch accessability --limit 1 --repo Atomic-Germ/time-to-leave` - Find specific run after push
+    - `gh run view` - View details of the latest CI run
+    - `gh run watch` - Live monitoring of currently running CI
+    - `gh run list --limit 5` - Show recent CI runs with status
+    - `gh run view <run-id> --log` - View logs for specific run
 - **Commit discipline:** Make one commit per logical grouping of changes before moving to the next task. Each commit should represent a complete, working feature or fix that can stand alone. Examples:
     - ✅ "feat: add theme switching functionality" (includes CSS, JS, and HTML changes for complete feature)
     - ✅ "fix: resolve IPC communication timeout issues" (includes all related fixes for specific bug)

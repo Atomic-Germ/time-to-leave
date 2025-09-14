@@ -64,7 +64,8 @@ jobs:
           # Generate additional coverage sources for CodeCov
           npm run coverage:ci
 
-      - name: 'Verify Coverage Files'
+      - name: 'Verify Coverage Files (Unix)'
+        if: matrix.os != 'windows-latest'
         run: |
           echo "📊 Checking all coverage files for CodeCov upload..."
           
@@ -79,6 +80,23 @@ jobs:
           # List all coverage files that will be uploaded
           echo "📤 Coverage files for CodeCov:"
           find . -name "coverage-final.json" -o -name "lcov.info" | grep -E "(coverage_|coverage/)" | sort
+
+      - name: 'Verify Coverage Files (Windows)'
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "📊 Checking all coverage files for CodeCov upload..."
+          
+          # Standard coverage files
+          if (Test-Path "coverage_mocha") { Get-ChildItem coverage_mocha } else { echo "⚠️ coverage_mocha directory not found" }
+          if (Test-Path "coverage_c8") { Get-ChildItem coverage_c8 } else { echo "⚠️ coverage_c8 directory not found" }
+          
+          # Enhanced coverage files  
+          if (Test-Path "coverage_nyc") { Get-ChildItem coverage_nyc } else { echo "⚠️ coverage_nyc directory not found" }
+          if (Test-Path "coverage_combined") { Get-ChildItem coverage_combined } else { echo "⚠️ coverage_combined directory not found" }
+          
+          # List all coverage files that will be uploaded
+          echo "📤 Coverage files for CodeCov:"
+          Get-ChildItem -Recurse -Name "coverage-final.json", "lcov.info" | Where-Object { $_ -match "coverage_|coverage/" } | Sort-Object
 
       - name: 'Upload Enhanced Coverage to Codecov'
         uses: codecov/codecov-action@v5

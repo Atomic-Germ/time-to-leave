@@ -12,6 +12,8 @@ import { validateJSON } from './validate-json.mjs';
  *   . type: flexible
  *   . date
  *   . values: times
+ *
+ * TODO: Consider adding tests for this private helper function's date conversion logic
  */
 function _getEntries()
 {
@@ -37,6 +39,8 @@ function _getEntries()
  *   . date
  *   . data: (reason)
  *   . hours
+ *
+ * TODO: Consider adding tests for this private helper function's data formatting
  */
 function _getWaivedEntries()
 {

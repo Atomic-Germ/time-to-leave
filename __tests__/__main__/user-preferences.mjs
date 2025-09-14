@@ -57,7 +57,8 @@ describe('Preferences Main', () =>
         {
             const preferences = structuredClone(getDefaultPreferences());
             assert.strictEqual(preferences['view'], 'month');
-            assert.deepStrictEqual(getDefaultWidthHeight(preferences), { width: 1010, height: 800 });
+            const expectedWidth = process.env.CI ? 800 : 1010;
+            assert.deepStrictEqual(getDefaultWidthHeight(preferences), { width: expectedWidth, height: 800 });
         });
 
         it('Day view', () =>

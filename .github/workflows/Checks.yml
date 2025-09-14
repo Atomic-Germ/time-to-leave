@@ -16,49 +16,69 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - name: '        Startup ChromeDriver and Display in Ubuntu'
-        shell: bash
+      
+      - name: 'Setup Display and ChromeDriver (Ubuntu)'
         if: matrix.os == 'ubuntu-latest'
         run: |
-          export DISPLAY=:99
-          # TODO: need to download driver according to electron's version
-          wget --directory-prefix=/tmp https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
-          unzip -d /tmp/chromedriver /tmp/chromedriver_linux64.zip
-          sudo chmod +x /tmp/chromedriver/chromedriver
-          # Fix not being able to run electron on CI https://github.com/microsoft/playwright/issues/34251#issuecomment-2580645333
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-          /tmp/chromedriver/chromedriver &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-      - name: '        Install Dependencies'
-        shell: bash
-        run: |
-          npm install
-      - name: '        Lint'
-        shell: bash
-        run: |
-          npm run lint
-      - name: '        Tests'
-        shell: bash
-        env:
-          OS: ${{ matrix.os }}
-        run: |
-          if [[ $OS == 'ubuntu-latest' ]]; then
-            # Avoid "failed to connect to the bus" errors on CI https://github.com/microsoft/WSL/issues/7915
-            export XDG_RUNTIME_DIR=/run/user/$(id -u)
-            sudo mkdir -p $XDG_RUNTIME_DIR
-            sudo chmod 700 $XDG_RUNTIME_DIR
-            sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
-            export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+          # Setup D-Bus and display for Electron on Ubuntu
+          sudo apt-get update
+          sudo apt-get install -y xvfb dbus-x11 chromium-driver
+          
+          # Setup runtime directory for current user
+          export XDG_RUNTIME_DIR=/run/user/$(id -u)
+          sudo mkdir -p $XDG_RUNTIME_DIR
+          sudo chmod 700 $XDG_RUNTIME_DIR  
+          sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
+          
+          # Start D-Bus session
+          sudo mkdir -p /var/run/dbus
+          sudo dbus-daemon --system --fork || true
+          
+          # Start virtual display for Electron
+          export DISPLAY=':99'
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          sleep 5
+          
+          # Set environment for subsequent steps
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+          echo "XDG_RUNTIME_DIR=/run/user/$(id -u)" >> $GITHUB_ENV
+          echo "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus" >> $GITHUB_ENV
 
-            # For ChromeDriver to work
-            export DISPLAY=':99'
-          fi
+      - name: 'Install Dependencies'
+        run: npm ci
 
-          npm run test
-      - name: '        CodeCov'
+      - name: 'Install Playwright Browsers'
+        run: npx playwright install --with-deps chromium
+
+      - name: 'Lint Check'
+        run: npm run lint
+
+      - name: 'Run Tests with Coverage'
+        run: |
+          npm run test:ci
+          npm run coverage:ci
+
+      - name: 'Verify Coverage Files (Unix)'
+        if: matrix.os != 'windows-latest'
+        run: |
+          ls -la coverage_mocha/ || echo "⚠️ coverage_mocha directory not found"
+          ls -la coverage_c8/ || echo "⚠️ coverage_c8 directory not found"
+          ls -la coverage_nyc/ || echo "⚠️ coverage_nyc directory not found"
+          ls -la coverage_combined/ || echo "⚠️ coverage_combined directory not found"
+
+      - name: 'Verify Coverage Files (Windows)'
+        if: matrix.os == 'windows-latest'
+        run: |
+          if (Test-Path "coverage_mocha") { Get-ChildItem coverage_mocha } else { echo "⚠️ coverage_mocha directory not found" }
+          if (Test-Path "coverage_c8") { Get-ChildItem coverage_c8 } else { echo "⚠️ coverage_c8 directory not found" }
+          if (Test-Path "coverage_nyc") { Get-ChildItem coverage_nyc } else { echo "⚠️ coverage_nyc directory not found" }
+          if (Test-Path "coverage_combined") { Get-ChildItem coverage_combined } else { echo "⚠️ coverage_combined directory not found" }
+
+      - name: 'Upload Enhanced Coverage to Codecov'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage_c8/coverage-final.json,coverage_mocha/coverage-final.json
-          name: codecov-${{ matrix.os }}
-          verbose: true
+          files: coverage_mocha/coverage-final.json,coverage_c8/coverage-final.json,coverage_nyc/coverage-final.json,coverage_combined/lcov.info,coverage_mocha/lcov.info,coverage_c8/lcov.info,coverage_nyc/lcov.info,coverage_playwright/lcov.info
+          flags: unittests,enhanced-coverage,${{ matrix.os }}
+          name: codecov-enhanced-${{ matrix.os }}
+          fail_ci_if_error: false

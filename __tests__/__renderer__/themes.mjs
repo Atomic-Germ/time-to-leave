@@ -7,7 +7,8 @@ import { stub } from 'sinon';
 
 import {
     applyTheme,
-    isValidTheme
+    isValidTheme,
+    themeOptions
 } from '../../renderer/themes.js';
 
 const $_backup = global.$;
@@ -18,6 +19,12 @@ describe('Theme Functions', function()
     {
         // Stub $ and window.matchMedia for applyTheme()
         global.$ = stub().returns({'attr': stub()});
+
+        // Create matchMedia if it doesn't exist, then stub it
+        if (!global.window.matchMedia)
+        {
+            global.window.matchMedia = () => ({matches: false});
+        }
         stub(global.window, 'matchMedia').returns({matches: true});
     });
 
@@ -25,10 +32,11 @@ describe('Theme Functions', function()
     {
         it('should validate', () =>
         {
-            assert.strictEqual(isValidTheme('system-default'), true);
-            assert.strictEqual(isValidTheme('light'), true);
-            assert.strictEqual(isValidTheme('dark'), true);
-            assert.strictEqual(isValidTheme('cadent-star'), true);
+            // Test all valid themes from themeOptions
+            themeOptions.forEach(theme =>
+            {
+                assert.strictEqual(isValidTheme(theme), true, `Should validate theme: ${theme}`);
+            });
         });
     });
 
@@ -51,13 +59,16 @@ describe('Theme Functions', function()
 
         it('should apply', () =>
         {
-            assert.strictEqual(applyTheme('system-default'), true);
-            assert.strictEqual(applyTheme('light'), true);
-            assert.strictEqual(applyTheme('dark'), true);
-            assert.strictEqual(applyTheme('cadent-star'), true);
+            // Test all valid themes from themeOptions
+            let expectedCallCount = 0;
+            themeOptions.forEach(theme =>
+            {
+                assert.strictEqual(applyTheme(theme), true, `Should apply theme: ${theme}`);
+                expectedCallCount++;
+            });
 
             assert.strictEqual(global.window.matchMedia.callCount, 1);
-            assert.strictEqual(global.$.callCount, 4);
+            assert.strictEqual(global.$.callCount, expectedCallCount);
         });
 
         it('should not apply', function()
@@ -73,6 +84,9 @@ describe('Theme Functions', function()
     after(() =>
     {
         global.$ = $_backup;
-        window.matchMedia.restore();
+        if (global.window.matchMedia && global.window.matchMedia.restore)
+        {
+            global.window.matchMedia.restore();
+        }
     });
 });

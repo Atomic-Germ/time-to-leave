@@ -1,0 +1,73 @@
+/* Purple Sunset theme - Professional Edition */
+html[data-theme="purple-sunset"] {
+  /* Base colors with sophisticated warmth */
+  --page-bground: rgb(45 41 78);  /* Deep professional navy-purple #2D294E */
+  --page-color: rgb(248 250 252);  /* Soft white text - >7:1 contrast ratio */
+  
+  /* Table styling with subtle elegance */
+  --table-bground: rgb(71 65 110);  /* Muted purple surface #47416E */
+  --table-header-bground: rgb(63 57 96);  /* Slightly darker muted purple #3F3960 */
+  --table-border: rgb(139 116 165);  /* Soft lavender border - >7:1 contrast with background */
+  --table-total-border: rgb(205 133 63);  /* Warm bronze #CD853F */
+  
+  /* Cell styling with professional contrast */
+  --table-cell-offtime-bground: rgb(63 57 96);  /* Muted purple #3F3960 */
+  --table-cell-offtime-color: rgb(229 231 235);  /* Light gray text - >4.5:1 contrast ratio */
+  --table-cell-total-bground: rgb(84 70 122);  /* Professional purple #544A7A */
+  --table-cell-total-color: rgb(205 133 63);  /* Warm bronze text - >7:1 contrast ratio */
+  --table-header-label-bground: var(--table-header-bground);
+  --table-header-label-shadow: var(--table-border);
+  
+  /* Interactive elements with professional appeal */
+  --error: rgb(220 82 82);  /* Muted red for errors - >4.5:1 contrast ratio */
+  --punch-bground: rgb(156 113 141);  /* Sophisticated mauve #9C718D */
+  --punch-color: rgb(255 255 255);  /* White text - >7:1 contrast ratio */
+  --punch-invert: 1;  /* Invert for white text */
+  --punch-disable-bground: rgb(107 114 128);  /* Gray for disabled */
+  
+  /* Form controls with refined contrast */
+  --input-bground: rgb(58 52 89);  /* Professional dark purple for inputs #3A3459 */
+  --slider-background-color: rgb(63 57 96);  /* Muted purple slider track */
+  --slider-checked-color: rgb(205 133 63);  /* Warm bronze for active state */
+  --slider-unchecked-color: rgb(255 255 255);
+  --weekday-background: rgb(63 57 96);  /* Muted purple weekday background */
+  --weekday-selected: rgb(205 133 63);  /* Warm bronze for selected weekday */
+  
+  /* UI accents with professional sophistication */
+  --disabled-input-bground: rgb(107 114 128);  /* Gray for disabled inputs */
+  --title-color: rgb(205 133 63);  /* Warm bronze for titles - >7:1 contrast ratio */
+  --input-border: rgb(139 116 165);  /* Soft lavender input borders - >4.5:1 contrast ratio */
+  --tab-font-color: rgb(229 231 235);  /* Light gray tab text */
+  --tab-waiver-color: rgb(205 133 63);  /* Warm bronze for waiver tabs */
+  --tab-waiver-border: rgb(139 116 165);  /* Soft lavender waiver border */
+  
+  /* Icon colors */
+  --svg-invert: 1;  /* Invert SVG icons for dark theme */
+  --outline: 2px solid rgb(205 133 63);  /* Warm bronze focus outline */
+}
+
+/* Purple Sunset specific table enhancements */
+html[data-theme="purple-sunset"] #calendar table {
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgb(139 116 165 / 20%);  /* Soft lavender shadow */
+  overflow: hidden; /* Ensures border-radius clips content */
+}
+
+html[data-theme="purple-sunset"] #calendar .table-header,
+html[data-theme="purple-sunset"] #calendar .table-body {
+  border-radius: 4px;
+  background-color: var(--table-bground);
+}
+
+/* Ensure borders don't interfere with radius */
+html[data-theme="purple-sunset"] #calendar tr:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+html[data-theme="purple-sunset"] #calendar .table-header th:first-child {
+  border-top-left-radius: 4px;
+}
+
+html[data-theme="purple-sunset"] #calendar .table-header th:last-child {
+  border-top-right-radius: 4px;
+}

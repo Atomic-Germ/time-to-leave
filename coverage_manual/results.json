@@ -1,0 +1,145 @@
+Normal app startup
+{
+  "stats": {
+    "suites": 3,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-09-13T21:57:11.890Z",
+    "end": "2025-09-13T21:57:11.901Z",
+    "duration": 11
+  },
+  "tests": [
+    {
+      "title": "should track coverage while generating demo data",
+      "fullTitle": "Demo Generator with Coverage Tracking should track coverage while generating demo data",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/demo-generator-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should generate coverage summary for all tests",
+      "fullTitle": "Demo Generator with Coverage Tracking should generate coverage summary for all tests",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/demo-generator-with-coverage.mjs",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track coverage while loading CommonJS preload script",
+      "fullTitle": "Preload CJS with Coverage Tracking should track coverage while loading CommonJS preload script",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should handle error conditions with coverage tracking",
+      "fullTitle": "Preload CJS with Coverage Tracking should handle error conditions with coverage tracking",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track coverage for squirrel install event",
+      "fullTitle": "Squirrel with Coverage Tracking should track coverage for squirrel install event",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track coverage for non-squirrel execution",
+      "fullTitle": "Squirrel with Coverage Tracking should track coverage for non-squirrel execution",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track all squirrel event types",
+      "fullTitle": "Squirrel with Coverage Tracking should track all squirrel event types",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "should track coverage while generating demo data",
+      "fullTitle": "Demo Generator with Coverage Tracking should track coverage while generating demo data",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/demo-generator-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should generate coverage summary for all tests",
+      "fullTitle": "Demo Generator with Coverage Tracking should generate coverage summary for all tests",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/demo-generator-with-coverage.mjs",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track coverage while loading CommonJS preload script",
+      "fullTitle": "Preload CJS with Coverage Tracking should track coverage while loading CommonJS preload script",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should handle error conditions with coverage tracking",
+      "fullTitle": "Preload CJS with Coverage Tracking should handle error conditions with coverage tracking",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/preload-cjs-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track coverage for squirrel install event",
+      "fullTitle": "Squirrel with Coverage Tracking should track coverage for squirrel install event",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track coverage for non-squirrel execution",
+      "fullTitle": "Squirrel with Coverage Tracking should track coverage for non-squirrel execution",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
+      "duration": 0,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    },
+    {
+      "title": "should track all squirrel event types",
+      "fullTitle": "Squirrel with Coverage Tracking should track all squirrel event types",
+      "file": "/Users/caseyjparker/test/__tests__/__main__/squirrel-with-coverage.mjs",
+      "duration": 1,
+      "currentRetry": 0,
+      "speed": "fast",
+      "err": {}
+    }
+  ]
+}

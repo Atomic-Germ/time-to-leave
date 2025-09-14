@@ -1,0 +1,991 @@
+/* ==========================================================================
+   Modern CSS Performance and Responsive Improvements for Time to Leave
+   ========================================================================== */
+
+/* =====================
+   CSS Custom Properties Enhancements
+   ===================== */
+
+:root {
+  /* Modern responsive spacing system */
+  --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --spacing-sm: clamp(0.5rem, 1vw, 1rem);
+  --spacing-md: clamp(/* Navigation arrow hover effects */m);
+  --spacing-lg: clamp(1.5rem, 3vw, 2.5rem);
+  --spacing-xl: clamp(2rem, 4vw, 3rem);
+  
+  /* Fluid typography */
+  --font-size-sm: clamp(0.75rem, 0.9vw, 0.875rem);
+  --font-size-base: clamp(0.875rem, 1vw, 1rem);
+  --font-size-lg: clamp(1rem, 1.2vw, 1.125rem);
+  --font-size-xl: clamp(1.125rem, 1.5vw, 1.25rem);
+  --font-size-2xl: clamp(1.25rem, 2vw, 1.5rem);
+  
+  /* Container widths for logical breakpoints */
+  --container-sm: 576px;
+  --container-md: 768px;
+  --container-lg: 992px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+  
+  /* Modern transition system */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+  
+  /* Border radius system */
+  --radius-sm: 0.25rem;
+  --radius-base: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  
+  /* Shadow system for depth */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%), 0 4px 6px -4px rgb(0 0 0 / 10%);
+}
+
+/* =====================
+   Container Queries for Modern Responsive Design
+   ===================== */
+
+@container (width < 576px) {
+  .calendar-responsive {
+    /* Mobile-first optimizations */
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+  }
+}
+
+@container (width >= 576px) and (width < 768px) {
+  .calendar-responsive {
+    /* Small tablet optimizations */
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md);
+  }
+}
+
+@container (width >= 768px) {
+  .calendar-responsive {
+    /* Desktop optimizations */
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-lg);
+  }
+}
+
+/* =====================
+   Performance Optimizations
+   ===================== */
+
+/* Improve painting performance */
+.calendar-optimized {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+/* GPU acceleration for smooth animations */
+.smooth-transform {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Modern flexbox layouts for better performance */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.flex-item {
+  flex: 1 1 auto;
+  min-width: 0; /* Prevent flex items from overflowing */
+}
+
+/* Grid layouts for complex responsive designs */
+.grid-responsive {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+}
+
+/* =====================
+   Modern Focus and Interaction States
+   ===================== */
+
+.focus-modern:focus-visible {
+  outline: 2px solid var(--focus-color, currentColor);
+  outline-offset: 2px;
+  border-radius: var(--radius-base);
+}
+
+.hover-smooth {
+  transition: all var(--transition-base);
+}
+
+.hover-smooth:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* =====================
+   Accessibility and Reduced Motion
+   ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================
+   Modern Typography System
+   ===================== */
+
+.text-responsive {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizelegibility;
+}
+
+.text-balance {
+  text-wrap: balance; /* Modern text balancing */
+}
+
+/* =====================
+   Improved Loading States
+   ===================== */
+
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base, #f0f0f0) 25%,
+    var(--skeleton-highlight, #e0e0e0) 50%,
+    var(--skeleton-base, #f0f0f0) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-skeleton {
+    animation: none;
+    background: var(--skeleton-base, #f0f0f0);
+  }
+}
+
+/* =====================
+   Preferences-Specific Responsive Enhancements
+   ===================== */
+
+.preferences-main {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: 1fr;
+  max-width: var(--container-md);
+  margin-inline: auto;
+}
+
+@media (width >= 768px) {
+  .preferences-main {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Enhanced working days selector */
+.weekdays-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--spacing-sm);
+  margin-block: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+.weekdays-selector input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.weekdays-selector label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-base);
+  background-color: var(--weekday-background);
+  color: var(--page-color);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: 500;
+  text-align: center;
+}
+
+.weekdays-selector input[type="checkbox"]:checked + label {
+  background-color: var(--purple-base);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-base);
+}
+
+.weekdays-selector input[type="checkbox"]:focus-visible + label {
+  outline: 2px solid var(--focus-color, var(--purple-base));
+  outline-offset: 2px;
+}
+
+/* Modern flex-box improvements */
+.flex-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--table-cell-offtime-bground);
+  margin-block: var(--spacing-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.flex-box:hover {
+  background-color: var(--table-header-bground);
+}
+
+@media (width <= 576px) {
+  .flex-box {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Section title improvements */
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--purple-base);
+  margin-block: var(--spacing-lg) var(--spacing-md);
+  border-bottom: 2px solid var(--purple-base);
+  padding-block-end: var(--spacing-sm);
+}
+
+/* Input field focus enhancements - moved before specific selectors */
+input,
+select,
+textarea {
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+/* Enhanced form controls */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  transition: all var(--transition-fast);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  transform: scale(1.01);
+  box-shadow: 0 0 0 3px rgb(var(--purple-base-rgb) / 20%);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+  outline: 2px solid var(--purple-base);
+  outline-offset: 2px;
+  border-color: var(--purple-base);
+  box-shadow: var(--shadow-base);
+}
+
+/* Switch component improvements */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--slider-background-color);
+  transition: var(--transition-base);
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: var(--transition-base);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+input:checked + .slider {
+  background-color: var(--slider-checked-color);
+}
+
+input:focus-visible + .slider {
+  outline: 2px solid var(--purple-base);
+  outline-offset: 2px;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* ===== VISUAL TRANSITION ENHANCEMENTS ===== */
+
+/* Global transition defaults for smooth interactions */
+* {
+  transition-property: background-color, border-color, color, box-shadow, transform, opacity;
+  transition-duration: var(--transition-fast);
+  transition-timing-function: ease-out;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Button transition enhancements with GPU acceleration for desktop */
+.punch-button,
+button,
+input[type="button"],
+input[type="submit"],
+.btn {
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0); /* GPU acceleration */
+  will-change: auto; /* Only set when animating */
+}
+
+.punch-button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+.punch-button:active,
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+.btn:active {
+  transform: translateY(0);
+  transition-duration: var(--transition-fast);
+}
+
+/* Ripple effect for buttons */
+@media (prefers-reduced-motion: no-preference) {
+  .punch-button::after,
+  button::after,
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 30%);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    pointer-events: none;
+  }
+
+  .punch-button:active::after,
+  button:active::after,
+  .btn:active::after {
+    width: 100px;
+    height: 100px;
+    transition-duration: 0.1s;
+  }
+}
+
+/* Calendar day hover effects */
+.day {
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.day:hover {
+  transform: scale(1.02);
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
+
+.day-number {
+  transition: color var(--transition-fast);
+}
+
+/* Table row hover effects */
+.table-row,
+tr {
+  transition: background-color var(--transition-fast);
+}
+
+.table-row:hover,
+tr:hover {
+  background-color: rgb(var(--primary-rgb), 0.05);
+}
+
+/* Navigation arrow hover effects */
+.month-nav,
+.year-nav,
+.arrow-button,
+[class*="arrow"] {
+  transition: all var(--transition-base);
+}
+
+.month-nav:hover,
+.year-nav:hover,
+.arrow-button:hover,
+[class*="arrow"]:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Icon and image smooth transitions with performance optimization */
+img,
+svg,
+.icon {
+  transition: all var(--transition-fast);
+  content-visibility: auto; /* Lazy render off-screen images */
+  contain-intrinsic-size: 100px 100px; /* Prevent layout shift */
+}
+
+img:hover,
+svg:hover,
+.icon:hover {
+  opacity: 0.8;
+}
+
+/* Waiver trigger enhancements for desktop */
+.waiver-trigger {
+  transition: all var(--transition-base);
+}
+
+.waiver-trigger:hover {
+  transform: scale(1.05);
+}
+
+/* Modal and dialog transitions */
+.modal,
+.dialog,
+[role="dialog"] {
+  transition: all var(--transition-slow);
+}
+
+.modal.show,
+.dialog.show,
+[role="dialog"].show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.modal:not(.show),
+.dialog:not(.show),
+[role="dialog"]:not(.show) {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+}
+
+/* Smooth scrolling for containers */
+.calendar-container,
+.preferences-container,
+.scrollable {
+  scroll-behavior: smooth;
+}
+
+/* Loading state transitions */
+.loading {
+  opacity: 0.7;
+  transition: opacity var(--transition-base);
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 20%),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+/* ===== DESKTOP OPTIMIZATIONS ===== */
+
+/* Desktop browser optimizations for Electron */
+
+/* Chromium-based optimizations (Electron uses Chromium) */
+.optimized-rendering {
+  /* Enable hardware acceleration */
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar styling and behavior for desktop */
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple-base) var(--table-border);
+  scroll-behavior: smooth;
+  overflow-anchor: auto; /* Prevent scroll anchoring issues */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
+}
+
+/* Print styles for desktop applications */
+
+/* Print styles */
+@media print {
+  .calendar-responsive {
+    /* Optimize for printing */
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0.5cm !important;
+  }
+  
+  .punch-button,
+  .modal,
+  .dialog {
+    display: none !important;
+  }
+  
+  .calendar-table {
+    break-inside: avoid;
+  }
+}
+
+/* Screen reader optimizations */
+@media (prefers-reduced-motion: reduce) {
+  /* Enhanced for screen readers */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* Progressive enhancement classes */
+.js-enabled .enhanced-interaction {
+  /* Enhanced features for JavaScript-enabled browsers */
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.css-grid-enabled .grid-layout {
+  /* Enhanced layouts for grid-supporting browsers */
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.css-custom-props-enabled .themed-component {
+  /* Enhanced theming for custom property support */
+  background-color: var(--component-background, #f8f9fa);
+  color: var(--component-text, #212529);
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--purple-base);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 6px;
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Enhanced focus indicators */
+.focus-visible,
+*:focus-visible {
+  outline: 3px solid var(--purple-base);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  /* Ensure modal focus management */
+  position: relative;
+}
+
+.focus-trap:focus {
+  outline: none; /* Remove default outline as we handle it visually */
+}
+
+/* Motion preferences accessibility for desktop */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations and transitions */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Ensure transforms still work for layout but without animation */
+  .calendar-day:hover,
+  .punch-button:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+  
+  /* Keep essential visual feedback */
+  .focus-visible,
+  *:focus-visible {
+    outline: 3px solid var(--purple-base);
+    outline-offset: 2px;
+  }
+}
+
+/* Enhanced keyboard navigation */
+.keyboard-nav *:focus {
+  outline: 3px solid var(--purple-base);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Desktop-optimized font loading */
+.font-loading {
+  font-display: swap;
+  text-rendering: optimizelegibility;
+}
+
+/* Improve readability */
+.readable-text {
+  line-height: 1.6;
+  word-spacing: 0.1em;
+  letter-spacing: 0.05em;
+}
+
+.calendar-table,
+.preferences-form {
+  line-height: 1.6;
+}
+
+/* Error and status announcements */
+.status-message {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.status-message[role="alert"] {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-message[role="status"] {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+/* Live region for dynamic content announcements */
+.live-region {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.live-region[aria-live="polite"] {
+  /* Announced when convenient - polite announcements */
+  z-index: -1;
+}
+
+.live-region[aria-live="assertive"] {
+  /* Announced immediately - urgent announcements */
+  z-index: -1;
+}
+
+/* Form accessibility enhancements */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-control:invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+}
+
+.form-control:invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 50%);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+/* Table accessibility */
+.calendar-table caption {
+  font-weight: 600;
+  color: var(--text-color);
+  padding: var(--spacing-sm);
+  caption-side: top;
+}
+
+.calendar-table th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.calendar-table th[scope="col"] {
+  background-color: var(--table-header-bground);
+}
+
+.calendar-table th[scope="row"] {
+  background-color: var(--table-row-header-bground, var(--table-header-bground));
+}
+
+/* ===== RENDERING PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Font loading optimization */
+@font-face {
+  font-family: system-ui-fallback;
+  src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont');
+  font-display: swap; /* Improve font loading performance */
+}
+
+/* CSS containment for better rendering performance */
+.calendar-container {
+  contain: layout style paint;
+  will-change: auto; /* Only when necessary */
+}
+
+.preferences-container {
+  contain: layout style;
+}
+
+.calendar-table-body {
+  contain: layout paint;
+}
+
+/* Performance optimization for interactive elements already covered above */
+
+/* Optimize expensive properties */
+.optimized-shadows {
+  box-shadow: var(--shadow-base);
+  will-change: box-shadow; /* Only during transitions */
+}
+
+.optimized-shadows:not(:hover, :focus) {
+  will-change: auto; /* Remove when not needed */
+}
+
+/* Reduce reflow-causing properties */
+.layout-stable {
+  transform: translateZ(0); /* Create compositing layer */
+  backface-visibility: hidden;
+}
+
+/* Optimize table rendering */
+.calendar-table,
+.preferences-table {
+  table-layout: fixed; /* Faster table rendering */
+  border-collapse: separate; /* Better for animations */
+  border-spacing: 0;
+}
+
+/* Optimize list rendering */
+.large-list {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* GPU acceleration for frequently changing elements */
+.calendar-day,
+.modal-content {
+  transform: translateZ(0);
+  will-change: auto; /* Only set when animating */
+}
+
+/* Optimize focus indicators */
+.focus-visible-indicator {
+  outline: 2px solid var(--purple-base);
+  outline-offset: 2px;
+  transition: outline-offset var(--transition-fast);
+}
+
+/* Prevent layout thrashing */
+.no-layout-shift {
+  min-height: 1px; /* Prevent zero-height collapse */
+  min-width: 1px;
+}
+
+/* Optimize backdrop filters */
+.backdrop-optimized {
+  backdrop-filter: blur(10px);
+  will-change: backdrop-filter;
+}
+
+.backdrop-optimized:not(.active) {
+  will-change: auto;
+}
+
+/* Critical rendering path optimization */
+.above-fold {
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+/* Reduce paint complexity */
+.simple-background {
+  background-attachment: local; /* Better than fixed */
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Animation performance */
+@media (prefers-reduced-motion: no-preference) {
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+  
+  .gpu-accelerated:not(.animating) {
+    will-change: auto;
+  }
+}
+
+/* Memory usage optimization */
+.memory-efficient {
+  transform: translate3d(0, 0, 0); /* Lightweight GPU layer */
+  backface-visibility: hidden;
+}
+
+/* Page transition effects */
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all var(--transition-slow);
+  }
+
+  .page-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all var(--transition-slow);
+  }
+}

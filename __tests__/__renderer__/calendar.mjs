@@ -55,6 +55,24 @@ describe('Test Calendar Window', () =>
     beforeEach(async function()
     {
         await prepareMockup();
+
+        // Manually set up the callback that calendar.js would normally register
+        // This simulates what happens in calendar.js when the document ready event fires
+        window.calendarApi.handleToggleMainWindowWait((event, enable) =>
+        {
+            const waitClass = 'wait';
+            if (enable)
+            {
+                if (!$('html').hasClass(waitClass))
+                {
+                    $('html').addClass(waitClass);
+                }
+            }
+            else
+            {
+                $('html').removeClass(waitClass);
+            }
+        });
     });
 
     describe('Toggle wait mode', () =>

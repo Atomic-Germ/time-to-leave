@@ -19,6 +19,7 @@ const appConfig = {
     trayIcon: path.join(__dirname, win32 ? '../assets/icon-win.ico' : '../assets/ttl-tray-icon.png')
 };
 
+// TODO: Add tests for getDetails() function to verify proper version string formatting
 function getDetails()
 {
     const version = app.getVersion();

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html data-theme="">
+<html data-theme="" lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none';">
 
     <title>Time to Leave</title>
 
@@ -19,8 +19,24 @@
 </head>
 
 <body>
-    <div id="calendar" class="container"></div>
-    <div id="footer" class="footer"></div>
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link" data-i18n="$Generic.skipToMain">Skip to main content</a>
+    
+    <!-- Main application content -->
+    <main id="main-content" class="container calendar-responsive" role="main" aria-label="Time tracking calendar">
+        <header class="app-header" role="banner">
+            <h1 class="sr-only text-responsive" data-i18n="$Calendar.appTitle">Time to Leave - Work Time Tracker</h1>
+        </header>
+        
+        <section id="calendar" class="calendar-optimized layout-stable above-fold" aria-label="Calendar view" role="region">
+            <!-- Calendar content will be dynamically loaded here -->
+        </section>
+    </main>
+    
+    <!-- Application footer -->
+    <footer id="footer" class="footer below-fold" role="contentinfo" aria-label="Application information">
+        <!-- Footer content will be dynamically loaded here -->
+    </footer>
 </body>
 
 </html>

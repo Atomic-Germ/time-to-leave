@@ -27,6 +27,12 @@ lib-cov
 coverage
 coverage_c8
 coverage_mocha
+coverage_nyc
+coverage_combined
+coverage_merged
+coverage_manual
+coverage_playwright
+.nyc_output
 *.lcov
 
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
@@ -109,3 +115,4 @@ missing.md
 
 # Mac
 .DS_Store
+.early.coverage

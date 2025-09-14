@@ -7,11 +7,13 @@ import IpcConstants from './ipc-constants.mjs';
 
 let savedPreferences = null;
 
+// TODO: Add tests for getSavedPreferences() function to verify state management
 function getSavedPreferences()
 {
     return savedPreferences;
 }
 
+// TODO: Add tests for IPC handler to verify preferences saving, login item settings, and language changes
 ipcMain.on(IpcConstants.PreferenceSaveDataNeeded, (event, preferences) =>
 {
     savedPreferences = preferences;

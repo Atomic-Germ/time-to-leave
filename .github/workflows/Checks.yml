@@ -41,25 +41,23 @@ jobs:
       - name: 'Lint Check'
         run: npm run lint
 
-      - name: 'Run Tests with Coverage'
-        env:
-          OS: ${{ matrix.os }}
-          CI: true
+      - name: 'Setup Display and ChromeDriver (Ubuntu)'
+        if: matrix.os == 'ubuntu-latest'
         run: |
-          if [[ $OS == 'ubuntu-latest' ]]; then
-            # Setup D-Bus and display for Electron on Ubuntu
-            export XDG_RUNTIME_DIR=/run/user/$(id -u)
-            sudo mkdir -p $XDG_RUNTIME_DIR
-            sudo chmod 700 $XDG_RUNTIME_DIR
-            sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
-            export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-            
-            # Start virtual display for Electron
-            export DISPLAY=':99'
-            Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-            sleep 3  # Give Xvfb time to start
-          fi
+          # Setup D-Bus and display for Electron on Ubuntu
+          export XDG_RUNTIME_DIR=/run/user/$(id -u)
+          sudo mkdir -p $XDG_RUNTIME_DIR
+          sudo chmod 700 $XDG_RUNTIME_DIR
+          sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
+          export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+          
+          # Start virtual display for Electron
+          export DISPLAY=':99'
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+          sleep 3  # Give Xvfb time to start
 
+      - name: 'Run Tests with Coverage'
+        run: |
           # Run comprehensive test suite with enhanced coverage
           npm run test:ci
           

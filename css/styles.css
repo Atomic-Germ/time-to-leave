@@ -1047,6 +1047,7 @@ p.header-help {
   font-variant-caps: all-petite-caps;
   border: none;
   line-height: normal;
+  background-color: transparent;
 }
 
 #preferences-window input {
@@ -1193,6 +1194,7 @@ p.header-help {
   height: 25px;
   justify-content: space-between;
   padding-right: 0.5rem;
+  background-color: transparent;
 }
 
 #preferences-window p {
@@ -1303,6 +1305,11 @@ p.header-help {
   width: 100%;
 }
 
+/* Alternating row colors for waiver list table */
+#workday-waiver-window #waiver-list-table tbody tr:nth-child(odd) {
+  background-color: var(--table-cell-total-bground);
+}
+
 #workday-waiver-window .list-date-header {
   min-width: 80px;
 }
@@ -1322,6 +1329,7 @@ p.header-help {
   background-image: var(--delete-icon);
   background-repeat: no-repeat;
   background-position: center;
+  background-color: transparent;
 }
 
 /** Flexible view related styles **/

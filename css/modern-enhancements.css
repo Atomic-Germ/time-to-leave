@@ -216,8 +216,6 @@
   gap: var(--spacing-sm);
   margin-block: var(--spacing-md);
   padding: var(--spacing-md);
-  border: 1px solid var(--table-border);
-  border-radius: var(--radius-lg);
 }
 
 .weekdays-selector input[type="checkbox"] {
@@ -259,7 +257,6 @@
   justify-content: space-between;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
-  border-radius: var(--radius-base);
   background-color: var(--table-cell-offtime-bground);
   margin-block: var(--spacing-sm);
   transition: background-color var(--transition-fast);

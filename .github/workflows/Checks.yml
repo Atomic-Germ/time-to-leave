@@ -21,23 +21,34 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           # Setup D-Bus and display for Electron on Ubuntu
+          sudo apt-get update
+          sudo apt-get install -y xvfb dbus-x11 chromium-driver
+          
+          # Setup runtime directory for current user (runner user is typically 1001)
           export XDG_RUNTIME_DIR=/run/user/$(id -u)
           sudo mkdir -p $XDG_RUNTIME_DIR
-          sudo chmod 700 $XDG_RUNTIME_DIR
+          sudo chmod 700 $XDG_RUNTIME_DIR  
           sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
-          export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+          
+          # Start D-Bus session
+          sudo mkdir -p /var/run/dbus
+          sudo dbus-daemon --system --fork || true
           
           # Start virtual display for Electron
           export DISPLAY=':99'
           Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-          sleep 3  # Give Xvfb time to start
+          sleep 5  # Give Xvfb more time to start
           
-          # Install ChromeDriver via system package manager (much simpler!)
-          sudo apt-get update
-          sudo apt-get install -y chromium-driver
+          # Set environment for subsequent steps
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+          echo "XDG_RUNTIME_DIR=/run/user/$(id -u)" >> $GITHUB_ENV
+          echo "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus" >> $GITHUB_ENV
           
-          # Verify installation
+          # Verify ChromeDriver installation
           chromedriver --version
+          
+          # Test that display is working
+          xvfb-run -a echo "Display test successful"
 
       - name: 'Install Dependencies'
         run: npm ci

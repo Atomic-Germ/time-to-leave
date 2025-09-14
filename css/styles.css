@@ -295,6 +295,7 @@ html[data-theme="light"].wait {
     float: none;
     margin-inline: auto;
     text-align: center;
+
     /* Use logical properties */
   }
 
@@ -323,6 +324,7 @@ html[data-theme="light"].wait {
   width: min(90%, var(--container-lg));
   border-collapse: collapse;
   border-spacing: 0;
+
   /* Performance optimization */
   contain: layout style;
 }
@@ -335,6 +337,7 @@ html[data-theme="light"].wait {
   top: 0;
   background: var(--table-header-bground);
   z-index: 1;
+
   /* Improve stickiness performance */
   backdrop-filter: blur(8px);
 }
@@ -349,6 +352,7 @@ html[data-theme="light"].wait {
 #calendar .table-body {
   overflow-y: auto;
   background-color: var(--table-bground);
+
   /* Improve scrolling performance */
   overscroll-behavior: contain;
   scroll-behavior: smooth;
@@ -600,11 +604,19 @@ html[data-theme="business-dress"] #calendar .table-header th:last-child {
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
+  transition: all var(--transition-base, 250ms ease-out);
+  cursor: pointer;
+}
+
+.arrow:hover {
+  border-color: var(--purple-base, #6f42c1);
+  transform: scale(1.1);
 }
 
 .arrow.disabled {
   border-color: var(--disabled-input-bground);
-  cursor: inherit !important;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .right {

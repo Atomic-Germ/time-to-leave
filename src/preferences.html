@@ -2,26 +2,56 @@
 <html data-theme="" lang="en">
 
 <head>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none';">
+    
+    <title>Time to Leave - Preferences</title>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 
+    <!-- Scripts -->
     <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" charset="utf-8"></script>
     <script type="module" src="preferences.js"></script>
+    
+    <!-- Keyboard shortcuts help dialog -->
+    <dialog id="keyboard-shortcuts" aria-labelledby="shortcuts-title" aria-describedby="shortcuts-desc">
+        <h2 id="shortcuts-title" data-i18n="$Generic.keyboardShortcuts">Keyboard Shortcuts</h2>
+        <div id="shortcuts-desc">
+            <ul class="shortcuts-list">
+                <li><kbd>?</kbd> <span data-i18n="$Generic.showShortcuts">Show keyboard shortcuts</span></li>
+                <li><kbd>Esc</kbd> <span data-i18n="$Generic.closeDialog">Close dialog</span></li>
+                <li><kbd>Alt</kbd> + <kbd>R</kbd> <span data-i18n="$Generic.resetSettings">Reset settings</span></li>
+                <li><kbd>Alt</kbd> + <kbd>T</kbd> <span data-i18n="$Generic.switchTheme">Switch theme</span></li>
+            </ul>
+        </div>
+        <button class="dialog-close" aria-label="Close dialog">×</button>
+    </dialog>
 </head>
 
-<body id="preferences-window" class="common-window">
-    <div>
-        <div class="header-title" data-i18n="$Preferences.userPreferences">
-            User preferences
-        </div>
+<body id="preferences-window">
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link" data-i18n="$Generic.skipToMain">Skip to main content</a>
+    
+    <!-- Main application content -->
+    <main id="main-content" class="container" role="main" aria-label="User preferences">
+        <header class="app-header" role="banner">
+            <h1 class="header-title text-responsive" data-i18n="$Preferences.userPreferences">
+                User preferences
+            </h1>
+        </header>
+        
+        <main id="main-content" class="preferences-main" tabindex="-1" role="main">
 
-        <section>
-            <div class="section-title" data-i18n="$Preferences.workingDays">Working days</div>
-            <div class="weekdays-selector">
-                <input type="checkbox" id="sunday" name="working-days-sunday" class="weekday" />
+        <!-- Working days section -->
+        <section aria-labelledby="working-days-title">
+            <h2 id="working-days-title" class="section-title" data-i18n="$Preferences.workingDays">Working days</h2>
+            <fieldset class="weekdays-selector" aria-labelledby="working-days-title">
+                <legend class="sr-only" data-i18n="$Preferences.select-working-days">Select working days</legend>
+                <input type="checkbox" id="sunday" name="working-days-sunday" class="weekday">
                 <label for="sunday" data-i18n="$Preferences.sun">Sun</label>
                 <input type="checkbox" id="monday" name="working-days-monday" class="weekday" />
                 <label for="monday" data-i18n="$Preferences.mon">Mon</label>
@@ -35,101 +65,193 @@
                 <label for="friday" data-i18n="$Preferences.fri">Fri</label>
                 <input type="checkbox" id="saturday" name="working-days-saturday" class="weekday" />
                 <label for="saturday" data-i18n="$Preferences.sat">Sat</label>
-            </div>
+            </fieldset>
             <div class="flex-box">
                 <p data-i18n="$Preferences.hideNonWorkingDay">Hide non-working days (Month View)</p>
-                <label id='non-working-label' class="switch"><input type="checkbox" name="hide-non-working-days"><span class="slider round"></span></label>
+                <label id='non-working-label' class="switch">
+                    <input type="checkbox" 
+                           name="hide-non-working-days"
+                           aria-label="Hide non-working days in month view">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
                 <p data-i18n="$Preferences.hoursPerDay">Hours per day</p>
-                <input data-i18n="[placeholder]$Preferences.hours-per-day;[oninvalid]$Generic.hours-on-invalid" title="X, XX, XX.X, X.XX, X:XX, XX.XX, XX:XX" type="text" name="hours-per-day" id="hours-per-day" maxlength=5 pattern="^((0|1)?[0-9]|2[0-3])(\.[0-9][0-9]?|:[0-5][0-9])?$" value="08:00" size=5 required oninput="this.setCustomValidity('');this.reportValidity()" onblur="this.value = this.checkValidity() ? this.value : '08:00';this.setCustomValidity('')">
+                <input data-i18n="[placeholder]$Preferences.hours-per-day;[oninvalid]$Generic.hours-on-invalid" 
+                       title="X, XX, XX.X, X.XX, X:XX, XX.XX, XX:XX" 
+                       type="text" 
+                       name="hours-per-day" 
+                       id="hours-per-day" 
+                       maxlength="5" 
+                       pattern="^((0|1)?[0-9]|2[0-3])(\.[0-9][0-9]?|:[0-5][0-9])?$" 
+                       value="08:00" 
+                       size="5" 
+                       required 
+                       aria-label="Hours per day"
+                       oninput="this.setCustomValidity('');this.reportValidity()" 
+                       onblur="this.value = this.checkValidity() ? this.value : '08:00';this.setCustomValidity('')">
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-utensils"></i><span data-i18n="$Preferences.enablePrefillBreakTime">Enable prefilling of break time</span></p>
-                <label class="switch"><input type="checkbox" id='enable-prefill-break-time' name="enable-prefill-break-time"><span class="slider round"></span></label>
+                <p><i class="fas fa-utensils" aria-hidden="true"></i><span data-i18n="$Preferences.enablePrefillBreakTime">Enable prefilling of break time</span></p>
+                <label class="switch">
+                    <input type="checkbox" 
+                           id='enable-prefill-break-time' 
+                           name="enable-prefill-break-time"
+                           aria-label="Enable prefilling of break time">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
                 <p data-i18n="$Preferences.breakTimeInterval">Break time interval</p>
-                <input data-i18n="[placeholder]$Preferences.hours-per-day" title="X, XX, XX.X, X.XX, X:XX, XX.XX, XX:XX" type="text" name="break-time-interval" id="break-time-interval" maxlength=5 pattern="^((0|1)?[0-9]|2[0-3])(\.[0-9][0-9]?|:[0-5][0-9])?$" value="00:30" size=5 required oninput="this.reportValidity()" onblur="this.value = this.checkValidity() ? this.value : '00:30'">
+                <input data-i18n="[placeholder]$Preferences.hours-per-day" 
+                       title="X, XX, XX.X, X.XX, X:XX, XX.XX, XX:XX" 
+                       type="text" 
+                       name="break-time-interval" 
+                       id="break-time-interval" 
+                       maxlength="5" 
+                       pattern="^((0|1)?[0-9]|2[0-3])(\.[0-9][0-9]?|:[0-5][0-9])?$" 
+                       value="00:30" 
+                       size="5" 
+                       required 
+                       aria-label="Break time interval"
+                       oninput="this.reportValidity()" 
+                       onblur="this.value = this.checkValidity() ? this.value : '00:30'">
             </div>
             
         </section>
 
-        <section>
-            <div class="section-title" data-i18n="$Preferences.notification">Notification</div>
-            <div class="flex-box">
-                <p><i class="far fa-bell"></i> <span data-i18n="$Preferences.notification">Notification</span></p>
-                <label class="switch"><input type="checkbox" id="notification" name="notification"><span class="slider round"></span></label>
+        <!-- Notification section -->
+        <section aria-labelledby="notification-title">
+            <h2 id="notification-title" class="section-title" data-i18n="$Preferences.notification">Notification</h2>
+            <div class="flex-box" role="group" aria-labelledby="notification-settings">
+                <p id="notification-settings"><i class="far fa-bell" aria-hidden="true"></i> <span data-i18n="$Preferences.notification">Notification</span></p>
+                <label class="switch">
+                    <input type="checkbox" id="notification" name="notification" aria-label="Enable notifications">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-redo"></i> <span data-i18n="$Preferences.allowRecurringNotifications">Allow recurring notifications</span></p>
-                <label class="switch"><input type="checkbox" id="repetition" name="repetition"><span class="slider round"></span></label>
+                <p id="recurring-label"><i class="fas fa-redo" aria-hidden="true"></i> <span data-i18n="$Preferences.allowRecurringNotifications">Allow recurring notifications</span></p>
+                <label class="switch">
+                    <input type="checkbox" id="repetition" name="repetition" aria-labelledby="recurring-label">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box mb-2">
-                <p><i class="fas fa-stopwatch"></i><span data-i18n="$Preferences.minutesBetweenNotifications">Minutes between notifications</span></p>
-                <input type="number" name="notifications-interval" id="notifications-interval" min="1" max="30" value="5" required onblur="this.value = this.checkValidity() ? this.value : 5">
+                <p id="interval-label"><i class="fas fa-stopwatch" aria-hidden="true"></i><span data-i18n="$Preferences.minutesBetweenNotifications">Minutes between notifications</span></p>
+                <div class="form-field-container">
+                    <input type="number" 
+                        name="notifications-interval" 
+                        id="notifications-interval" 
+                        min="1" 
+                        max="30" 
+                        value="5" 
+                        required 
+                        onblur="this.value = this.checkValidity() ? this.value : 5"
+                        aria-labelledby="interval-label"
+                        aria-invalid="false"
+                        aria-describedby="interval-error">
+                    <div id="interval-error" class="error-message" role="alert" aria-live="polite"></div>
+                </div>
             </div>
-            
         </section>
 
-        <section>
-            <div class="section-title" data-i18n="$Preferences.appBehavior">App Behavior</div>
+        <!-- App Behavior section -->
+        <section aria-labelledby="app-behavior-title">
+            <h2 id="app-behavior-title" class="section-title" data-i18n="$Preferences.appBehavior">App Behavior</h2>
             <div class="flex-box">
-                <p><i class="fas fa-globe"></i><span data-i18n="$Preferences.language">Language</span></p>
-                <select class="selects-right" id="language" name="language">
+                <p><i class="fas fa-globe" aria-hidden="true"></i><span data-i18n="$Preferences.language">Language</span></p>
+                <select class="selects-right" id="language" name="language" aria-label="Select application language">
                 </select>
             </div>
             <div class="flex-box">
-                <p><i class="far fa-play-circle"></i><span data-i18n="$Preferences.startOnLogin">Start on Login</span></p>
-                <label id='start-at-login' class="switch"><input type="checkbox" name="start-at-login"><span class="slider round"></span></label>
+                <p><i class="far fa-play-circle" aria-hidden="true"></i><span data-i18n="$Preferences.startOnLogin">Start on Login</span></p>
+                <label id='start-at-login' class="switch">
+                    <input type="checkbox" 
+                           name="start-at-login" 
+                           aria-label="Start application on system login">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
-                <p></i><span data-i18n="$Preferences.minimizeToTray">Minimize button should minimize to tray</span></p>
-                <label id='minimize-to-tray' class="switch"><input type="checkbox" name="minimize-to-tray"><span class="slider round"></span></label>
+                <p data-i18n="$Preferences.minimizeToTray">Minimize button should minimize to tray</p>
+                <label id='minimize-to-tray' class="switch">
+                    <input type="checkbox" 
+                           name="minimize-to-tray"
+                           aria-label="Minimize to system tray instead of taskbar">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
-                <p><span  data-i18n="$Preferences.closeMinimizeToTray">Close button should minimize to tray</span></p>
-                <label id='close-to-tray' class="switch"><input type="checkbox" name="close-to-tray"><span class="slider round"></span></label>
+                <p><span data-i18n="$Preferences.closeMinimizeToTray">Close button should minimize to tray</span></p>
+                <label id='close-to-tray' class="switch">
+                    <input type="checkbox" 
+                           name="close-to-tray"
+                           aria-label="Close to system tray instead of quitting">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
         </section>
 
-        <section>
-            <div class="section-title" data-i18n="$Preferences.view">View</div>
+        <!-- View section -->
+        <section aria-labelledby="view-title">
+            <h2 id="view-title" class="section-title" data-i18n="$Preferences.view">View</h2>
             <div class="flex-box">
-                <p><i class="fas fa-calendar-day"></i><span data-i18n="$Preferences.countTodayOnTotals">Count Today in Totals</span></p>
-                <label id='count-today' class="switch"><input type="checkbox" name="count-today"><span class="slider round"></span></label>
+                <p><i class="fas fa-calendar-day" aria-hidden="true"></i><span data-i18n="$Preferences.countTodayOnTotals">Count Today in Totals</span></p>
+                <label id='count-today' class="switch">
+                    <input type="checkbox" 
+                           name="count-today"
+                           aria-label="Include today's hours in total calculations">
+                    <span class="slider round" role="presentation"></span>
+                </label>
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-sign-in-alt"></i><span data-i18n="$Preferences.overallBalanceStart">Overall Balance Start Date</span></p>
-                <label id='overall-balance-start-date'><input type="date" class="date-right" name="overall-balance-start-date"></label>
+                <p><i class="fas fa-sign-in-alt" aria-hidden="true"></i><span data-i18n="$Preferences.overallBalanceStart">Overall Balance Start Date</span></p>
+                <label id='overall-balance-start-date' for="overall-balance-start-date-input">
+                    <input type="date" 
+                           class="date-right" 
+                           name="overall-balance-start-date" 
+                           id="overall-balance-start-date-input"
+                           aria-label="Overall balance start date">
+                </label>
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-eye"></i><span data-i18n="$Preferences.view">View</span></p>
-                <select class="selects-right" id="view" name="view">
+                <p><i class="fas fa-eye" aria-hidden="true"></i><span data-i18n="$Preferences.view">View</span></p>
+                <select class="selects-right" id="view" name="view" aria-label="Select calendar view">
                     <option value="month" data-i18n="$Preferences.month" selected>Month</option>
                     <option value="day" data-i18n="$Preferences.day">Day</option>
                 </select>
             </div>
             <div class="flex-box">
-                <p><i class="fas fa-swatchbook"></i><span data-i18n="$Preferences.themes">Themes</span></p>
-                <select class="selects-right" id="theme" name="theme">
+                <p><i class="fas fa-swatchbook" aria-hidden="true"></i><span data-i18n="$Preferences.themes">Themes</span></p>
+                <select class="selects-right" id="theme" name="theme" aria-label="Select application theme">
                     <option value="system-default" data-i18n="$Preferences.systemDefault" selected>System Default</option>
-                    <option value="light" data-i18n="$Preferences.light">Light</option>
-                    <option value="dark" data-i18n="$Preferences.dark">Dark</option>
                     <option value="cadent-star" data-i18n="$Preferences.cadentStar">Cadent Star</option>
+                    <option value="dark" data-i18n="$Preferences.dark">Dark</option>
+                    <option value="light" data-i18n="$Preferences.light">Light</option>
                 </select>
             </div>
         </section>
-        <section>
-            <div class="section-title" data-i18n="$Preferences.reset">Reset</div>
+        
+        <!-- Reset section -->
+        <section aria-labelledby="reset-section-title">
+            <h2 id="reset-section-title" class="section-title" data-i18n="$Preferences.reset">Reset</h2>
             <div class="flex-box" name="preferences-area">
-                <p><i class="fas fa-undo"></i><span data-i18n="$Preferences.reset-preferences">Reset to default preferences</span></p>
-                <button name="reset-button" id="reset-button" type="button" data-i18n="$Preferences.reset">
+                <p><i class="fas fa-undo" aria-hidden="true"></i><span data-i18n="$Preferences.reset-preferences">Reset to default preferences</span></p>
+                <button name="reset-button" 
+                        id="reset-button" 
+                        type="button" 
+                        data-i18n="$Preferences.reset"
+                        aria-describedby="reset-warning">
                     Reset
                 </button>
+                <div id="reset-warning" class="sr-only" data-i18n="$Preferences.reset-warning">
+                    Warning: This will reset all preferences to their default values
+                </div>
             </div>
         </section>
-    </div>
+        
+    </main>
 </body>
 
 </html>

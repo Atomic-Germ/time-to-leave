@@ -709,12 +709,7 @@ html[data-theme="business-dress"] #calendar .table-header th:last-child {
 }
 
 .slider::before {
-  position: absolute;
-  content: "";
-  height: 15px;
-  width: 15px;
-  background-color: var(--slider-unchecked-color);
-  transition: 0.4s;
+  display: none;
 }
 
 input:checked + .slider {
@@ -968,60 +963,77 @@ input[type="number"] {
     appearance: textfield;
     border: 1px solid #ccc;
     padding: 1px 4.8px 1px 0px;
-    border-radius: 4px;
     text-align: right;
     width: var(--interval-width);
 }
 
 /** Common window styles **/
 
-.common-window {
+/* Apply unified styling to all windows */
+#preferences-window .container,
+#workday-waiver-window .container {
   font-family: Montserrat, sans-serif;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  width: 100%;
-  height: 90%;
+  container-type: inline-size; /* Enable container queries */
+  max-width: min(var(--container-xl), 100% - 2rem);
+  margin-inline: auto;
+  padding-inline: var(--spacing-md);
+  
+  /* Performance optimizations */
+  contain: layout style;
+  content-visibility: auto;
 }
 
-.common-window .header-title {
-  font-size: 25px;
+/* Unified header styling across all windows */
+.header-title {
+  font-size: clamp(2rem, 4vw, 3rem); /* Fluid typography like main window */
+  font-weight: 300;
   border-bottom: 4px solid var(--table-total-border);
+  margin-bottom: var(--spacing-lg);
+  user-select: none;
 }
 
-.common-window .window-tab {
-  padding-top: 10px;
+/* Unified window component styling */
+.window-tab {
+  padding-top: var(--spacing-md);
   border-bottom: 1px solid var(--tab-waiver-border);
 }
 
-.common-window .tab-content {
-  padding-top: 10px;
+.tab-content {
+  padding-top: var(--spacing-md);
 }
 
-.common-window p.header-help {
+p.header-help {
   font-variant-caps: all-petite-caps;
-  font-size: 15px;
-  margin-bottom: 0px;
+  font-size: clamp(0.875rem, 1.5vw, 1rem); /* Responsive typography */
+  margin-bottom: 0;
+  line-height: 1.5;
 }
 
-.common-window .section-title {
-  font-size: 20px;
+.section-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* Responsive typography */
+  font-weight: 300;
   color: var(--title-color);
-  margin-bottom: 5px;
-  margin-top: 15px;
+  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-lg);
   border-bottom: 1px solid var(--table-total-border);
+  padding-bottom: var(--spacing-sm);
 }
 
-.common-window input, .common-window select, .common-window option {
+/* Unified input styling across all windows */
+#preferences-window input, #preferences-window select, #preferences-window option,
+#workday-waiver-window input, #workday-waiver-window select, #workday-waiver-window option {
   color: var(--page-color);
   background-color: var(--page-bground);
 }
 
-.common-window input[type="time" i]::-webkit-calendar-picker-indicator {
+/* Unified calendar picker styling */
+#preferences-window input[type="time" i]::-webkit-calendar-picker-indicator,
+#workday-waiver-window input[type="time" i]::-webkit-calendar-picker-indicator {
   background-image: var(--datepicker-icon);
 }
 
-.common-window input[type="date" i]::-webkit-calendar-picker-indicator {
+#preferences-window input[type="date" i]::-webkit-calendar-picker-indicator,
+#workday-waiver-window input[type="date" i]::-webkit-calendar-picker-indicator {
   background-image: var(--calendar-icon);
 }
 
@@ -1033,15 +1045,21 @@ input[type="number"] {
   font-size: 14px;
   font-weight: 300;
   font-variant-caps: all-petite-caps;
-  border-radius: 0.5rem;
   border: none;
-  height: inherit;
   line-height: normal;
 }
 
 #preferences-window input {
   padding-left: 0;
   padding-right: 0.3rem;
+}
+
+#preferences-window .weekdays-selector {
+  font-size: 0; /* Eliminates whitespace between inline elements */
+  display: flex; /* Ensure single row layout */
+  flex-wrap: nowrap; /* Prevent wrapping to multiple lines */
+  gap: 4px; /* Use gap instead of margin for better control */
+  align-items: center;
 }
 
 #preferences-window .weekdays-selector input {
@@ -1052,21 +1070,53 @@ input[type="number"] {
   font-size: 14px;
   font-weight: 300;
   font-variant-caps: all-petite-caps;
-  display: inline-block;
+  display: flex; /* Use flex for better alignment */
+  align-items: center;
+  justify-content: center;
   border-radius: 0.5rem;
   background: var(--weekday-background);
   height: 40px;
   width: 45px;
-  margin-right: 3px;
-  line-height: 40px;
-  text-align: center;
+  flex-shrink: 0; /* Prevent shrinking in flex container */
   cursor: pointer;
   user-select: none;
+  transition: all var(--transition-fast, 150ms ease-out);
+}
+
+/* Desktop hover effect for better UX */
+#preferences-window .weekdays-selector input[type="checkbox"] + label:hover {
+  background: var(--purple-light, #9388b1);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 #preferences-window .weekdays-selector input[type="checkbox"]:checked + label {
   background: var(--weekday-selected);
   color: #fff;
+  transform: scale(1.02); /* Subtle desktop hover effect */
+}
+
+/* Modern responsive design for preferences window */
+@container (width <= 480px) {
+  .common-window .header-title {
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+  
+  .common-window .section-title {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+  }
+}
+
+/* Desktop-optimized layout improvements */
+@container (width >= 768px) {
+  .common-window {
+    padding-inline: var(--spacing-lg);
+  }
+  
+  .common-window .header-title {
+    margin-bottom: var(--spacing-xl);
+  }
 }
 
 #preferences-window input[type="text"]:invalid,

@@ -2,11 +2,17 @@
 <html data-theme="" lang="en">
 
 <head>
+    <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none';">
+    
+    <title>Time to Leave - Preferences</title>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 
+    <!-- Scripts -->
     <script src="../node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js" charset="utf-8"></script>
     <script type="module" src="preferences.js"></script>
@@ -26,11 +32,12 @@
     </dialog>
 </head>
 
-<body id="preferences-window" class="common-window">
-    <div class="container calendar-responsive">
-        <a href="#main-content" class="skip-link focus-modern" data-i18n="$Generic.skipToMain">Skip to main content</a>
-        
-        <!-- Application header -->
+<body id="preferences-window">
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link" data-i18n="$Generic.skipToMain">Skip to main content</a>
+    
+    <!-- Main application content -->
+    <main id="main-content" class="container" role="main" aria-label="User preferences">
         <header class="app-header" role="banner">
             <h1 class="header-title text-responsive" data-i18n="$Preferences.userPreferences">
                 User preferences
@@ -44,7 +51,7 @@
             <h2 id="working-days-title" class="section-title" data-i18n="$Preferences.workingDays">Working days</h2>
             <fieldset class="weekdays-selector" aria-labelledby="working-days-title">
                 <legend class="sr-only" data-i18n="$Preferences.select-working-days">Select working days</legend>
-                <input type="checkbox" id="sunday" name="working-days-sunday" class="weekday" />
+                <input type="checkbox" id="sunday" name="working-days-sunday" class="weekday">
                 <label for="sunday" data-i18n="$Preferences.sun">Sun</label>
                 <input type="checkbox" id="monday" name="working-days-monday" class="weekday" />
                 <label for="monday" data-i18n="$Preferences.mon">Mon</label>
@@ -245,9 +252,7 @@
             </div>
         </section>
         
-        
-        </main>
-    </div>
+    </main>
 </body>
 
 </html>

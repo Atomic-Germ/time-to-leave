@@ -399,7 +399,7 @@ input:checked + .slider::before {
   }
 }
 
-/* Button transition enhancements */
+/* Button transition enhancements with GPU acceleration */
 .punch-button,
 button,
 input[type="button"],
@@ -408,6 +408,8 @@ input[type="submit"],
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  transform: translateZ(0); /* GPU acceleration */
+  will-change: auto; /* Only set when animating */
 }
 
 .punch-button:hover,
@@ -498,11 +500,13 @@ tr:hover {
   opacity: 0.8;
 }
 
-/* Icon and image smooth transitions */
+/* Icon and image smooth transitions with performance optimization */
 img,
 svg,
 .icon {
   transition: all var(--transition-fast);
+  content-visibility: auto; /* Lazy render off-screen images */
+  contain-intrinsic-size: 100px 100px; /* Prevent layout shift */
 }
 
 img:hover,
@@ -578,6 +582,134 @@ svg:hover,
   100% {
     left: 100%;
   }
+}
+
+/* ===== RENDERING PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Font loading optimization */
+@font-face {
+  font-family: system-ui-fallback;
+  src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont');
+  font-display: swap; /* Improve font loading performance */
+}
+
+/* CSS containment for better rendering performance */
+.calendar-container {
+  contain: layout style paint;
+  will-change: auto; /* Only when necessary */
+}
+
+.preferences-container {
+  contain: layout style;
+}
+
+.calendar-table-body {
+  contain: layout paint;
+}
+
+/* Performance optimization for interactive elements already covered above */
+
+/* Optimize expensive properties */
+.optimized-shadows {
+  box-shadow: var(--shadow-base);
+  will-change: box-shadow; /* Only during transitions */
+}
+
+.optimized-shadows:not(:hover, :focus) {
+  will-change: auto; /* Remove when not needed */
+}
+
+/* Reduce reflow-causing properties */
+.layout-stable {
+  transform: translateZ(0); /* Create compositing layer */
+  backface-visibility: hidden;
+}
+
+/* Optimize table rendering */
+.calendar-table,
+.preferences-table {
+  table-layout: fixed; /* Faster table rendering */
+  border-collapse: separate; /* Better for animations */
+  border-spacing: 0;
+}
+
+/* Optimize list rendering */
+.large-list {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Smooth scrolling optimizations */
+.scroll-container {
+  scroll-behavior: smooth;
+  overflow-anchor: auto; /* Prevent scroll anchoring issues */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
+}
+
+/* GPU acceleration for frequently changing elements */
+.calendar-day,
+.modal-content {
+  transform: translateZ(0);
+  will-change: auto; /* Only set when animating */
+}
+
+/* Optimize focus indicators */
+.focus-visible-indicator {
+  outline: 2px solid var(--purple-base);
+  outline-offset: 2px;
+  transition: outline-offset var(--transition-fast);
+}
+
+/* Prevent layout thrashing */
+.no-layout-shift {
+  min-height: 1px; /* Prevent zero-height collapse */
+  min-width: 1px;
+}
+
+/* Optimize backdrop filters */
+.backdrop-optimized {
+  backdrop-filter: blur(10px);
+  will-change: backdrop-filter;
+}
+
+.backdrop-optimized:not(.active) {
+  will-change: auto;
+}
+
+/* Critical rendering path optimization */
+.above-fold {
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+/* Reduce paint complexity */
+.simple-background {
+  background-attachment: local; /* Better than fixed */
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Animation performance */
+@media (prefers-reduced-motion: no-preference) {
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+  
+  .gpu-accelerated:not(.animating) {
+    will-change: auto;
+  }
+}
+
+/* Memory usage optimization */
+.memory-efficient {
+  transform: translate3d(0, 0, 0); /* Lightweight GPU layer */
+  backface-visibility: hidden;
 }
 
 /* Page transition effects */

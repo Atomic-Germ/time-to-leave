@@ -14,6 +14,7 @@
   font-family: Montserrat;
   src: url('fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format("truetype-variations");
   font-weight: 1 999;
+  font-display: swap; /* Improve font loading performance */
 }
 
 * {
@@ -198,6 +199,10 @@ body {
   max-width: min(var(--container-xl), 100% - 2rem);
   margin-inline: auto;
   padding-inline: var(--spacing-md);
+  
+  /* Performance optimizations */
+  contain: layout style;
+  content-visibility: auto;
 }
 
 /* Modern responsive container using logical properties */
@@ -326,7 +331,9 @@ html[data-theme="light"].wait {
   border-spacing: 0;
 
   /* Performance optimization */
-  contain: layout style;
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 #calendar .table-header {
@@ -561,6 +568,11 @@ html[data-theme="business-dress"] #calendar .table-header th:last-child {
   border-top-right-radius: 0.5rem;
   border-top-left-radius: 0.5rem;
   transition: filter 0.3s;
+  
+  /* Performance optimizations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style;
 }
 
 .punch-button:disabled {

@@ -171,7 +171,38 @@ These instructions help AI coding agents understand the Time to Leave codebase, 
     3. Use `data-i18n="$translation.key"` in HTML
     4. Test with `i18NextConfig.getCurrentTranslation()`
 
-## 18. External Documentation References
+## 18. CI Debugging & Monitoring Workflow
+
+When CI tests fail, follow this systematic debugging approach:
+
+- **Cross-platform test failures:**
+    1. **Identify the scope**: Check which platforms fail (Windows/macOS/Ubuntu) using `gh run view <run-id>`
+    2. **Examine failure patterns**: Use `gh run view <run-id> --log-failed` to see detailed error logs
+    3. **Compare platform differences**: Look for path resolution, browser launch, or environment-specific issues
+    4. **Test locally first**: Always verify fixes work locally before pushing to CI
+    5. **Monitor systematically**: Use documented GitHub CLI workflow to track CI progress
+
+- **Playwright-specific CI issues:**
+    1. **Test discovery problems**: Check `testDir` path resolution and `testMatch` patterns in `configs/playwright.config.mjs`
+    2. **Browser launch failures**: Verify headless configuration and CI-specific Electron launch args
+    3. **Cross-platform paths**: Use `path.resolve(__dirname, ...)` for absolute paths instead of relative paths
+    4. **Config vs script conflicts**: Let Playwright config handle test discovery rather than npm scripts with explicit paths
+    5. **Pattern matching**: Use array format `['**/*-pattern.mjs']` for better cross-platform compatibility
+
+- **CI Monitoring Best Practices:**
+    1. **Get run details**: `sleep 15 && gh run list --branch <branch> --limit 1 --repo Atomic-Germ/time-to-leave`
+    2. **Extract run ID**: `gh run list --branch <branch> --limit 1 --json databaseId --repo Atomic-Germ/time-to-leave`
+    3. **Monitor completion**: `sleep 180 && gh run view <run-id> --repo Atomic-Germ/time-to-leave`
+    4. **Check specific jobs**: `gh run view --job=<job-id> --repo Atomic-Germ/time-to-leave`
+    5. **View failure logs**: `gh run view <run-id> --log-failed`
+
+- **Common Windows CI Fixes:**
+    1. **Path resolution**: Change relative paths to absolute using `path.resolve()`
+    2. **Test patterns**: Use glob patterns compatible with Windows path separators
+    3. **Browser args**: Include `--no-sandbox`, `--disable-setuid-sandbox` for headless environments
+    4. **File discovery**: Avoid npm script path wildcards, use config-based test discovery
+
+## 19. External Documentation References
 
 - **Electron API:** https://www.electronjs.org/docs/latest/api
 - **WAI-ARIA Guidelines:** https://www.w3.org/WAI/ARIA/apg/

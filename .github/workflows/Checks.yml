@@ -24,7 +24,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb dbus-x11 chromium-driver
           
-          # Setup runtime directory for current user (runner user is typically 1001)
+          # Setup runtime directory for current user
           export XDG_RUNTIME_DIR=/run/user/$(id -u)
           sudo mkdir -p $XDG_RUNTIME_DIR
           sudo chmod 700 $XDG_RUNTIME_DIR  
@@ -37,18 +37,12 @@ jobs:
           # Start virtual display for Electron
           export DISPLAY=':99'
           Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-          sleep 5  # Give Xvfb more time to start
+          sleep 5
           
           # Set environment for subsequent steps
           echo "DISPLAY=:99" >> $GITHUB_ENV
           echo "XDG_RUNTIME_DIR=/run/user/$(id -u)" >> $GITHUB_ENV
           echo "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus" >> $GITHUB_ENV
-          
-          # Verify ChromeDriver installation
-          chromedriver --version
-          
-          # Test that display is working
-          xvfb-run -a echo "Display test successful"
 
       - name: 'Install Dependencies'
         run: npm ci
@@ -61,45 +55,24 @@ jobs:
 
       - name: 'Run Tests with Coverage'
         run: |
-          # Run comprehensive test suite with enhanced coverage
           npm run test:ci
-          
-          # Generate additional coverage sources for CodeCov
           npm run coverage:ci
 
       - name: 'Verify Coverage Files (Unix)'
         if: matrix.os != 'windows-latest'
         run: |
-          echo "📊 Checking all coverage files for CodeCov upload..."
-          
-          # Standard coverage files
           ls -la coverage_mocha/ || echo "⚠️ coverage_mocha directory not found"
           ls -la coverage_c8/ || echo "⚠️ coverage_c8 directory not found"
-          
-          # Enhanced coverage files
           ls -la coverage_nyc/ || echo "⚠️ coverage_nyc directory not found"
           ls -la coverage_combined/ || echo "⚠️ coverage_combined directory not found"
-          
-          # List all coverage files that will be uploaded
-          echo "📤 Coverage files for CodeCov:"
-          find . -name "coverage-final.json" -o -name "lcov.info" | grep -E "(coverage_|coverage/)" | sort
 
       - name: 'Verify Coverage Files (Windows)'
         if: matrix.os == 'windows-latest'
         run: |
-          echo "📊 Checking all coverage files for CodeCov upload..."
-          
-          # Standard coverage files
           if (Test-Path "coverage_mocha") { Get-ChildItem coverage_mocha } else { echo "⚠️ coverage_mocha directory not found" }
           if (Test-Path "coverage_c8") { Get-ChildItem coverage_c8 } else { echo "⚠️ coverage_c8 directory not found" }
-          
-          # Enhanced coverage files  
           if (Test-Path "coverage_nyc") { Get-ChildItem coverage_nyc } else { echo "⚠️ coverage_nyc directory not found" }
           if (Test-Path "coverage_combined") { Get-ChildItem coverage_combined } else { echo "⚠️ coverage_combined directory not found" }
-          
-          # List all coverage files that will be uploaded
-          echo "📤 Coverage files for CodeCov:"
-          Get-ChildItem -Recurse -Include "coverage-final.json", "lcov.info" | Where-Object { $_.Directory.Name -match "coverage" } | Sort-Object FullName
 
       - name: 'Upload Enhanced Coverage to Codecov'
         uses: codecov/codecov-action@v5
@@ -109,5 +82,3 @@ jobs:
           flags: unittests,enhanced-coverage,${{ matrix.os }}
           name: codecov-enhanced-${{ matrix.os }}
           fail_ci_if_error: false
-          verbose: true
-          directory: ./

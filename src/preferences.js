@@ -50,7 +50,18 @@ function setupLanguages()
     listenerLanguage();
     window.rendererApi.getLanguageDataPromise().then(languageData =>
     {
-        i18nTranslator.translatePage(preferences['language'], languageData.data, 'Preferences');
+        // Ensure DOM is ready before translating
+        if (document.readyState === 'loading')
+        {
+            document.addEventListener('DOMContentLoaded', () =>
+            {
+                i18nTranslator.translatePage(preferences['language'], languageData.data, 'Preferences');
+            });
+        }
+        else
+        {
+            i18nTranslator.translatePage(preferences['language'], languageData.data, 'Preferences');
+        }
     });
 }
 
@@ -283,11 +294,6 @@ function handleKeyboardShortcuts(event)
             break;
         }
     }
-    else if (event.ctrlKey && event.key.toLowerCase() === 's')
-    {
-        event.preventDefault();
-        window.preferencesApi.notifyNewPreferences(preferences);
-    }
 }
 
 function setupRTL()
@@ -405,16 +411,6 @@ function setupListeners()
     $('#view').on('change', function()
     {
         changeValue('view', this.value);
-    });
-
-    $('#save').on('click', function(event)
-    {
-        // Save preferences
-        window.rendererApi.setOriginalUserPreferences(preferences);
-        window.preferencesApi.notifyNewPreferences(preferences);
-        showSuccess('Preferences saved successfully');
-        event.preventDefault();
-        $('#close').trigger('click');
     });
 
     $('#reset-button').on('click', function()

@@ -116,6 +116,7 @@
     "$Preferences": {
         "allowRecurringNotifications": "Allow recurring notifications",
         "appBehavior": "App Behavior",
+        "businessDress": "Business Dress",
         "cadentStar": "Cadent Star",
         "closeMinimizeToTray": "Close button should minimize to tray",
         "confirm-reset-preferences": "Are you sure you want to reset all preferences?",
@@ -139,6 +140,7 @@
         "no": "No",
         "numberOfEntries": "Number of Entries",
         "overallBalanceStart": "Overall Balance Start Date",
+        "purpleSunset": "Purple Sunset",
         "reset": "Reset",
         "reset-success": "Preferences successfully reset to default!",
         "reset-preferences": "Reset to default preferences",
@@ -202,6 +204,12 @@
         "yes": "Yes"
     },
     "$Generic": {
-        "hours-on-invalid": "this.setCustomValidity(\"Please enter the time in valid 24-hour format from 00:00 to 23:59\")"
+        "closeDialog": "Close dialog",
+        "hours-on-invalid": "this.setCustomValidity(\"Please enter the time in valid 24-hour format from 00:00 to 23:59\")",
+        "keyboardShortcuts": "Keyboard Shortcuts",
+        "resetSettings": "Reset settings",
+        "showShortcuts": "Show keyboard shortcuts",
+        "skipToMain": "Skip to main content",
+        "switchTheme": "Switch theme"
     }
 }

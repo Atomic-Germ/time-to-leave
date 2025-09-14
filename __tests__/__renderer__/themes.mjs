@@ -33,7 +33,8 @@ describe('Theme Functions', function()
         it('should validate', () =>
         {
             // Test all valid themes from themeOptions
-            themeOptions.forEach(theme => {
+            themeOptions.forEach(theme =>
+            {
                 assert.strictEqual(isValidTheme(theme), true, `Should validate theme: ${theme}`);
             });
         });
@@ -60,7 +61,8 @@ describe('Theme Functions', function()
         {
             // Test all valid themes from themeOptions
             let expectedCallCount = 0;
-            themeOptions.forEach(theme => {
+            themeOptions.forEach(theme =>
+            {
                 assert.strictEqual(applyTheme(theme), true, `Should apply theme: ${theme}`);
                 expectedCallCount++;
             });

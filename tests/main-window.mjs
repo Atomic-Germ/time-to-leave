@@ -76,7 +76,7 @@ describe('Application launch', function()
     {
         // TODO: Investigate why this takes such a long time (10s)
         console.log('Starting Calendar test...');
-        
+
         console.log('Getting first window...');
         const window = await electronApp.firstWindow();
         console.log('Got first window:', !!window);
@@ -86,11 +86,11 @@ describe('Application launch', function()
         console.log('Found locator, getting text...');
         const monthYearText = await monthYearLocator.evaluate(node => node.innerText);
         console.log('Month year text:', monthYearText);
-        
+
         const today = new Date();
         const expected = `${months[today.getMonth()]} ${today.getFullYear()}`;
         console.log('Expected:', expected);
-        
+
         assert.strictEqual(monthYearText, expected);
     });
 

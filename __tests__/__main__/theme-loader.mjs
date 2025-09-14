@@ -26,7 +26,8 @@ describe('Theme Loader', function()
                 .map(file => file.replace('.css', ''));
 
             // Should include all actual theme files
-            actualThemeFiles.forEach(expectedTheme => {
+            actualThemeFiles.forEach(expectedTheme =>
+            {
                 assert.strictEqual(themes.includes(expectedTheme), true, `Should include ${expectedTheme} theme`);
             });
 

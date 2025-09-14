@@ -354,6 +354,16 @@ html[data-theme="light"].wait {
   vertical-align: middle;
   padding: var(--spacing-sm);
   transition: background-color var(--transition-fast);
+  
+  /* Cross-browser fallbacks */
+  height: 50px; /* Fallback for block-size */
+}
+
+/* Fallback for logical properties */
+@supports not (block-size: 50px) {
+  #calendar .table-header th {
+    height: 50px;
+  }
 }
 
 #calendar .table-body {
@@ -573,6 +583,10 @@ html[data-theme="business-dress"] #calendar .table-header th:last-child {
   transform: translateZ(0);
   backface-visibility: hidden;
   contain: layout style;
+  
+  /* Cross-browser compatibility */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .punch-button:disabled {

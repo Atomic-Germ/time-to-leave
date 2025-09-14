@@ -584,6 +584,257 @@ svg:hover,
   }
 }
 
+/* ===== CROSS-BROWSER COMPATIBILITY ===== */
+
+/* Fallbacks for container queries (older browsers) */
+@supports not (container-type: inline-size) {
+  .calendar-responsive {
+    /* Fallback to media queries */
+    width: 100%;
+  }
+  
+  @media (width <= 640px) {
+    .calendar-responsive {
+      padding: var(--spacing-sm);
+    }
+  }
+  
+  @media (width >= 1024px) {
+    .calendar-responsive {
+      padding: var(--spacing-lg);
+      max-width: var(--container-lg);
+    }
+  }
+}
+
+/* Fallbacks for logical properties */
+@supports not (margin-inline: auto) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .calendar-responsive {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+}
+
+/* Fallbacks for content-visibility */
+@supports not (content-visibility: auto) {
+  .above-fold,
+  .below-fold {
+    /* Remove content-visibility for older browsers */
+    contain: layout style;
+  }
+}
+
+/* Fallbacks for CSS containment */
+@supports not (contain: layout) {
+  .calendar-container,
+  .preferences-container {
+    /* Fallback for browsers without containment */
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+/* Backdrop filter fallbacks */
+@supports not (backdrop-filter: blur(10px)) {
+  .backdrop-optimized {
+    background-color: rgb(255 255 255 / 90%);
+  }
+  
+  html[data-theme="dark"] .backdrop-optimized {
+    background-color: rgb(39 39 39 / 90%);
+  }
+}
+
+/* Grid fallbacks for older browsers */
+@supports not (display: grid) {
+  .preferences-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+  
+  .grid-item {
+    flex: 1 1 300px;
+    min-width: 300px;
+  }
+}
+
+/* Custom properties fallbacks */
+@supports not (color: var(--purple-base)) {
+  .btn-primary {
+    background-color: #6f42c1;
+    color: white;
+  }
+  
+  .calendar-responsive {
+    max-width: 1200px;
+    padding: 1rem;
+  }
+}
+
+/* Flexbox gap fallbacks */
+@supports not (gap: 1rem) {
+  .flex-gap > * + * {
+    margin-top: var(--spacing-md);
+  }
+  
+  .flex-gap-horizontal > * + * {
+    margin-left: var(--spacing-md);
+  }
+}
+
+/* Modern focus-visible fallback */
+@supports not selector(:focus-visible) {
+  input:focus,
+  button:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid var(--purple-base, #6f42c1);
+    outline-offset: 2px;
+  }
+}
+
+/* clamp() fallbacks */
+@supports not (font-size: clamp(1rem, 2vw, 2rem)) {
+  .fluid-text-lg {
+    font-size: 1.5rem;
+  }
+  
+  @media (width >= 768px) {
+    .fluid-text-lg {
+      font-size: 1.75rem;
+    }
+  }
+  
+  @media (width >= 1200px) {
+    .fluid-text-lg {
+      font-size: 2rem;
+    }
+  }
+}
+
+/* Browser-specific optimizations */
+
+/* Safari-specific fixes */
+@supports (-webkit-appearance: none) {
+  input[type="date"],
+  input[type="time"] {
+    appearance: none;
+  }
+  
+  /* Improve Safari scrolling */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Firefox-specific fixes using feature detection */
+@supports (-moz-appearance: none) {
+  .scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--purple-base) var(--table-border);
+  }
+}
+
+/* Edge/IE-specific fixes */
+@supports (-ms-ime-align: auto) {
+  .calendar-table {
+    /* Use simpler layout for IE/Edge */
+    table-layout: auto;
+  }
+}
+
+/* Chromium-specific optimizations */
+@media screen and (resolution >= 1dppx) {
+  .optimized-rendering {
+    /* Enable hardware acceleration */
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .calendar-responsive,
+  .preferences-container {
+    border: 2px solid;
+    background: Canvas;
+    color: CanvasText;
+  }
+  
+  .btn {
+    border: 2px solid;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  
+  .btn:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* Print styles */
+@media print {
+  .calendar-responsive {
+    /* Optimize for printing */
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0.5cm !important;
+  }
+  
+  .punch-button,
+  .modal,
+  .dialog {
+    display: none !important;
+  }
+  
+  .calendar-table {
+    break-inside: avoid;
+  }
+}
+
+/* Screen reader optimizations */
+@media (prefers-reduced-motion: reduce) {
+  /* Enhanced for screen readers */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* Progressive enhancement classes */
+.js-enabled .enhanced-interaction {
+  /* Enhanced features for JavaScript-enabled browsers */
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.css-grid-enabled .grid-layout {
+  /* Enhanced layouts for grid-supporting browsers */
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.css-custom-props-enabled .themed-component {
+  /* Enhanced theming for custom property support */
+  background-color: var(--component-background, #f8f9fa);
+  color: var(--component-text, #212529);
+}
+
 /* ===== RENDERING PERFORMANCE OPTIMIZATIONS ===== */
 
 /* Font loading optimization */

@@ -16,166 +16,32 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      - name: '        Setup Display and ChromeDriver (Ubuntu)'
-        shell: bash
+      
+      # Simplified Ubuntu setup - just use system ChromeDriver
+      - name: 'Setup Display and ChromeDriver (Ubuntu)'
         if: matrix.os == 'ubuntu-latest'
         run: |
+          # Setup virtual display
           export DISPLAY=:99
+          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
           
-          # Get Electron version from package.json
-          ELECTRON_VERSION=$(node -p "require('./package.json').devDependencies.electron")
-          echo "📦 Using Electron version: $ELECTRON_VERSION"
+          # Install ChromeDriver via system package manager (much simpler!)
+          sudo apt-get update
+          sudo apt-get install -y chromium-driver
           
-          # Get the corresponding Chromium version for this Electron version
-          # This API provides the mapping between Electron and Chromium versions
-          CHROMIUM_VERSION=$(curl -s "https://releases.electronjs.org/releases.json" | \
-            node -p "
-              const releases = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));
-              const electronRelease = releases.find(r => r.version === '$ELECTRON_VERSION');
-              electronRelease ? electronRelease.chrome : null;
-            " 2>/dev/null)
-          
-          # Fallback: if API fails, use a reasonable default based on major version
-          if [[ -z "$CHROMIUM_VERSION" || "$CHROMIUM_VERSION" == "null" ]]; then
-            ELECTRON_MAJOR=$(echo $ELECTRON_VERSION | cut -d. -f1)
-            case $ELECTRON_MAJOR in
-              37) CHROMIUM_VERSION="138.0.7204.168" ;;
-              36) CHROMIUM_VERSION="128.0.6613.36" ;;
-              35) CHROMIUM_VERSION="126.0.6478.127" ;;
-              34) CHROMIUM_VERSION="124.0.6367.243" ;;
-              *) CHROMIUM_VERSION="138.0.7204.168" ;;  # Default to latest stable
-            esac
-            echo "⚠️  Using fallback Chromium version: $CHROMIUM_VERSION"
-          else
-            echo "✅ Found matching Chromium version: $CHROMIUM_VERSION"
-          fi
-          
-          # Download ChromeDriver automatically using Chrome for Testing API
-          echo "Attempting to automatically determine ChromeDriver version..."
-          
-          # Get the latest Electron version info to determine Chrome version
-          ELECTRON_VERSION=$(node -e "console.log(require('./package.json').devDependencies.electron)" | tr -d '^~')
-          echo "Electron version: $ELECTRON_VERSION"
-          
-          # Use Electron version mapping instead of API call (more reliable)
-          echo "Using Electron version mapping for Chrome version..."
-          ELECTRON_MAJOR=$(echo "$ELECTRON_VERSION" | cut -d'.' -f1)
-          case "$ELECTRON_MAJOR" in
-            "39") CHROME_VERSION="142";;
-            "38") CHROME_VERSION="141";;
-            "37") CHROME_VERSION="140";;
-            "36") CHROME_VERSION="139";;
-            "35") CHROME_VERSION="138";;
-            "34") CHROME_VERSION="137";;
-            "33") CHROME_VERSION="136";;
-            "32") CHROME_VERSION="135";;
-            "31") CHROME_VERSION="134";;
-            "30") CHROME_VERSION="133";;
-            "29") CHROME_VERSION="132";;
-            "28") CHROME_VERSION="131";;
-            "27") CHROME_VERSION="130";;
-            "26") CHROME_VERSION="129";;
-            "25") CHROME_VERSION="128";;
-            *) 
-              echo "Unknown Electron version $ELECTRON_MAJOR, using latest stable Chrome"
-              CHROME_VERSION="140";;  # Default to stable
-          esac
-          echo "Mapped Chrome version: $CHROME_VERSION"
-          
-          # Extract major version for ChromeDriver
-          CHROME_MAJOR="$CHROME_VERSION"
-          echo "Chrome major version: $CHROME_MAJOR"
-          
-          # For Chrome 115+, use the new Chrome for Testing API
-          if [ "$CHROME_MAJOR" -ge "115" ]; then
-            echo "Using Chrome for Testing API for Chrome $CHROME_MAJOR..."
-            
-            # Get stable Chrome version from Chrome for Testing API
-            STABLE_VERSIONS=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions.json")
-            STABLE_VERSION=$(echo "$STABLE_VERSIONS" | grep -o '"Stable":{"channel":"Stable","version":"[0-9.]*"' | grep -o '[0-9.]*')
-            
-            if [ -n "$STABLE_VERSION" ]; then
-              echo "Using stable Chrome for Testing version: $STABLE_VERSION"
-              CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$STABLE_VERSION/linux64/chromedriver-linux64.zip"
-            else
-              echo "Could not get stable version, falling back to manual version selection"
-              # Use a known good version for newer Chrome versions
-              case "$CHROME_MAJOR" in
-                "142") CHROMEDRIVER_VERSION="142.0.7405.0";;
-                "141") CHROMEDRIVER_VERSION="141.0.7390.16";;
-                "140") CHROMEDRIVER_VERSION="140.0.7339.82";;
-                "139") CHROMEDRIVER_VERSION="139.0.7315.25";;
-                "138") CHROMEDRIVER_VERSION="138.0.7252.35";;
-                "137") CHROMEDRIVER_VERSION="137.0.7179.37";;
-                "136") CHROMEDRIVER_VERSION="136.0.7106.59";;
-                "135") CHROMEDRIVER_VERSION="135.0.7033.97";;
-                *) CHROMEDRIVER_VERSION="140.0.7339.82";;  # Default to stable
-              esac
-              CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
-            fi
-          else
-            # For Chrome 114 and below, use the legacy API
-            echo "Using legacy ChromeDriver API for Chrome $CHROME_MAJOR..."
-            CHROMEDRIVER_VERSION_RESPONSE=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR")
-            
-            # Check if the response is XML (indicating an error)
-            if echo "$CHROMEDRIVER_VERSION_RESPONSE" | grep -q "<?xml"; then
-              echo "Legacy ChromeDriver API returned XML error for version $CHROME_MAJOR"
-              echo "Falling back to system ChromeDriver installation"
-              sudo apt-get update
-              sudo apt-get install -y chromium-driver
-              exit 0
-            else
-              CHROMEDRIVER_VERSION="$CHROMEDRIVER_VERSION_RESPONSE"
-              echo "ChromeDriver version from legacy API: $CHROMEDRIVER_VERSION"
-              CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-            fi
-          fi
-          
-          # Download and install ChromeDriver
-          echo "Downloading ChromeDriver from: $CHROMEDRIVER_URL"
-          
-          if wget -q "$CHROMEDRIVER_URL" -O chromedriver.zip; then
-            echo "Successfully downloaded ChromeDriver"
-            unzip chromedriver.zip
-            
-            # Handle different zip structures
-            if [ -f "chromedriver-linux64/chromedriver" ]; then
-              sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
-            elif [ -f "chromedriver" ]; then
-              sudo mv chromedriver /usr/local/bin/
-            else
-              echo "Could not find chromedriver binary in zip file"
-              ls -la
-              echo "Falling back to system package manager installation"
-              sudo apt-get update
-              sudo apt-get install -y chromium-driver
-              exit 0
-            fi
-            
-            sudo chmod +x /usr/local/bin/chromedriver
-            echo "ChromeDriver installed successfully"
-            /usr/local/bin/chromedriver --version
-          else
-            echo "Failed to download ChromeDriver from $CHROMEDRIVER_URL"
-            echo "Falling back to system package manager installation"
-            sudo apt-get update
-            sudo apt-get install -y chromium-driver
-          fi
-      - name: '        Install Dependencies'
-        shell: bash
-        run: |
-          npm ci
-      - name: '        Install Playwright Browsers'
-        shell: bash
-        run: |
-          npx playwright install --with-deps chromium
-      - name: '        Lint Check'
-        shell: bash
-        run: |
-          npm run lint
-      - name: '        Run Tests with Coverage'
-        shell: bash
+          # Verify installation
+          chromedriver --version
+
+      - name: 'Install Dependencies'
+        run: npm ci
+
+      - name: 'Install Playwright Browsers'
+        run: npx playwright install --with-deps chromium
+
+      - name: 'Lint Check'
+        run: npm run lint
+
+      - name: 'Run Tests with Coverage'
         env:
           OS: ${{ matrix.os }}
           CI: true
@@ -199,8 +65,8 @@ jobs:
           
           # Generate additional coverage sources for CodeCov
           npm run coverage:ci
-      - name: '        Verify Coverage Files'
-        shell: bash
+
+      - name: 'Verify Coverage Files'
         run: |
           echo "📊 Checking all coverage files for CodeCov upload..."
           
@@ -215,7 +81,8 @@ jobs:
           # List all coverage files that will be uploaded
           echo "📤 Coverage files for CodeCov:"
           find . -name "coverage-final.json" -o -name "lcov.info" | grep -E "(coverage_|coverage/)" | sort
-      - name: '        Upload Enhanced Coverage to Codecov'
+
+      - name: 'Upload Enhanced Coverage to Codecov'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

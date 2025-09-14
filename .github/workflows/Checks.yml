@@ -96,7 +96,7 @@ jobs:
           
           # List all coverage files that will be uploaded
           echo "📤 Coverage files for CodeCov:"
-          Get-ChildItem -Recurse -Name "coverage-final.json", "lcov.info" | Where-Object { $_ -match "coverage_|coverage/" } | Sort-Object
+          Get-ChildItem -Recurse -Include "coverage-final.json", "lcov.info" | Where-Object { $_.Directory.Name -match "coverage" } | Sort-Object FullName
 
       - name: 'Upload Enhanced Coverage to Codecov'
         uses: codecov/codecov-action@v5

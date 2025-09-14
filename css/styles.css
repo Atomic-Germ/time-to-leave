@@ -579,14 +579,13 @@ html[data-theme="business-dress"] #calendar .table-header th:last-child {
   border-top-left-radius: 0.5rem;
   transition: filter 0.3s;
   
-  /* Performance optimizations */
+  /* Performance optimizations for desktop */
   transform: translateZ(0);
   backface-visibility: hidden;
   contain: layout style;
   
-  /* Cross-browser compatibility */
+  /* Desktop-specific optimizations */
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
 }
 
 .punch-button:disabled {

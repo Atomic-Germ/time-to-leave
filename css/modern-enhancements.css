@@ -399,7 +399,7 @@ input:checked + .slider::before {
   }
 }
 
-/* Button transition enhancements with GPU acceleration and touch targets */
+/* Button transition enhancements with GPU acceleration for desktop */
 .punch-button,
 button,
 input[type="button"],
@@ -410,9 +410,6 @@ input[type="submit"],
   overflow: hidden;
   transform: translateZ(0); /* GPU acceleration */
   will-change: auto; /* Only set when animating */
-  min-height: 44px; /* Touch target accessibility */
-  min-width: 44px;
-  touch-action: manipulation;
 }
 
 .punch-button:hover,
@@ -518,12 +515,9 @@ svg:hover,
   opacity: 0.8;
 }
 
-/* Waiver trigger enhancements with accessibility */
+/* Waiver trigger enhancements for desktop */
 .waiver-trigger {
   transition: all var(--transition-base);
-  min-height: 44px;
-  min-width: 44px;
-  touch-action: manipulation;
 }
 
 .waiver-trigger:hover {
@@ -590,200 +584,27 @@ svg:hover,
   }
 }
 
-/* ===== CROSS-BROWSER COMPATIBILITY ===== */
+/* ===== DESKTOP OPTIMIZATIONS ===== */
 
-/* Fallbacks for container queries (older browsers) */
-@supports not (container-type: inline-size) {
-  .calendar-responsive {
-    /* Fallback to media queries */
-    width: 100%;
-  }
-  
-  @media (width <= 640px) {
-    .calendar-responsive {
-      padding: var(--spacing-sm);
-    }
-  }
-  
-  @media (width >= 1024px) {
-    .calendar-responsive {
-      padding: var(--spacing-lg);
-      max-width: var(--container-lg);
-    }
-  }
+/* Desktop browser optimizations for Electron */
+
+/* Chromium-based optimizations (Electron uses Chromium) */
+.optimized-rendering {
+  /* Enable hardware acceleration */
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Fallbacks for logical properties */
-@supports not (margin-inline: auto) {
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .calendar-responsive {
-    padding-left: var(--spacing-md);
-    padding-right: var(--spacing-md);
-  }
+/* Scrollbar styling and behavior for desktop */
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple-base) var(--table-border);
+  scroll-behavior: smooth;
+  overflow-anchor: auto; /* Prevent scroll anchoring issues */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
 }
 
-/* Fallbacks for content-visibility */
-@supports not (content-visibility: auto) {
-  .above-fold,
-  .below-fold {
-    /* Remove content-visibility for older browsers */
-    contain: layout style;
-  }
-}
-
-/* Fallbacks for CSS containment */
-@supports not (contain: layout) {
-  .calendar-container,
-  .preferences-container {
-    /* Fallback for browsers without containment */
-    overflow: hidden;
-    position: relative;
-  }
-}
-
-/* Backdrop filter fallbacks */
-@supports not (backdrop-filter: blur(10px)) {
-  .backdrop-optimized {
-    background-color: rgb(255 255 255 / 90%);
-  }
-  
-  html[data-theme="dark"] .backdrop-optimized {
-    background-color: rgb(39 39 39 / 90%);
-  }
-}
-
-/* Grid fallbacks for older browsers */
-@supports not (display: grid) {
-  .preferences-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
-  }
-  
-  .grid-item {
-    flex: 1 1 300px;
-    min-width: 300px;
-  }
-}
-
-/* Custom properties fallbacks */
-@supports not (color: var(--purple-base)) {
-  .btn-primary {
-    background-color: #6f42c1;
-    color: white;
-  }
-  
-  .calendar-responsive {
-    max-width: 1200px;
-    padding: 1rem;
-  }
-}
-
-/* Flexbox gap fallbacks */
-@supports not (gap: 1rem) {
-  .flex-gap > * + * {
-    margin-top: var(--spacing-md);
-  }
-  
-  .flex-gap-horizontal > * + * {
-    margin-left: var(--spacing-md);
-  }
-}
-
-/* Modern focus-visible fallback */
-@supports not selector(:focus-visible) {
-  input:focus,
-  button:focus,
-  select:focus,
-  textarea:focus {
-    outline: 2px solid var(--purple-base, #6f42c1);
-    outline-offset: 2px;
-  }
-}
-
-/* clamp() fallbacks */
-@supports not (font-size: clamp(1rem, 2vw, 2rem)) {
-  .fluid-text-lg {
-    font-size: 1.5rem;
-  }
-  
-  @media (width >= 768px) {
-    .fluid-text-lg {
-      font-size: 1.75rem;
-    }
-  }
-  
-  @media (width >= 1200px) {
-    .fluid-text-lg {
-      font-size: 2rem;
-    }
-  }
-}
-
-/* Browser-specific optimizations */
-
-/* Safari-specific fixes */
-@supports (-webkit-appearance: none) {
-  input[type="date"],
-  input[type="time"] {
-    appearance: none;
-  }
-  
-  /* Improve Safari scrolling */
-  .scroll-container {
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-/* Firefox-specific fixes using feature detection */
-@supports (-moz-appearance: none) {
-  .scroll-container {
-    scrollbar-width: thin;
-    scrollbar-color: var(--purple-base) var(--table-border);
-  }
-}
-
-/* Edge/IE-specific fixes */
-@supports (-ms-ime-align: auto) {
-  .calendar-table {
-    /* Use simpler layout for IE/Edge */
-    table-layout: auto;
-  }
-}
-
-/* Chromium-specific optimizations */
-@media screen and (resolution >= 1dppx) {
-  .optimized-rendering {
-    /* Enable hardware acceleration */
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-  }
-}
-
-/* High contrast mode support */
-@media (forced-colors: active) {
-  .calendar-responsive,
-  .preferences-container {
-    border: 2px solid;
-    background: Canvas;
-    color: CanvasText;
-  }
-  
-  .btn {
-    border: 2px solid;
-    background: ButtonFace;
-    color: ButtonText;
-  }
-  
-  .btn:hover {
-    background: Highlight;
-    color: HighlightText;
-  }
-}
+/* Print styles for desktop applications */
 
 /* Print styles */
 @media print {
@@ -894,41 +715,7 @@ svg:hover,
   outline: none; /* Remove default outline as we handle it visually */
 }
 
-/* High contrast improvements */
-@media (forced-colors: active) {
-  .calendar-responsive,
-  .preferences-container {
-    border: 2px solid ButtonText;
-    background: ButtonFace;
-    color: ButtonText;
-  }
-  
-  .btn,
-  .punch-button {
-    border: 2px solid ButtonText;
-    background: ButtonFace;
-    color: ButtonText;
-    forced-color-adjust: none;
-  }
-  
-  .btn:hover,
-  .btn:focus,
-  .punch-button:hover,
-  .punch-button:focus {
-    background: Highlight;
-    color: HighlightText;
-    border-color: HighlightText;
-  }
-  
-  /* Ensure sufficient contrast for interactive elements */
-  .arrow,
-  .calendar-day {
-    border: 1px solid ButtonText;
-    forced-color-adjust: none;
-  }
-}
-
-/* Motion preferences accessibility */
+/* Motion preferences accessibility for desktop */
 @media (prefers-reduced-motion: reduce) {
   /* Disable all animations and transitions */
   *,
@@ -962,30 +749,7 @@ svg:hover,
   border-radius: 3px;
 }
 
-/* Ensure sufficient color contrast */
-.high-contrast {
-  --text-color: #000;
-  --background-color: #fff;
-  --link-color: #00e;
-  --visited-link-color: #551a8b;
-}
-
-html[data-theme="dark"] .high-contrast {
-  --text-color: #fff;
-  --background-color: #000;
-  --link-color: #99f;
-  --visited-link-color: #c9f;
-}
-
-/* Touch target improvements for additional elements */
-.touch-target,
-.arrow {
-  min-height: 44px;
-  min-width: 44px;
-  touch-action: manipulation;
-}
-
-/* Ensure text remains readable during font swap */
+/* Desktop-optimized font loading */
 .font-loading {
   font-display: swap;
   text-rendering: optimizelegibility;
@@ -1143,13 +907,6 @@ html[data-theme="dark"] .high-contrast {
 .large-list {
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
-}
-
-/* Smooth scrolling optimizations */
-.scroll-container {
-  scroll-behavior: smooth;
-  overflow-anchor: auto; /* Prevent scroll anchoring issues */
-  overscroll-behavior: contain; /* Prevent scroll chaining */
 }
 
 /* GPU acceleration for frequently changing elements */

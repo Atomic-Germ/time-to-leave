@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Modern CSS Performance and Responsive Improvements for Time to Leave
+   ========================================================================== */
+
+/* =====================
+   CSS Custom Properties Enhancements
+   ===================== */
+
+:root {
+  /* Modern responsive spacing system */
+  --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --spacing-sm: clamp(0.5rem, 1vw, 1rem);
+  --spacing-md: clamp(1rem, 2vw, 1.5rem);
+  --spacing-lg: clamp(1.5rem, 3vw, 2.5rem);
+  --spacing-xl: clamp(2rem, 4vw, 3rem);
+  
+  /* Fluid typography */
+  --font-size-sm: clamp(0.75rem, 0.9vw, 0.875rem);
+  --font-size-base: clamp(0.875rem, 1vw, 1rem);
+  --font-size-lg: clamp(1rem, 1.2vw, 1.125rem);
+  --font-size-xl: clamp(1.125rem, 1.5vw, 1.25rem);
+  --font-size-2xl: clamp(1.25rem, 2vw, 1.5rem);
+  
+  /* Container widths for logical breakpoints */
+  --container-sm: 576px;
+  --container-md: 768px;
+  --container-lg: 992px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+  
+  /* Modern transition system */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+  
+  /* Border radius system */
+  --radius-sm: 0.25rem;
+  --radius-base: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  
+  /* Shadow system for depth */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* =====================
+   Container Queries for Modern Responsive Design
+   ===================== */
+
+@container (width < 576px) {
+  .calendar-responsive {
+    /* Mobile-first optimizations */
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+  }
+}
+
+@container (width >= 576px) and (width < 768px) {
+  .calendar-responsive {
+    /* Small tablet optimizations */
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md);
+  }
+}
+
+@container (width >= 768px) {
+  .calendar-responsive {
+    /* Desktop optimizations */
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-lg);
+  }
+}
+
+/* =====================
+   Performance Optimizations
+   ===================== */
+
+/* Improve painting performance */
+.calendar-optimized {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+/* GPU acceleration for smooth animations */
+.smooth-transform {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Modern flexbox layouts for better performance */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.flex-item {
+  flex: 1 1 auto;
+  min-width: 0; /* Prevent flex items from overflowing */
+}
+
+/* Grid layouts for complex responsive designs */
+.grid-responsive {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+}
+
+/* =====================
+   Modern Focus and Interaction States
+   ===================== */
+
+.focus-modern:focus-visible {
+  outline: 2px solid var(--focus-color, currentColor);
+  outline-offset: 2px;
+  border-radius: var(--radius-base);
+}
+
+.hover-smooth {
+  transition: all var(--transition-base);
+}
+
+.hover-smooth:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* =====================
+   Accessibility and Reduced Motion
+   ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================
+   Modern Typography System
+   ===================== */
+
+.text-responsive {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.text-balance {
+  text-wrap: balance; /* Modern text balancing */
+}
+
+/* =====================
+   Improved Loading States
+   ===================== */
+
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base, #f0f0f0) 25%,
+    var(--skeleton-highlight, #e0e0e0) 50%,
+    var(--skeleton-base, #f0f0f0) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-skeleton {
+    animation: none;
+    background: var(--skeleton-base, #f0f0f0);
+  }
+}
+
+/* =====================
+   Preferences-Specific Responsive Enhancements
+   ===================== */
+
+.preferences-main {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: 1fr;
+  max-width: var(--container-md);
+  margin-inline: auto;
+}
+
+@media (width >= 768px) {
+  .preferences-main {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Enhanced working days selector */
+.weekdays-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--spacing-sm);
+  margin-block: var(--spacing-md);
+  padding: var(--spacing-md);
+  border: 1px solid var(--table-border);
+  border-radius: var(--radius-lg);
+}
+
+.weekdays-selector input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.weekdays-selector label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-base);
+  background-color: var(--weekday-background);
+  color: var(--page-color);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: 500;
+  text-align: center;
+  min-height: 44px; /* Touch target size */
+}
+
+.weekdays-selector input[type="checkbox"]:checked + label {
+  background-color: var(--purple-base);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-base);
+}
+
+.weekdays-selector input[type="checkbox"]:focus-visible + label {
+  outline: 2px solid var(--focus-color, var(--purple-base));
+  outline-offset: 2px;
+}
+
+/* Modern flex-box improvements */
+.flex-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-base);
+  background-color: var(--table-cell-offtime-bground);
+  margin-block: var(--spacing-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.flex-box:hover {
+  background-color: var(--table-header-bground);
+}
+
+@media (width <= 576px) {
+  .flex-box {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Section title improvements */
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--purple-base);
+  margin-block: var(--spacing-lg) var(--spacing-md);
+  border-bottom: 2px solid var(--purple-base);
+  padding-block-end: var(--spacing-sm);
+}
+
+/* Enhanced form controls */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--table-border);
+  border-radius: var(--radius-base);
+  background-color: var(--input-bground);
+  color: var(--page-color);
+  transition: all var(--transition-fast);
+  min-height: 44px; /* Touch target size */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+  outline: 2px solid var(--purple-base);
+  outline-offset: 2px;
+  border-color: var(--purple-base);
+  box-shadow: var(--shadow-base);
+}
+
+/* Switch component improvements */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--slider-background-color);
+  transition: var(--transition-base);
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: var(--transition-base);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+input:checked + .slider {
+  background-color: var(--slider-checked-color);
+}
+
+input:focus-visible + .slider {
+  outline: 2px solid var(--purple-base);
+  outline-offset: 2px;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}

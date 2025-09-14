@@ -1,8 +1,10 @@
 /* stylelint-disable no-descending-specificity */
 
+/* Import modern enhancements */
+@import url('modern-enhancements.css');
+
 /* Import themes */
 @import url('themes/business-dress.css');
-@import url('themes/cadent-star.css');
 @import url('themes/dark.css');
 @import url('themes/light.css');
 @import url('themes/purple-sunset.css');
@@ -192,11 +194,24 @@ body {
 
 .container {
   font-family: Montserrat, sans-serif;
+  container-type: inline-size; /* Enable container queries */
+  max-width: min(var(--container-xl), 100% - 2rem);
+  margin-inline: auto;
+  padding-inline: var(--spacing-md);
 }
 
+/* Modern responsive container using logical properties */
 @media (width <= 768px) {
   .container {
-    max-width: initial;
+    max-width: 100%;
+    padding-inline: var(--spacing-sm);
+  }
+}
+
+@media (width >= 1200px) {
+  .container {
+    max-width: var(--container-xl);
+    padding-inline: var(--spacing-lg);
   }
 }
 
@@ -268,23 +283,24 @@ html[data-theme="light"].wait {
 .title-header-text {
   user-select: none;
   float: left;
-  font-size: 3em;
+  font-size: clamp(2rem, 4vw, 3rem); /* Fluid typography */
   font-weight: 300;
   vertical-align: middle;
   -webkit-user-drag: none;
 }
 
+/* Modern mobile-first responsive design */
 @media (width <= 480px) {
   .title-header-text {
     float: none;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     text-align: center;
+    /* Use logical properties */
   }
 
   .title-header > img {
     display: flex;
-    padding-left: 1vh;
+    padding-inline-start: 1vh;
   }
   
   .title-header-day > img {
@@ -297,34 +313,45 @@ html[data-theme="light"].wait {
 }
 
 #calendar.container {
-  margin-bottom: 70px;
+  margin-block-end: var(--spacing-xl);
+  container-type: inline-size;
 }
 
 #calendar table {
-  margin-left: auto;
-  margin-right: auto;
-  table-layout: auto;
-  width: 90%;
+  margin-inline: auto;
+  table-layout: fixed; /* Better for performance */
+  width: min(90%, var(--container-lg));
+  border-collapse: collapse;
+  border-spacing: 0;
+  /* Performance optimization */
+  contain: layout style;
 }
 
 #calendar .table-header {
-  margin-right: auto;
+  margin-inline-end: auto;
   table-layout: fixed;
-  width: 90%;
+  width: min(90%, var(--container-lg));
   position: sticky;
   top: 0;
   background: var(--table-header-bground);
   z-index: 1;
+  /* Improve stickiness performance */
+  backdrop-filter: blur(8px);
 }
 
 #calendar .table-header th {
-  height: 50px;
+  block-size: 50px;
   vertical-align: middle;
+  padding: var(--spacing-sm);
+  transition: background-color var(--transition-fast);
 }
 
 #calendar .table-body {
   overflow-y: auto;
   background-color: var(--table-bground);
+  /* Improve scrolling performance */
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
 }
 
 /* Business Dress specific table enhancements */

@@ -27,17 +27,17 @@
 </head>
 
 <body id="preferences-window" class="common-window">
-    <div>
-        <a href="#main-content" class="skip-link" data-i18n="$Generic.skipToMain">Skip to main content</a>
+    <div class="container calendar-responsive">
+        <a href="#main-content" class="skip-link focus-modern" data-i18n="$Generic.skipToMain">Skip to main content</a>
         
         <!-- Application header -->
         <header class="app-header" role="banner">
-            <h1 class="header-title" data-i18n="$Preferences.userPreferences">
+            <h1 class="header-title text-responsive" data-i18n="$Preferences.userPreferences">
                 User preferences
             </h1>
         </header>
         
-        <main id="main-content" tabindex="-1" role="main">
+        <main id="main-content" class="preferences-main" tabindex="-1" role="main">
 
         <!-- Working days section -->
         <section aria-labelledby="working-days-title">
@@ -220,7 +220,6 @@
                 <select class="selects-right" id="theme" name="theme" aria-label="Select application theme">
                     <option value="system-default" data-i18n="$Preferences.systemDefault" selected>System Default</option>
                     <option value="business-dress" data-i18n="$Preferences.businessDress">Business Dress</option>
-                    <option value="cadent-star" data-i18n="$Preferences.cadentStar">Cadent Star</option>
                     <option value="dark" data-i18n="$Preferences.dark">Dark</option>
                     <option value="light" data-i18n="$Preferences.light">Light</option>
                     <option value="purple-sunset" data-i18n="$Preferences.purpleSunset">Purple Sunset</option>

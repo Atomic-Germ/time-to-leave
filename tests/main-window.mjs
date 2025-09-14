@@ -32,12 +32,25 @@ describe('Application launch', function()
                 '--disable-extensions'
             );
         }
+        else
+        {
+            // Add macOS-specific arguments to prevent hanging
+            launchArgs.push(
+                '--no-sandbox',
+                '--disable-features=VizDisplayCompositor'
+            );
+        }
+
+        console.log('Launching Electron with args:', launchArgs);
 
         electronApp = await electron.launch({
             args: launchArgs,
             env: process.env,
-            cwd: rootDir
+            cwd: rootDir,
+            timeout: 30000 // Add explicit timeout
         });
+
+        console.log('Electron launched successfully');
     });
 
     afterEach(async function()
@@ -62,12 +75,23 @@ describe('Application launch', function()
     it('Calendar opens on Current Month/Year', async function()
     {
         // TODO: Investigate why this takes such a long time (10s)
+        console.log('Starting Calendar test...');
+        
+        console.log('Getting first window...');
         const window = await electronApp.firstWindow();
+        console.log('Got first window:', !!window);
 
+        console.log('Looking for month-year element...');
         const monthYearLocator = window.locator('#month-year');
+        console.log('Found locator, getting text...');
         const monthYearText = await monthYearLocator.evaluate(node => node.innerText);
+        console.log('Month year text:', monthYearText);
+        
         const today = new Date();
-        assert.strictEqual(monthYearText, `${months[today.getMonth()]} ${today.getFullYear()}`);
+        const expected = `${months[today.getMonth()]} ${today.getFullYear()}`;
+        console.log('Expected:', expected);
+        
+        assert.strictEqual(monthYearText, expected);
     });
 
     it('Change to Day View', async function()

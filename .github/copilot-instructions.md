@@ -2,6 +2,13 @@
 
 These instructions help AI coding agents understand the Time to Leave codebase, its architecture, conventions, and key workflows.
 
+## 0. Development Environment
+
+- **Local OS:** macOS - use macOS-specific commands and tools
+- **Terminal commands:** Use `brew install` for missing utilities (e.g., `brew install coreutils` for `gtimeout`)
+- **Timeout commands:** macOS doesn't have `timeout` by default, use `gtimeout` from coreutils or alternative approaches
+- **Package manager:** Homebrew is available for installing missing system utilities
+
 ## 1. Project Overview
 
 - Electron-based desktop app for logging work hours and notifications (entry: `main.mjs`).

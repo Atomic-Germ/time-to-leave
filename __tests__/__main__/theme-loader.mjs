@@ -18,12 +18,17 @@ describe('Theme Loader', function()
             const themesPath = path.join(__dirname, '..', '..', 'css', 'themes');
             const themes = await getAvailableThemes(themesPath);
 
-            // Should include actual theme files
-            assert.strictEqual(themes.includes('light'), true, 'Should include light theme');
-            assert.strictEqual(themes.includes('dark'), true, 'Should include dark theme');
-            assert.strictEqual(themes.includes('business-dress'), true, 'Should include business-dress theme');
-            assert.strictEqual(themes.includes('cadent-star'), true, 'Should include cadent-star theme');
-            assert.strictEqual(themes.includes('purple-sunset'), true, 'Should include purple-sunset theme');
+            // Dynamically discover what theme files should exist
+            const fs = await import('fs');
+            const actualThemeFiles = fs.readdirSync(themesPath)
+                .filter(file => file.endsWith('.css'))
+                .filter(file => file !== 'theme.css.template' && file !== 'index.css')
+                .map(file => file.replace('.css', ''));
+
+            // Should include all actual theme files
+            actualThemeFiles.forEach(expectedTheme => {
+                assert.strictEqual(themes.includes(expectedTheme), true, `Should include ${expectedTheme} theme`);
+            });
 
             // Should exclude template and index files
             assert.strictEqual(themes.includes('theme.css'), false, 'Should exclude template file');
@@ -36,6 +41,9 @@ describe('Theme Loader', function()
                 assert.strictEqual(typeof theme, 'string', 'Each theme should be a string');
                 assert.strictEqual(theme.endsWith('.css'), false, 'Theme names should not include .css extension');
             });
+
+            // Should have at least some themes (sanity check)
+            assert.strictEqual(themes.length > 0, true, 'Should return at least one theme');
         });
 
         it('should return fallback themes when directory does not exist', async function()

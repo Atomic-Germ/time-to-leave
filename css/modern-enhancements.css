@@ -399,7 +399,7 @@ input:checked + .slider::before {
   }
 }
 
-/* Button transition enhancements with GPU acceleration */
+/* Button transition enhancements with GPU acceleration and touch targets */
 .punch-button,
 button,
 input[type="button"],
@@ -410,6 +410,9 @@ input[type="submit"],
   overflow: hidden;
   transform: translateZ(0); /* GPU acceleration */
   will-change: auto; /* Only set when animating */
+  min-height: 44px; /* Touch target accessibility */
+  min-width: 44px;
+  touch-action: manipulation;
 }
 
 .punch-button:hover,
@@ -515,9 +518,12 @@ svg:hover,
   opacity: 0.8;
 }
 
-/* Waiver trigger enhancements */
+/* Waiver trigger enhancements with accessibility */
 .waiver-trigger {
   transition: all var(--transition-base);
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
 }
 
 .waiver-trigger:hover {
@@ -833,6 +839,255 @@ svg:hover,
   /* Enhanced theming for custom property support */
   background-color: var(--component-background, #f8f9fa);
   color: var(--component-text, #212529);
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--purple-base);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 6px;
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Enhanced focus indicators */
+.focus-visible,
+*:focus-visible {
+  outline: 3px solid var(--purple-base);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  /* Ensure modal focus management */
+  position: relative;
+}
+
+.focus-trap:focus {
+  outline: none; /* Remove default outline as we handle it visually */
+}
+
+/* High contrast improvements */
+@media (forced-colors: active) {
+  .calendar-responsive,
+  .preferences-container {
+    border: 2px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+  }
+  
+  .btn,
+  .punch-button {
+    border: 2px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+    forced-color-adjust: none;
+  }
+  
+  .btn:hover,
+  .btn:focus,
+  .punch-button:hover,
+  .punch-button:focus {
+    background: Highlight;
+    color: HighlightText;
+    border-color: HighlightText;
+  }
+  
+  /* Ensure sufficient contrast for interactive elements */
+  .arrow,
+  .calendar-day {
+    border: 1px solid ButtonText;
+    forced-color-adjust: none;
+  }
+}
+
+/* Motion preferences accessibility */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations and transitions */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Ensure transforms still work for layout but without animation */
+  .calendar-day:hover,
+  .punch-button:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+  
+  /* Keep essential visual feedback */
+  .focus-visible,
+  *:focus-visible {
+    outline: 3px solid var(--purple-base);
+    outline-offset: 2px;
+  }
+}
+
+/* Enhanced keyboard navigation */
+.keyboard-nav *:focus {
+  outline: 3px solid var(--purple-base);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Ensure sufficient color contrast */
+.high-contrast {
+  --text-color: #000;
+  --background-color: #fff;
+  --link-color: #00e;
+  --visited-link-color: #551a8b;
+}
+
+html[data-theme="dark"] .high-contrast {
+  --text-color: #fff;
+  --background-color: #000;
+  --link-color: #99f;
+  --visited-link-color: #c9f;
+}
+
+/* Touch target improvements for additional elements */
+.touch-target,
+.arrow {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* Ensure text remains readable during font swap */
+.font-loading {
+  font-display: swap;
+  text-rendering: optimizelegibility;
+}
+
+/* Improve readability */
+.readable-text {
+  line-height: 1.6;
+  word-spacing: 0.1em;
+  letter-spacing: 0.05em;
+}
+
+.calendar-table,
+.preferences-form {
+  line-height: 1.6;
+}
+
+/* Error and status announcements */
+.status-message {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.status-message[role="alert"] {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-message[role="status"] {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+/* Live region for dynamic content announcements */
+.live-region {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.live-region[aria-live="polite"] {
+  /* Announced when convenient - polite announcements */
+  z-index: -1;
+}
+
+.live-region[aria-live="assertive"] {
+  /* Announced immediately - urgent announcements */
+  z-index: -1;
+}
+
+/* Form accessibility enhancements */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-control:invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+}
+
+.form-control:invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 50%);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+/* Table accessibility */
+.calendar-table caption {
+  font-weight: 600;
+  color: var(--text-color);
+  padding: var(--spacing-sm);
+  caption-side: top;
+}
+
+.calendar-table th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.calendar-table th[scope="col"] {
+  background-color: var(--table-header-bground);
+}
+
+.calendar-table th[scope="row"] {
+  background-color: var(--table-row-header-bground, var(--table-header-bground));
 }
 
 /* ===== RENDERING PERFORMANCE OPTIMIZATIONS ===== */

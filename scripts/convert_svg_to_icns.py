@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 Icon generation script
-Converts assets/ttl.svg to various icon formats (.png, .ico, .icns)
-Requires: ImageMagick
+Converts assets/ttl.svg to other icon formats
 """
 
 import subprocess
@@ -46,11 +45,11 @@ def main():
         print("Error: ImageMagick is not installed.")
         system = platform.system().lower()
         if system == "darwin":
-            print("Install it with: brew install imagemagick")
+            print("Install with: brew install imagemagick")
         elif system == "linux":
-            print("Install it with: sudo apt install imagemagick")
+            print("Install with: sudo apt install imagemagick (or your distro's package manager)")
         elif system == "windows":
-            print("Download from: https://imagemagick.org/script/download.php#windows")
+            print("Install from: https://imagemagick.org/script/download.php#windows")
         sys.exit(1)
     
     print(f"Generating icons from {svg_source}...")
@@ -70,13 +69,9 @@ def main():
                 sys.exit(1)
             icon_files[size] = output_path
         
-        # Copy main icon (256x256)
-        shutil.copy2(icon_files[256], "assets/ttl.png")
-        print("✅ Generated assets/ttl.png (256×256)")
-        
-        # Copy Debian icon (512x512)
-        shutil.copy2(icon_files[512], "assets/icon-deb.png")
-        print("✅ Generated assets/icon-deb.png (512×512)")
+        # Copy main and debian icons (128x128)
+        shutil.copy2(icon_files[128], "assets/ttl.png")
+        shutil.copy2(icon_files[128], "assets/icon-deb.png")
         
         # Generate tray icons
         print("Generating tray icons...")
@@ -93,7 +88,6 @@ def main():
         if not generate_png(svg_source, "assets/ttl-tray-icon@2x.png", 32, 32):
             print("❌ Failed to generate high-DPI tray icon")
             sys.exit(1)
-        print("✅ Generated tray icons")
         
         system = platform.system().lower()
         print("Generating macOS .icns file...")
@@ -104,7 +98,6 @@ def main():
         if not run_command(icns_cmd, capture_output=False):
             print("❌ Failed to generate .icns file")
             sys.exit(1)
-        print("✅ Generated assets/icon-mac.icns")
         
         print("Generating Windows .ico file...")
         ico_sizes = [16, 32, 48, 64, 128, 256]
@@ -113,12 +106,11 @@ def main():
         if not run_command(ico_cmd, capture_output=False):
             print("❌ Failed to generate .ico file")
             sys.exit(1)
-        print("✅ Generated assets/icon-win.ico")
         
         print()
         print("icons generated:")
-        print("   • assets/ttl.png (256×256 - General use)")
-        print("   • assets/icon-deb.png (512×512 - Debian packages)")
+        print("   • assets/ttl.png (128x128 - General use)")
+        print("   • assets/icon-deb.png (128x128 - Debian packages)")
         print("   • assets/icon-mac.icns (Multi-resolution - macOS)")
         print("   • assets/icon-win.ico (Multi-resolution - Windows)")
         print("   • assets/ttl-tray-icon.png (16×16 - System tray)")

@@ -68,7 +68,7 @@ function addRowToListTable(day, reason, hours)
     reasonCell.innerHTML = reason;
     hoursCell.innerHTML = hours;
     const id = 'delete-' + day;
-    delButtonCell.innerHTML = '<input class="delete-btn" data-day="' + day + '" id="' + id + '" type="button"></input>';
+    delButtonCell.innerHTML = '<input class="delete-btn" data-day="' + day + '" id="' + id + '" type="button" aria-label="delete"></input>';
 
     $('#'+ id).on('click', deleteEntryOnClick);
 }
@@ -463,7 +463,19 @@ $(async() =>
 
     populateList();
 
-    $('#reason, #hours').on('input blur', () =>
+    $('#hours').on('input', function()
+    {
+        this.setCustomValidity('');
+        this.reportValidity();
+    });
+
+    $('#hours').on('blur', function()
+    {
+        this.value = this.checkValidity() ? TimeMath.convertTimeFormat(this.value) : '08:00';
+        this.setCustomValidity('');
+    });
+
+    $('#reason').on('input blur', () =>
     {
         toggleAddButton('waive-button', $('#reason').val() && $('#hours')[0].checkValidity());
     });
